@@ -1,0 +1,16 @@
+{
+  "login": {
+    "email": "email",
+    "init": "iniciar sesión",
+    "name": "nombre"
+  },
+  "routine": {
+    "title": "Rutinas de {{name}}"
+  },
+  "nav": {
+    "home": "inicio",
+    "series": "series",
+    "routine": "rutina",
+    "add": "añadir"
+  }
+}
