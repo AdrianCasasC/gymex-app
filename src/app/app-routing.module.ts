@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { RoutineComponent } from './pages/routine/routine.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SelectedRoutineComponent } from './pages/selected-routine/selected-routine.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'series', component: RoutineComponent },
-  { path: 'routine', component: RoutineComponent },
+  /*{ path: 'routine', title: 'routine', component: RoutineComponent, children: [{
+    path: ':selectedRoutine', title: 'selectedRoutine', component: SelectedRoutineComponent
+  }]},*/
+  { path: 'routine', title: 'routine', component: RoutineComponent},
+  { path: 'routine/:selectedRoutine', title: 'selectedRoutine', component: SelectedRoutineComponent},
   { path: 'add', component: RoutineComponent },
   { path: 'login', component: LoginComponent },
 ];

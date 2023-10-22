@@ -1,4 +1,8 @@
 {
+  "button": {
+    "accept": "aceptar",
+    "cancel": "cancelar"
+  },
   "login": {
     "email": "email",
     "init": "iniciar sesión",

@@ -16,6 +16,7 @@ h2 {
 }
 
 button {
+    position: absolute;
     padding: 12px;
     background: #14ded2;
     border-radius: 10px;
@@ -24,6 +25,7 @@ button {
     width: 40%;
     text-align: center;
     cursor: pointer;
+    bottom: 24px;
 }
 
 input {
@@ -36,7 +38,7 @@ input {
 .container {
     position: relative;
     width: 60%;
-    height: 25%;
+    height: 30%;
     gap: 40px;
     padding: 24px;
 }

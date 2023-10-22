@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from '../components/components.module';
 import { RoutineComponent } from './routine/routine.component';
-import { TranslocoHttpLoader } from '../transloco-loader';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LoginComponent } from './login/login.component';
+import { SelectedRoutineComponent } from './selected-routine/selected-routine.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
-  declarations: [HomeComponent, RoutineComponent, LoginComponent], //Aquí se declaran los componentes
-  imports: [CommonModule, ComponentsModule, TranslocoModule, FormsModule], //Aquí se exportan módulos exteriores
-  exports: [HomeComponent, RoutineComponent], //Aquí se exportan los componentes
+  declarations: [HomeComponent, RoutineComponent, LoginComponent, SelectedRoutineComponent], //Aquí se declaran los componentes
+  imports: [CommonModule, ComponentsModule, TranslocoModule, FormsModule, AppRoutingModule], //Aquí se exportan módulos exteriores
+  exports: [HomeComponent, RoutineComponent, SelectedRoutineComponent], //Aquí se exportan los componentes
 })
 export class PagesModule {}

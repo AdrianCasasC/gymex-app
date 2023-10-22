@@ -7,42 +7,12 @@
 </section>
 
 <section class="routine-content centered">
-    <div class="card primary-box">
+    <div *ngFor="let routine of routines" (click)="goToCard(routine)" class="card primary-box">
         <img src="">
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="../../../images/squad.jpg" alt="imagen" />
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
-    </div>
-    <div class="card primary-box">
-        <img src="" alt="imagen"/>
-        <span>Sentadilla</span>
+        <span>{{routine | titlecase}}</span>
     </div>
 </section>
 
-<app-routine-modal *ngIf="showNewRoutineModal" (closeModal)="showNewRoutineModal = false" [labelText]="'modal.label' | transloco"></app-routine-modal>
+<router-outlet></router-outlet>
+
+<app-routine-modal *ngIf="showNewRoutineModal" (closeModal)="showNewRoutineModal = false" (addNewRoutine)="addNewRoutine($event)" [labelText]="'modal.label' | transloco"></app-routine-modal>

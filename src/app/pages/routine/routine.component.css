@@ -38,4 +38,15 @@ image {
     padding: 20px;
     width: 124px;
     height: 200px;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.2);
+    transition: transform 0.3s;
+}
+
+.card:not(:hover) {
+    transform: scale(1);
+    transition: transform 0.3s;
 }
