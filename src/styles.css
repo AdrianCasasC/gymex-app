@@ -1,8 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos Globales */
 body {
-  margin: 0;
-  padding: 0;
-  background-color: transparent;
-  font-family: Arial, sans-serif;
-  /* Otros estilos que desees eliminar o modificar */
+  all: unset; /* Para quitar los estilos por defecto */
+}
+
+button {
+  all: unset;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.primary-box {
+  border: 2px solid #14ded2;
+  background-color: #a7f8f3;
+  border-radius: 10px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-col-cent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RoutineComponent implements OnInit {
   userName!: string;
+  showNewRoutineModal: boolean = false;
 
   constructor(private authService: AuthService) {}
 

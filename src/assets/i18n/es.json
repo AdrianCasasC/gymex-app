@@ -4,7 +4,11 @@
     "init": "iniciar sesión",
     "name": "nombre"
   },
+  "modal": {
+    "label": "Nombre de la nueva rutina"
+  },
   "routine": {
+    "add": "Añadir nueva rutina",
     "title": "Rutinas de {{name}}"
   },
   "nav": {
