@@ -1,7 +1,7 @@
 <h1>Rutina seleccionada: {{ selectedRoutine | titlecase }}</h1>
 
 <section class="muscleGroups-container centered">
-    <div *ngFor="let muscleGroup of muscularGroups" class="option primary-box">{{ muscleGroup | titlecase }}</div>
+    <div *ngFor="let muscleGroup of muscularGroups" (click)="selectedMuscle = muscleGroup" class="option primary-box">{{ 'muscles.' + muscleGroup | transloco | titlecase }}</div>
 </section>
 
 <section *ngFor="let muscleGroup of muscularGroups">
@@ -11,3 +11,11 @@
     </div>
 </section>
 
+<ng-container *ngFor="let muscleGroup of muscularGroups">
+    <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
+        <div *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']" class="muscle-card">
+            <span>{{ 'muscles.' + muscleGroup | transloco }}</span>
+
+        </div>
+    </section>
+</ng-container>

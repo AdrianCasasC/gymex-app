@@ -1,60 +1,59 @@
 import { Injectable } from '@angular/core';
+import { MuscularGroups, Exercises } from '../interfaces/app.interface';
 
-export const muscularGroups = ['chest', 'back', 'leg', 'shoulder', 'arm', 'abdomen', 'basics'];
+export const muscularGroups: MuscularGroups[] = ['chest', 'back', 'leg', 'shoulder', 'arm', 'abs', 'basics'];
 
-export const chestExercises = [
-  'inclineBarBenchPress', 
-  'inclineDumbellBenchPress', 
-  'dumbellBenchPress',
-  'pulleyCrosses',
-  'dumbellCrosses'];
-  
-export const backExercises = [
-  'chestPull',
-  'neutralChestPull',
-  'supineChestPull',
-  'dumbellRow',
-  'pulleyRow',
-  'pullover'
-];
+export const exercisesByMuscleGroup: Exercises = {
+  chestExercises: [
+    'inclineBarBenchPress', 
+    'inclineDumbellBenchPress', 
+    'dumbellBenchPress',
+    'pulleyCrosses',
+    'dumbellCrosses'],
+  backExercises: [
+    'chestPull',
+    'neutralChestPull',
+    'supineChestPull',
+    'dumbellRow',
+    'pulleyRow',
+    'pullover'
+  ],
+  shoulderExercises: [
+    'dumbellMilitarPress',
+    'lateralRaises',
+    'frontalRaises',
+    'posterior'
+  ],
+  absExercises: [
+    'wheel',
+    'pulleyContractions'
+  ],
+  armExercises: [
+    'dumbellBiceps',
+    'barBiceps',
+    'pulleyBiceps',
+    'inclineBiceps',
+    'frenchPress',
+    'pulleyTriceps',
+    'dumbellTriceps',
+  ],
+  legExercises: [
+    'legPress',
+    'hiptrust',
+    'strides',
+    'dumbellDeadlift',
+    'stiffLegs',
+    'quadExtension',
+    'femoralContraction'
+  ],
+  basicsExercises: [
+    'squad',
+    'benchPress',
+    'deadLift'
+  ]
+}
 
-export const shoulderExercises = [
-  'dumbellMilitarPress',
-  'lateralRaises',
-  'frontalRaises',
-  'posterior'
-];
 
-export const absExercises = [
-  'wheel',
-  'pulleyContractions'
-];
-
-export const armExercices = [
-  'dumbellBiceps',
-  'barBiceps',
-  'pulleyBiceps',
-  'inclineBiceps',
-  'frenchPress',
-  'pulleyTriceps',
-  'dumbellTriceps',
-]
-
-export const legExercises = [
-  'legPress',
-  'hiptrust',
-  'strides',
-  'dumbellDeadlift',
-  'stiffLegs',
-  'quadExtension',
-  'femoralContraction'
-];
-
-export const basicExercises = [
-  'squad',
-  'benchPress',
-  'deadLift'
-];
 
 @Injectable({
   providedIn: 'root'

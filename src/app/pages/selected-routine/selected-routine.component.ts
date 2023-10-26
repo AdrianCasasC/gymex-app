@@ -2,14 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { 
   muscularGroups, 
-  chestExercises, 
-  backExercises, 
-  shoulderExercises, 
-  legExercises, 
-  armExercices, 
-  absExercises, 
-  basicExercises 
+  exercisesByMuscleGroup
 } from 'src/app/services/data.service';
+import { MuscularGroups } from 'src/app/interfaces/app.interface';
 
 @Component({
   selector: 'app-selected-routine',
@@ -18,7 +13,9 @@ import {
 })
 export class SelectedRoutineComponent implements OnInit {
   selectedRoutine!: string;
-  muscularGroups: string[] = muscularGroups;
+  selectedMuscle!: string;
+  muscularGroups: MuscularGroups[] = muscularGroups;
+  exercisesByMuscleGroup: any = exercisesByMuscleGroup;
   selectedMuscleGroup!: string[];
 
   constructor(private activatedRoute: ActivatedRoute) {}

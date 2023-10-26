@@ -11,6 +11,15 @@
   "modal": {
     "label": "Nombre de la nueva rutina"
   },
+  "muscles": {
+    "chest": "pecho",
+    "back": "espalda",
+    "leg": "piernas",
+    "shoulder": "hombros",
+    "arm": "brazos",
+    "abs": "abdomen",
+    "basics": "básicos"
+  },
   "routine": {
     "add": "Añadir nueva rutina",
     "title": "Rutinas de {{name}}"
