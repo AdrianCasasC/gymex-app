@@ -14,7 +14,7 @@ import { MuscularGroups, Exercise } from 'src/app/interfaces/app.interface';
 })
 export class SelectedRoutineComponent implements OnInit {
   selectedRoutine!: string;
-  selectedMuscle!: string;
+  selectedMuscle: string = 'chest';
   muscularGroups: MuscularGroups[] = muscularGroups;
   exercisesByMuscleGroup: any = exercisesByMuscleGroup;
   selectedMuscleGroup!: string[];
