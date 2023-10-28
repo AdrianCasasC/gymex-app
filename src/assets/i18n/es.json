@@ -78,6 +78,9 @@
     "add": "Añadir nueva rutina",
     "title": "Rutinas de {{name}}"
   },
+  "selectedRoutine": {
+    "button": "Guardar rutina"
+  },
   "nav": {
     "home": "inicio",
     "series": "series",

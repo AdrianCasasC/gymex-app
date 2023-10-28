@@ -18,27 +18,35 @@
   </div>
 </section>
 
-<ng-container *ngFor="let muscleGroup of muscularGroups">
-  <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
-    <div
-      *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']"
-      class="muscle-card scale-hover primary-box flex-col"
-      (click)="
-        selectedExercise = 'exercises.' + muscleGroup + '.' + exercise;
-        showExerciseModal = true
-      "
-    >
-      <img /><!--Aquí irán las fotos de los ejercicios-->
-      <span>{{
-        "exercises." + muscleGroup + "." + exercise | transloco | titlecase
-      }}</span>
+<div class="selected-routine-content">
+  <ng-container *ngFor="let muscleGroup of muscularGroups">
+    <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
+      <div
+        *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']"
+        class="muscle-card scale-hover primary-box flex-col"
+        (click)="handleSelectedCard(exercise, muscleGroup)"
+      >
+        <img /><!--Aquí irán las fotos de los ejercicios-->
+        <span>{{
+          "exercises." + muscleGroup + "." + exercise | transloco | titlecase
+        }}</span>
+      </div>
+    </section>
+  </ng-container>
+  
+  <section *ngIf="chosenExercises.length > 0" class="selected-exercises">
+    <div *ngFor="let exercise of chosenExercises" class="secondary-box selected-exercises__item">
+      <span>{{ exercise.name | transloco | titlecase }}</span>
+      <span>{{ exercise.series + (exercise.series !== 1 ? ' series' : ' serie')}}</span>
     </div>
   </section>
-</ng-container>
+</div>
+
+<button class="secondary-box save-button">{{ 'selectedRoutine.button' | transloco }}</button>
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">
   <div class="exercise-modal__content">
-    <i (click)="showExerciseModal = false" class="exercise-modal__content__icon"
+    <i (click)="closeModal()" class="exercise-modal__content__icon"
       >X</i
     >
     <strong>{{ selectedExercise | transloco | titlecase }}</strong>
@@ -58,7 +66,7 @@
         >{{ number }}</span
       >
     </div>
-    <button (click)="addExercise()">
+    <button (click)="addExercise(selectedExercise, selectedNumberOfSeries)">
       {{ "exerciseModal.button" | transloco | titlecase }}
     </button>
   </div>

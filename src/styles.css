@@ -3,6 +3,26 @@ body {
   all: unset; /* Para quitar los estilos por defecto */
 }
 
+/* Barra de desplazamiento vertical */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a7f8f3; /* Color del "pulgón" de la barra */
+  border-radius: 6px; /* Borde redondeado del "pulgón" */
+}
+
+::-webkit-scrollbar-track {
+  background-color: white; /* Color de fondo de la barra de desplazamiento */
+}
+
+/* Barra de desplazamiento horizontal */
+::-webkit-scrollbar:horizontal {
+  height: 8px; /* Alto de la barra de desplazamiento horizontal */
+}
+
+
 button {
   all: unset;
 }
@@ -17,6 +37,13 @@ button {
   border: 2px solid #14ded2;
   background-color: #a7f8f3;
   border-radius: 10px;
+}
+
+.secondary-box {
+  border: 2px solid black;
+  background-color: white;
+  border-radius: 10px;
+  padding: 12px;
 }
 
 .flex-col {
