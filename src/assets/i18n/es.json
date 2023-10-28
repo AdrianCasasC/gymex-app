@@ -3,6 +3,60 @@
     "accept": "aceptar",
     "cancel": "cancelar"
   },
+  "exercises": {
+    "chest": {
+      "inclineBarBenchPress": "inclinado con barra",
+      "inclineDumbellBenchPress": " inclinado con mancuernas",
+      "dumbellBenchPress": "plano con marcuernas",
+      "pulleyCrosses": "cruces en polea",
+      "dumbellCrosses": "cruces con mancuerna"
+    },
+    "back": {
+      "chestPull": "jalón al pecho",
+      "neutralChestPull": "jalón al pecho neutro",
+      "supineChestPull": "jalón agarre supino",
+      "dumbellRow": "remo con mancuerna",
+      "pulleyRow": "remo en polea",
+      "pullover": "pullover"
+    },
+    "leg": {
+      "legPress": "prensa",
+      "hiptrust": "hiptrust",
+      "strides": "zancadas",
+      "dumbellDeadlift": "peso muerto con mancuerna",
+      "stiffLegs": "piernas rígidas",
+      "quadExtension": "extensión de cuádriceps",
+      "femoralContraction": "contracción de femoral"
+    },
+    "arm": {
+      "dumbellBiceps": "biceps con mancuerna",
+      "barBiceps": "biceps con barra",
+      "pulleyBiceps": "biceps en polea",
+      "inclineBiceps": "biceps banco inclinado",
+      "frenchPress": "press militar",
+      "pulleyTriceps": "triceps en polea",
+      "dumbellTriceps": "triceps con mancuerna"
+    },
+    "shoulder": {
+      "dumbellMilitarPress": "press militar con mancuernas",
+      "lateralRaises": "elevaciones laterales",
+      "frontalRaises": "elevaciones frontales",
+      "posterior": "hombro posterior"
+    },
+    "abs": {
+      "wheel": "rueda abdominal",
+      "pulleyContractions": "contracciones en polea"
+    },
+    "basics": {
+      "squad": "sentadilla",
+      "benchPress": "pressbanca",
+      "deadLift": "peso muerto"
+    }
+  },
+  "exerciseModal": {
+    "label": "elige el número de series",
+    "button": "añadir ejercicio"
+  },
   "login": {
     "email": "email",
     "init": "iniciar sesión",

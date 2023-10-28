@@ -1,21 +1,65 @@
 <h1>Rutina seleccionada: {{ selectedRoutine | titlecase }}</h1>
 
 <section class="muscleGroups-container centered">
-    <div *ngFor="let muscleGroup of muscularGroups" (click)="selectedMuscle = muscleGroup" class="option primary-box">{{ 'muscles.' + muscleGroup | transloco | titlecase }}</div>
+  <div
+    *ngFor="let muscleGroup of muscularGroups"
+    (click)="selectedMuscle = muscleGroup"
+    class="option scale-hover primary-box"
+    [ngClass]="{ 'selected-muscle': selectedMuscle === muscleGroup }"
+  >
+    {{ "muscles." + muscleGroup | transloco | titlecase }}
+  </div>
 </section>
 
 <section *ngFor="let muscleGroup of muscularGroups">
-    <div *ngFor="let muscle of selectedMuscleGroup">
-        <img src="">
-        <span>{{muscle | titlecase}}</span>
-    </div>
+  <div *ngFor="let muscle of selectedMuscleGroup">
+    <img src="" />
+    <span>{{ muscle | titlecase }}</span>
+  </div>
 </section>
 
 <ng-container *ngFor="let muscleGroup of muscularGroups">
-    <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
-        <div *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']" class="muscle-card">
-            <span>{{ 'muscles.' + muscleGroup | transloco }}</span>
-
-        </div>
-    </section>
+  <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
+    <div
+      *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']"
+      class="muscle-card scale-hover primary-box flex-col"
+      (click)="
+        selectedExercise = 'exercises.' + muscleGroup + '.' + exercise;
+        showExerciseModal = true
+      "
+    >
+      <img /><!--Aquí irán las fotos de los ejercicios-->
+      <span>{{
+        "exercises." + muscleGroup + "." + exercise | transloco | titlecase
+      }}</span>
+    </div>
+  </section>
 </ng-container>
+
+<div *ngIf="showExerciseModal" class="exercise-modal__overlay">
+  <div class="exercise-modal__content">
+    <i (click)="showExerciseModal = false" class="exercise-modal__content__icon"
+      >X</i
+    >
+    <strong>{{ selectedExercise | transloco | titlecase }}</strong>
+    <span>
+      {{ "exerciseModal.label" | transloco | titlecase }}
+      {{
+        ": " +
+          selectedNumberOfSeries +
+          (selectedNumberOfSeries === 1 ? " serie" : " series")
+      }}</span
+    >
+    <div class="exercise-modal__content__seriesWrapper">
+      <span
+        *ngFor="let number of numberOfSeries"
+        (click)="selectedNumberOfSeries = number"
+        class="scale-hover"
+        >{{ number }}</span
+      >
+    </div>
+    <button (click)="addExercise()">
+      {{ "exerciseModal.button" | transloco | titlecase }}
+    </button>
+  </div>
+</div>

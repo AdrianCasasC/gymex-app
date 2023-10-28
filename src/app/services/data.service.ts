@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
 import { MuscularGroups, Exercises } from '../interfaces/app.interface';
 
-export const muscularGroups: MuscularGroups[] = ['chest', 'back', 'leg', 'shoulder', 'arm', 'abs', 'basics'];
+export const muscularGroups: MuscularGroups[] = [
+  'chest',
+  'back',
+  'leg',
+  'shoulder',
+  'arm',
+  'abs',
+  'basics',
+];
 
 export const exercisesByMuscleGroup: Exercises = {
   chestExercises: [
-    'inclineBarBenchPress', 
-    'inclineDumbellBenchPress', 
+    'inclineBarBenchPress',
+    'inclineDumbellBenchPress',
     'dumbellBenchPress',
     'pulleyCrosses',
-    'dumbellCrosses'],
+    'dumbellCrosses',
+  ],
   backExercises: [
     'chestPull',
     'neutralChestPull',
     'supineChestPull',
     'dumbellRow',
     'pulleyRow',
-    'pullover'
+    'pullover',
   ],
   shoulderExercises: [
     'dumbellMilitarPress',
     'lateralRaises',
     'frontalRaises',
-    'posterior'
+    'posterior',
   ],
-  absExercises: [
-    'wheel',
-    'pulleyContractions'
-  ],
+  absExercises: ['wheel', 'pulleyContractions'],
   armExercises: [
     'dumbellBiceps',
     'barBiceps',
@@ -44,21 +50,16 @@ export const exercisesByMuscleGroup: Exercises = {
     'dumbellDeadlift',
     'stiffLegs',
     'quadExtension',
-    'femoralContraction'
+    'femoralContraction',
   ],
-  basicsExercises: [
-    'squad',
-    'benchPress',
-    'deadLift'
-  ]
-}
+  basicsExercises: ['squad', 'benchPress', 'deadLift'],
+};
 
-
+export const numberOfSeries = [1, 2, 3, 4, 5, 6, 7, 8];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DataService {
-
-  constructor() { }
+  constructor() {}
 }
