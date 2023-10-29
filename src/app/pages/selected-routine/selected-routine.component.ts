@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   muscularGroups,
   exercisesByMuscleGroup,
   numberOfSeries,
+  DataService,
 } from 'src/app/services/data.service';
 import { MuscularGroups, Exercise } from 'src/app/interfaces/app.interface';
 
@@ -24,7 +25,11 @@ export class SelectedRoutineComponent implements OnInit {
   selectedNumberOfSeries: number = 0;
   chosenExercises: Exercise[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private dataService: DataService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
     this.selectedRoutine =
@@ -52,5 +57,10 @@ export class SelectedRoutineComponent implements OnInit {
   closeModal() {
     this.showExerciseModal = false
     document.body.style.overflow = 'auto';
+  }
+
+  saveRoutine() {
+    this.dataService.setSavedRoutines(this.selectedRoutine, this.chosenExercises);
+    this.router.navigate(['/routine'])
   }
 }

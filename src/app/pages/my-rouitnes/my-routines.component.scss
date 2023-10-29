@@ -1,0 +1,21 @@
+@import '../../../app/styles/variables.css';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+}
+
+.my-routines-wrapper {
+    display: flex;
+    gap: 12px;
+}
+
+.my-routines-wrapper span {
+    padding: 12px;
+}
+
+.series {
+    padding: 24px;
+    cursor: pointer;
+}

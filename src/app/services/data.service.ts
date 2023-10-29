@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MuscularGroups, Exercises } from '../interfaces/app.interface';
+import { MuscularGroups, Exercises, Exercise, Routine } from '../interfaces/app.interface';
 
 export const muscularGroups: MuscularGroups[] = [
   'chest',
@@ -61,5 +61,19 @@ export const numberOfSeries = [1, 2, 3, 4, 5, 6, 7, 8];
   providedIn: 'root',
 })
 export class DataService {
+  savedRoutines: Routine[] = [];
+
   constructor() {}
+
+  setSavedRoutines(routineName: string, selectedExercises: Exercise[]) {
+    const newRoutine: Routine = {
+      name: routineName,
+      exercises: [...selectedExercises]
+    }
+    this.savedRoutines.push(newRoutine);
+  }
+
+  getSavedRoutines(): Routine[] {
+    return this.savedRoutines;
+  }
 }

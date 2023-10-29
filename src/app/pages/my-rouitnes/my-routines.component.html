@@ -1,0 +1,14 @@
+<h1>Mis rutinas</h1>
+
+<section class="my-routines-wrapper">
+    <span class="primary-box" *ngFor="let routine of myRoutines" (click)="selectedRoutine = routine">{{ routine.name }}</span>
+</section>
+
+<section class="register-exercises-wrapper">
+    <div *ngFor="let exercise of selectedRoutine?.exercises" class="register-exercises-wrapper__container">
+        <span>{{ exercise.name | transloco }}</span>
+        <div *ngFor="let serie of getArray(exercise.series); let i = index" class="primary-box series">
+            <strong>Serie {{ i + 1 }}:</strong> X {{'___'}} X {{'___'}} Kgs
+        </div>
+    </div>
+</section>

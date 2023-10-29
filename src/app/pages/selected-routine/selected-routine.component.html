@@ -42,7 +42,7 @@
   </section>
 </div>
 
-<button class="secondary-box save-button">{{ 'selectedRoutine.button' | transloco }}</button>
+<button (click)="saveRoutine()" class="secondary-box save-button">{{ 'selectedRoutine.button' | transloco }}</button>
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">
   <div class="exercise-modal__content">

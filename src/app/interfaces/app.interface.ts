@@ -18,4 +18,9 @@ export interface Exercise {
   series: number;
 }
 
+export interface Routine {
+  name: string;
+  exercises: Exercise[];
+}
+
 export type MuscularGroups = 'chest' | 'back' | 'leg' | 'shoulder' | 'arm' | 'abs' | 'basics';

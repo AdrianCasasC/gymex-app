@@ -24,6 +24,6 @@ export class RoutineComponent implements OnInit {
   }
 
   goToCard(selectedRoutine: string) {
-    this.router.navigate([`/routine/${selectedRoutine}`]);
+    this.router.navigate([`/add/${selectedRoutine}`]);
   }
 }
