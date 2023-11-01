@@ -1,21 +1,58 @@
-@import '../../../app/styles/variables.css';
+@import "../../../app/styles/variables.css";
 
 :host {
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
 }
 
 .my-routines-wrapper {
-    display: flex;
-    gap: 12px;
+  display: flex;
+  gap: 12px;
 }
 
 .my-routines-wrapper span {
-    padding: 12px;
+  cursor: pointer;
+}
+
+.my-routines-wrapper span {
+  padding: 12px;
 }
 
 .series {
-    padding: 24px;
-    cursor: pointer;
+  padding: 24px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.modal-content {
+  position: relative;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.modal-content i {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  cursor: pointer;
+}
+
+.modal-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal-buttons {
+  cursor: pointer;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

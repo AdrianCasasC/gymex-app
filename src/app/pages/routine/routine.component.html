@@ -1,18 +1,28 @@
 <section class="routine-top">
-    <h1>{{ "routine.title" | transloco : { name: userName } }}</h1>
-    <div (click)="showNewRoutineModal = true" class="routine-top-add primary-box">
-        <span>{{ 'routine.add' | transloco}}</span>
-        <i>+</i>
-    </div>
+  <h1>{{ "routine.title" | transloco : { name: userName } }}</h1>
+  <div (click)="showNewRoutineModal = true" class="routine-top-add primary-box">
+    <span>{{ "routine.add" | transloco }}</span>
+    <i>+</i>
+  </div>
 </section>
 
 <section class="routine-content centered">
-    <div *ngFor="let routine of routines" (click)="goToCard(routine)" class="card primary-box">
-        <img src="">
-        <span>{{routine | titlecase}}</span>
-    </div>
+  <div
+    *ngFor="let routine of routines"
+    (click)="goToCard(routine)"
+    class="card primary-box"
+  >
+    <img src="" />
+    <span>{{ routine | titlecase }}</span>
+  </div>
 </section>
 
 <router-outlet></router-outlet>
 
-<app-routine-modal *ngIf="showNewRoutineModal" (closeModal)="showNewRoutineModal = false" (addNewRoutine)="addNewRoutine($event)" [labelText]="'modal.label' | transloco"></app-routine-modal>
+<app-routine-modal
+  *ngIf="showNewRoutineModal"
+  (closeModal)="showNewRoutineModal = false"
+  (addNewRoutine)="addNewRoutine($event)"
+  [labelText]="'modal.label' | transloco"
+  class="modal"
+></app-routine-modal>

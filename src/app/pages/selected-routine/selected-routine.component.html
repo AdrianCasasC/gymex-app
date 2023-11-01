@@ -5,7 +5,7 @@
     *ngFor="let muscleGroup of muscularGroups"
     (click)="selectedMuscle = muscleGroup"
     class="option scale-hover primary-box"
-    [ngClass]="{ 'selected-muscle': selectedMuscle === muscleGroup }"
+    [ngClass]="{ 'selected-box': selectedMuscle === muscleGroup }"
   >
     {{ "muscles." + muscleGroup | transloco | titlecase }}
   </div>
@@ -22,7 +22,9 @@
   <ng-container *ngFor="let muscleGroup of muscularGroups">
     <section *ngIf="selectedMuscle === muscleGroup" class="muscles-container">
       <div
-        *ngFor="let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']"
+        *ngFor="
+          let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']
+        "
         class="muscle-card scale-hover primary-box flex-col"
         (click)="handleSelectedCard(exercise, muscleGroup)"
       >
@@ -33,22 +35,28 @@
       </div>
     </section>
   </ng-container>
-  
+
   <section *ngIf="chosenExercises.length > 0" class="selected-exercises">
-    <div *ngFor="let exercise of chosenExercises" class="secondary-box selected-exercises__item">
+    <div
+      *ngFor="let exercise of chosenExercises"
+      class="secondary-box selected-exercises__item"
+    >
       <span>{{ exercise.name | transloco | titlecase }}</span>
-      <span>{{ exercise.series + (exercise.series !== 1 ? ' series' : ' serie')}}</span>
+      <span>{{
+        exercise.series.length +
+          (exercise.series.length !== 1 ? " series" : " serie")
+      }}</span>
     </div>
   </section>
 </div>
 
-<button (click)="saveRoutine()" class="secondary-box save-button">{{ 'selectedRoutine.button' | transloco }}</button>
+<button (click)="saveRoutine()" class="secondary-box save-button">
+  {{ "selectedRoutine.button" | transloco }}
+</button>
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">
   <div class="exercise-modal__content">
-    <i (click)="closeModal()" class="exercise-modal__content__icon"
-      >X</i
-    >
+    <i (click)="closeModal()" class="exercise-modal__content__icon">X</i>
     <strong>{{ selectedExercise | transloco | titlecase }}</strong>
     <span>
       {{ "exerciseModal.label" | transloco | titlecase }}

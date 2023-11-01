@@ -13,9 +13,14 @@ export interface Exercises {
   basicsExercises: string[];
 }
 
+export interface Serie {
+  weight: number;
+  reps: number;
+}
+
 export interface Exercise {
   name: string;
-  series: number;
+  series: Serie[];
 }
 
 export interface Routine {
@@ -23,4 +28,11 @@ export interface Routine {
   exercises: Exercise[];
 }
 
-export type MuscularGroups = 'chest' | 'back' | 'leg' | 'shoulder' | 'arm' | 'abs' | 'basics';
+export type MuscularGroups =
+  | 'chest'
+  | 'back'
+  | 'leg'
+  | 'shoulder'
+  | 'arm'
+  | 'abs'
+  | 'basics';

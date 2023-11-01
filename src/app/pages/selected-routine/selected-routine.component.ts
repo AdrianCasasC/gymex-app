@@ -6,7 +6,11 @@ import {
   numberOfSeries,
   DataService,
 } from 'src/app/services/data.service';
-import { MuscularGroups, Exercise } from 'src/app/interfaces/app.interface';
+import {
+  MuscularGroups,
+  Exercise,
+  Serie,
+} from 'src/app/interfaces/app.interface';
 
 @Component({
   selector: 'app-selected-routine',
@@ -29,7 +33,7 @@ export class SelectedRoutineComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
     private router: Router
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.selectedRoutine =
@@ -39,8 +43,8 @@ export class SelectedRoutineComponent implements OnInit {
   addExercise(exerciseName: string, exerciseSeries: number) {
     const pickedExercise: Exercise = {
       name: exerciseName,
-      series: exerciseSeries
-    }
+      series: this.generateSeriesTypeList(exerciseSeries),
+    };
 
     this.chosenExercises.push(pickedExercise);
 
@@ -48,19 +52,39 @@ export class SelectedRoutineComponent implements OnInit {
     document.body.style.overflow = 'auto';
   }
 
+  generateSeriesTypeList(length: number) {
+    const series: Serie[] = [];
+
+    if (length <= 0) {
+      return series;
+    } else {
+      for (let i = 0; i < length; i++) {
+        series.push({
+          weight: 0,
+          reps: 0,
+        });
+      }
+
+      return series;
+    }
+  }
+
   handleSelectedCard(exercise: string, muscleGroup: string) {
     this.selectedExercise = 'exercises.' + muscleGroup + '.' + exercise;
-    this.showExerciseModal = true
+    this.showExerciseModal = true;
     document.body.style.overflow = 'hidden';
   }
 
   closeModal() {
-    this.showExerciseModal = false
+    this.showExerciseModal = false;
     document.body.style.overflow = 'auto';
   }
 
   saveRoutine() {
-    this.dataService.setSavedRoutines(this.selectedRoutine, this.chosenExercises);
-    this.router.navigate(['/routine'])
+    this.dataService.setSavedRoutines(
+      this.selectedRoutine,
+      this.chosenExercises
+    );
+    this.router.navigate(['/routine']);
   }
 }

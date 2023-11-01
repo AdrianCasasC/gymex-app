@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Exercise, Routine } from 'src/app/interfaces/app.interface';
+import { Exercise, Routine, Serie } from 'src/app/interfaces/app.interface';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -10,16 +10,41 @@ import { DataService } from 'src/app/services/data.service';
 export class MyRoutinesComponent implements OnInit {
   myRoutines: Routine[] = [];
   selectedRoutine!: Routine;
-  
-  constructor(
-    private dataService: DataService
-  ) {}
+  editedExerciseIndex!: number;
+  selectedSerie!: Serie;
+  editedSerieIndex!: number;
+  selectedExercise!: Exercise;
+  showSerieModal: boolean = false;
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
-      this.myRoutines = this.dataService.getSavedRoutines();
+    this.myRoutines = this.dataService.getSavedRoutines();
   }
 
-  getArray(length: number): number[] {
-    return new Array(length)
+  applyChanges() {
+    this.selectedRoutine.exercises[this.editedExerciseIndex].series[
+      this.editedSerieIndex
+    ] = { ...this.selectedSerie };
+    this.closeModal();
+  }
+
+  copySerie(serie: Serie) {
+    this.selectedSerie = { ...serie };
+  }
+
+  saveExerciseAndSerieIndex(exerciseIndex: number, serieIndex: number) {
+    this.editedExerciseIndex = exerciseIndex;
+    this.editedSerieIndex = serieIndex;
+  }
+
+  openModal() {
+    document.body.style.overflow = 'hidden';
+    this.showSerieModal = true;
+  }
+
+  closeModal() {
+    document.body.style.overflow = '';
+    this.showSerieModal = false;
   }
 }
