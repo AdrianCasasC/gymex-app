@@ -1,4 +1,10 @@
-<h1>Mis rutinas</h1>
+<section class="routine-top">
+  <h1>Mis rutinas</h1>
+  <div (click)="showNewRoutineModal = true" class="routine-top-add primary-box">
+    <span>{{ "routine.add" | transloco }}</span>
+    <i>+</i>
+  </div>
+</section>
 
 <section class="my-routines-wrapper">
   <span
@@ -73,3 +79,11 @@
     </section>
   </div>
 </div>
+
+<app-routine-modal
+  *ngIf="showNewRoutineModal"
+  (closeModal)="showNewRoutineModal = false"
+  (addNewRoutine)="addNewRoutine($event)"
+  [labelText]="'modal.label' | transloco"
+  class="modal"
+></app-routine-modal>

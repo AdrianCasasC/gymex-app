@@ -25,6 +25,21 @@
   margin-bottom: 12px;
 }
 
+.routine-top {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 34px;
+}
+
+.routine-top-add {
+  padding: 32px;
+  color: #12706b;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 200px;
+}
+
 .modal-content {
   position: relative;
   padding: 24px;

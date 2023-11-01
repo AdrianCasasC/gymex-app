@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Exercise, Routine, Serie } from 'src/app/interfaces/app.interface';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -15,11 +17,19 @@ export class MyRoutinesComponent implements OnInit {
   editedSerieIndex!: number;
   selectedExercise!: Exercise;
   showSerieModal: boolean = false;
+  showNewRoutineModal: boolean = false;
+  userName!: string;
+  routines: string[] = [];
 
-  constructor(private dataService: DataService) {}
+  constructor(
+    private dataService: DataService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.myRoutines = this.dataService.getSavedRoutines();
+    this.userName = this.authService.getUser().name;
   }
 
   applyChanges() {
@@ -46,5 +56,14 @@ export class MyRoutinesComponent implements OnInit {
   closeModal() {
     document.body.style.overflow = '';
     this.showSerieModal = false;
+  }
+
+  addNewRoutine(newRoutine: string) {
+    this.routines.push(newRoutine);
+    this.goToCard(newRoutine);
+  }
+
+  goToCard(selectedRoutine: string) {
+    this.router.navigate([`/add/${selectedRoutine}`]);
   }
 }

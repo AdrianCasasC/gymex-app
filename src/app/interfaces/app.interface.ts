@@ -28,6 +28,16 @@ export interface Routine {
   exercises: Exercise[];
 }
 
+export interface Week {
+  name: string;
+  days: Day[];
+}
+
+export interface Day {
+  name: string;
+  routine: Routine | null;
+}
+
 export type MuscularGroups =
   | 'chest'
   | 'back'

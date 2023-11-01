@@ -3,6 +3,15 @@
     "accept": "aceptar",
     "cancel": "cancelar"
   },
+  "daysOfWeek": {
+    "monday": "Lunes",
+    "tuesday": "Martes",
+    "wednesday": "Miércoles",
+    "thursday": "Jueves",
+    "friday": "Viernes",
+    "saturday": "Sábado",
+    "sunday": "Domingo"
+  },
   "exercises": {
     "chest": {
       "inclineBarBenchPress": "inclinado con barra",
@@ -85,6 +94,10 @@
     "home": "inicio",
     "series": "series",
     "routine": "rutina",
-    "add": "añadir"
+    "weeks": "semanas"
+  },
+  "week": {
+    "add": "Añadir semana",
+    "modal-label": "Nombre de la nueva semana"
   }
 }

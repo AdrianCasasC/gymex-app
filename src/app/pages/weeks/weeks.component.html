@@ -1,0 +1,88 @@
+<section class="week-top">
+  <h1>Semanas</h1>
+  <div (click)="showWeekModal = true" class="add_week centered primary-box">
+    <span>{{ "week.add" | transloco }}</span>
+    <i>+</i>
+  </div>
+</section>
+
+<section *ngIf="myWeeks.length > 0" class="weeks-container">
+  <span
+    *ngFor="let week of myWeeks"
+    (click)="selectedWeek = week"
+    [ngClass]="{ 'selected-box': selectedWeek === week }"
+    class="primary-box week"
+    >{{ week.name }}</span
+  >
+</section>
+
+<ng-container *ngFor="let week of myWeeks">
+  <section *ngIf="selectedWeek === week" class="week-days-container centered">
+    <span
+      *ngFor="let day of week.days"
+      (click)="selectWeekDay(day)"
+      class="primary-box week-day"
+    >
+      {{ "daysOfWeek." + day.name | transloco }}
+    </span>
+  </section>
+</ng-container>
+
+<section *ngIf="selectedDay" class="day-routine">
+  <div *ngIf="!selectedDay?.routine; else routine">
+    <span
+      >No hay ninguna rutina asociada al
+      {{ "daysOfWeek." + selectedDay.name | transloco }}</span
+    >
+    <button (click)="openRoutinesModal()">Añadir rutina</button>
+  </div>
+
+  <ng-template #routine>
+    <span
+      >Aqui se muestra la rutina de
+      {{ selectedAssociatedRoutine.name }} asociada al
+      {{ "daysOfWeek." + selectedDay.name | transloco }}</span
+    >
+  </ng-template>
+</section>
+
+<app-routine-modal
+  *ngIf="showWeekModal"
+  (closeModal)="showWeekModal = false"
+  (addNewRoutine)="addNewWeek($event)"
+  [labelText]="'week.modal-label' | transloco"
+  class="modal"
+></app-routine-modal>
+
+<div *ngIf="showRoutinesModal" class="routines-modal modal">
+  <div class="flex-col content primary-box">
+    <div *ngIf="savedRoutines.length > 0; else noRoutines">
+      <i (click)="showRoutinesModal = false">X</i>
+      <h2>Selecciona rutina a añadir</h2>
+      <span *ngIf="selectedAssociatedRoutine"
+        >Rutina seleccionada: {{ selectedAssociatedRoutine.name }}</span
+      >
+      <section class="routines-wrapper">
+        <span
+          *ngFor="let routine of savedRoutines"
+          (click)="selectedAssociatedRoutine = routine"
+          >{{ routine.name }}</span
+        >
+      </section>
+
+      <button
+        (click)="associateRoutine(selectedAssociatedRoutine)"
+        class="secondary-box"
+      >
+        Asociar rutina
+      </button>
+    </div>
+
+    <ng-template #noRoutines>
+      <span>No hay ninguna rutina guardada</span>
+      <button (click)="goToRoutines()" class="secondary-box">
+        Ir a rutinas
+      </button>
+    </ng-template>
+  </div>
+</div>
