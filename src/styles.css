@@ -1,6 +1,7 @@
 /* Estilos Globales */
 body {
   all: unset; /* Para quitar los estilos por defecto */
+  font-family: cursive;
 }
 
 /* Barra de desplazamiento vertical */
@@ -26,6 +27,10 @@ button {
   all: unset;
 }
 
+h1 {
+  font-size: 2em;
+}
+
 .centered {
   display: flex;
   justify-content: center;
@@ -45,6 +50,15 @@ button {
   background-color: white;
   border-radius: 10px;
   padding: 12px;
+  cursor: pointer;
+}
+
+.secondary-box:hover {
+  border: 2px solid black;
+  background-color: black;
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
 }
 
 .flex-col {

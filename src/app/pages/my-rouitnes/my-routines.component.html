@@ -16,69 +16,18 @@
   >
 </section>
 
-<section class="register-exercises-wrapper">
+<section>
   <div
     *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
     class="register-exercises-wrapper__container"
   >
     <h2>{{ exercise.name | transloco }}</h2>
-    <div
-      *ngFor="let serie of exercise.series; let j = index"
-      class="primary-box series scale-hover"
-      (click)="
-        copySerie(serie);
-        saveExerciseAndSerieIndex(i, j);
-        openModal();
-        selectedExercise = exercise
-      "
+    <span
+      >{{ exercise.series.length }}
+      {{ exercise.series.length > 1 ? "series" : "serie" }}</span
     >
-      <strong>Serie {{ j + 1 }}:</strong> X
-      {{ serie.reps ? serie.reps : "___" }} X
-      {{ serie.weight ? serie.weight : "___" }} Kgs
-    </div>
   </div>
 </section>
-
-<div *ngIf="showSerieModal" class="modal">
-  <div class="modal-content primary-box">
-    <i (click)="closeModal()">X</i>
-    <section>
-      <h2>{{ selectedExercise.name | transloco }}</h2>
-      <h3>Serie {{ editedSerieIndex + 1 }}</h3>
-    </section>
-
-    <section class="input-field">
-      <label for="reps">Repeticiones</label>
-      <input
-        type="number"
-        min="0"
-        id="reps"
-        name="reps"
-        [(ngModel)]="selectedSerie.reps"
-      />
-    </section>
-
-    <section class="input-field">
-      <label for="weight">Peso</label>
-      <input
-        type="number"
-        min="0"
-        id="weight"
-        name="weight"
-        [(ngModel)]="selectedSerie.weight"
-      />
-    </section>
-
-    <section class="modal-buttons-container">
-      <button (click)="applyChanges()" class="modal-buttons secondary-box">
-        Aceptar
-      </button>
-      <button (click)="closeModal()" class="modal-buttons secondary-box">
-        Cancelar
-      </button>
-    </section>
-  </div>
-</div>
 
 <app-routine-modal
   *ngIf="showNewRoutineModal"

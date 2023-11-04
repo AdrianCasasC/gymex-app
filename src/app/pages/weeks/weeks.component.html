@@ -22,27 +22,51 @@
       *ngFor="let day of week.days"
       (click)="selectWeekDay(day)"
       class="primary-box week-day"
+      [ngClass]="{ 'selected-box': selectedDay === day }"
     >
       {{ "daysOfWeek." + day.name | transloco }}
     </span>
   </section>
 </ng-container>
 
-<section *ngIf="selectedDay" class="day-routine">
-  <div *ngIf="!selectedDay?.routine; else routine">
+<section *ngIf="selectedDay">
+  <div *ngIf="!selectedDay?.routine; else routine" class="no-routine">
     <span
       >No hay ninguna rutina asociada al
       {{ "daysOfWeek." + selectedDay.name | transloco }}</span
     >
-    <button (click)="openRoutinesModal()">Añadir rutina</button>
+    <button (click)="openRoutinesModal()" class="secondary-box">
+      Añadir rutina
+    </button>
   </div>
 
   <ng-template #routine>
-    <span
-      >Aqui se muestra la rutina de
-      {{ selectedAssociatedRoutine.name }} asociada al
-      {{ "daysOfWeek." + selectedDay.name | transloco }}</span
-    >
+    <h2 class="routine-title centered">
+      {{ "daysOfWeek." + selectedDay.name | transloco }} de
+      {{ selectedDay.routine?.name }}
+    </h2>
+
+    <section>
+      <div
+        *ngFor="let exercise of selectedDay.routine?.exercises; let i = index"
+      >
+        <h3>{{ exercise.name | transloco }}</h3>
+        <div
+          *ngFor="let serie of exercise.series; let j = index"
+          class="primary-box series scale-hover"
+          (click)="
+            copySerie(serie);
+            saveExerciseAndSerieIndex(i, j);
+            openModal();
+            selectedExercise = exercise
+          "
+        >
+          <strong>Serie {{ j + 1 }}:</strong> X
+          {{ serie.reps ? serie.reps : "___" }} X
+          {{ serie.weight ? serie.weight : "___" }} Kgs
+        </div>
+      </div>
+    </section>
   </ng-template>
 </section>
 
@@ -54,10 +78,13 @@
   class="modal"
 ></app-routine-modal>
 
-<div *ngIf="showRoutinesModal" class="routines-modal modal">
-  <div class="flex-col content primary-box">
-    <div *ngIf="savedRoutines.length > 0; else noRoutines">
-      <i (click)="showRoutinesModal = false">X</i>
+<div *ngIf="showRoutinesModal" class="modal">
+  <div class="flex-col content primary-box modal-content">
+    <div
+      *ngIf="savedRoutines.length > 0; else noRoutines"
+      class="flex-col-cent"
+    >
+      <i (click)="showRoutinesModal = false" class="centered">X</i>
       <h2>Selecciona rutina a añadir</h2>
       <span *ngIf="selectedAssociatedRoutine"
         >Rutina seleccionada: {{ selectedAssociatedRoutine.name }}</span
@@ -84,5 +111,46 @@
         Ir a rutinas
       </button>
     </ng-template>
+  </div>
+</div>
+
+<div *ngIf="showSerieModal" class="modal">
+  <div class="modal-content primary-box">
+    <i (click)="closeModal()">X</i>
+    <section>
+      <h2>{{ selectedExercise.name | transloco }}</h2>
+      <h3>Serie {{ editedSerieIndex + 1 }}</h3>
+    </section>
+
+    <section class="input-field">
+      <label for="reps">Repeticiones</label>
+      <input
+        type="number"
+        min="0"
+        id="reps"
+        name="reps"
+        [(ngModel)]="selectedSerie.reps"
+      />
+    </section>
+
+    <section class="input-field">
+      <label for="weight">Peso</label>
+      <input
+        type="number"
+        min="0"
+        id="weight"
+        name="weight"
+        [(ngModel)]="selectedSerie.weight"
+      />
+    </section>
+
+    <section class="modal-buttons-container">
+      <button (click)="applyChanges()" class="modal-buttons secondary-box">
+        Aceptar
+      </button>
+      <button (click)="closeModal()" class="modal-buttons secondary-box">
+        Cancelar
+      </button>
+    </section>
   </div>
 </div>

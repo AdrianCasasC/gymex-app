@@ -1,7 +1,7 @@
 {
   "button": {
-    "accept": "aceptar",
-    "cancel": "cancelar"
+    "accept": "Aceptar",
+    "cancel": "Cancelar"
   },
   "daysOfWeek": {
     "monday": "Lunes",
@@ -14,74 +14,74 @@
   },
   "exercises": {
     "chest": {
-      "inclineBarBenchPress": "inclinado con barra",
-      "inclineDumbellBenchPress": " inclinado con mancuernas",
-      "dumbellBenchPress": "plano con marcuernas",
-      "pulleyCrosses": "cruces en polea",
-      "dumbellCrosses": "cruces con mancuerna"
+      "inclineBarBenchPress": "Inclinado con barra",
+      "inclineDumbellBenchPress": " Inclinado con mancuernas",
+      "dumbellBenchPress": "Plano con marcuernas",
+      "pulleyCrosses": "Cruces en polea",
+      "dumbellCrosses": "Cruces con mancuerna"
     },
     "back": {
-      "chestPull": "jalón al pecho",
-      "neutralChestPull": "jalón al pecho neutro",
-      "supineChestPull": "jalón agarre supino",
-      "dumbellRow": "remo con mancuerna",
-      "pulleyRow": "remo en polea",
-      "pullover": "pullover"
+      "chestPull": "Jalón al pecho",
+      "neutralChestPull": "Jalón al pecho neutro",
+      "supineChestPull": "Jalón agarre supino",
+      "dumbellRow": "Remo con mancuerna",
+      "pulleyRow": "Remo en polea",
+      "pullover": "Pullover"
     },
     "leg": {
-      "legPress": "prensa",
-      "hiptrust": "hiptrust",
-      "strides": "zancadas",
-      "dumbellDeadlift": "peso muerto con mancuerna",
-      "stiffLegs": "piernas rígidas",
-      "quadExtension": "extensión de cuádriceps",
-      "femoralContraction": "contracción de femoral"
+      "legPress": "Prensa",
+      "hiptrust": "Hiptrust",
+      "strides": "Zancadas",
+      "dumbellDeadlift": "Peso muerto con mancuerna",
+      "stiffLegs": "Piernas rígidas",
+      "quadExtension": "Extensión de cuádriceps",
+      "femoralContraction": "Contracción de femoral"
     },
     "arm": {
-      "dumbellBiceps": "biceps con mancuerna",
-      "barBiceps": "biceps con barra",
-      "pulleyBiceps": "biceps en polea",
-      "inclineBiceps": "biceps banco inclinado",
-      "frenchPress": "press militar",
-      "pulleyTriceps": "triceps en polea",
-      "dumbellTriceps": "triceps con mancuerna"
+      "dumbellBiceps": "Biceps con mancuerna",
+      "barBiceps": "Biceps con barra",
+      "pulleyBiceps": "Biceps en polea",
+      "inclineBiceps": "Biceps banco inclinado",
+      "frenchPress": "Press militar",
+      "pulleyTriceps": "Triceps en polea",
+      "dumbellTriceps": "Triceps con mancuerna"
     },
     "shoulder": {
-      "dumbellMilitarPress": "press militar con mancuernas",
-      "lateralRaises": "elevaciones laterales",
-      "frontalRaises": "elevaciones frontales",
-      "posterior": "hombro posterior"
+      "dumbellMilitarPress": "Press militar con mancuernas",
+      "lateralRaises": "Elevaciones laterales",
+      "frontalRaises": "Elevaciones frontales",
+      "posterior": "Hombro posterior"
     },
     "abs": {
-      "wheel": "rueda abdominal",
-      "pulleyContractions": "contracciones en polea"
+      "wheel": "Rueda abdominal",
+      "pulleyContractions": "Contracciones en polea"
     },
     "basics": {
-      "squad": "sentadilla",
-      "benchPress": "pressbanca",
-      "deadLift": "peso muerto"
+      "squad": "Sentadilla",
+      "benchPress": "Pressbanca",
+      "deadLift": "Peso muerto"
     }
   },
   "exerciseModal": {
-    "label": "elige el número de series",
-    "button": "añadir ejercicio"
+    "label": "Elige el número de series",
+    "button": "Añadir ejercicio"
   },
   "login": {
-    "email": "email",
-    "init": "iniciar sesión",
-    "name": "nombre"
+    "email": "Email",
+    "init": "Iniciar sesión",
+    "name": "Nombre"
   },
   "modal": {
     "label": "Nombre de la nueva rutina"
   },
   "muscles": {
-    "chest": "pecho",
-    "back": "espalda",
-    "leg": "piernas",
-    "shoulder": "hombros",
-    "arm": "brazos",
-    "abs": "abdomen",
-    "basics": "básicos"
+    "chest": "Pecho",
+    "back": "Espalda",
+    "leg": "Piernas",
+    "shoulder": "Hombros",
+    "arm": "Brazos",
+    "abs": "Abdomen",
+    "basics": "Básicos"
   },
   "routine": {
     "add": "Añadir nueva rutina",
@@ -91,10 +91,10 @@
     "button": "Guardar rutina"
   },
   "nav": {
-    "home": "inicio",
-    "series": "series",
-    "routine": "rutina",
-    "weeks": "semanas"
+    "home": "Inicio",
+    "series": "Series",
+    "routine": "Rutina",
+    "weeks": "Semanas"
   },
   "week": {
     "add": "Añadir semana",

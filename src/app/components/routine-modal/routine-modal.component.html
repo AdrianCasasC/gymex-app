@@ -1,6 +1,12 @@
 <section class="container primary-box flex-col-cent">
-    <i (click)="closeModal.emit()">X</i>
-    <h2>{{labelText}}</h2>
-    <input type="text" [(ngModel)]="newRoutineName" />
-    <button (click)="handleAddRoutine()">{{'button.accept' | transloco | titlecase }}</button>
+  <i (click)="closeModal.emit()">X</i>
+  <h2>{{ labelText }}</h2>
+  <input
+    type="text"
+    (keydown.enter)="handleAddRoutine()"
+    [(ngModel)]="newRoutineName"
+  />
+  <button (click)="handleAddRoutine()">
+    {{ "button.accept" | transloco | titlecase }}
+  </button>
 </section>

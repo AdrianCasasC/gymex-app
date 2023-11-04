@@ -42,3 +42,88 @@
   cursor: pointer;
   width: 200px;
 }
+
+.modal-content {
+  position: relative;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 50%;
+
+  i {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    font-style: normal;
+    font-family: monospace;
+    width: 8px;
+    height: 8px;
+  }
+
+  i:hover {
+    background-color: #4ac4c4;
+  }
+}
+
+.modal-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.series {
+  padding: 24px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.no-routine {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.routine-title {
+  width: 100%;
+}
+
+.routines-wrapper {
+  margin: 24px 0;
+  padding: 12px;
+  border: 1px solid #12706b;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+
+  span {
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  span:hover {
+    background: #12706b;
+    color: #a7f8f3;
+  }
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
