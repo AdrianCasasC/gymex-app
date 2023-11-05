@@ -21,7 +21,9 @@
     *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
     class="register-exercises-wrapper__container"
   >
-    <h2>{{ exercise.name | transloco }}</h2>
+    <h2>
+      {{ "exercises." + exercise.name | transloco }}
+    </h2>
     <span
       >{{ exercise.series.length }}
       {{ exercise.series.length > 1 ? "series" : "serie" }}</span

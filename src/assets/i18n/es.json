@@ -13,54 +13,40 @@
     "sunday": "Domingo"
   },
   "exercises": {
-    "chest": {
-      "inclineBarBenchPress": "Inclinado con barra",
-      "inclineDumbellBenchPress": " Inclinado con mancuernas",
-      "dumbellBenchPress": "Plano con marcuernas",
-      "pulleyCrosses": "Cruces en polea",
-      "dumbellCrosses": "Cruces con mancuerna"
-    },
-    "back": {
-      "chestPull": "Jalón al pecho",
-      "neutralChestPull": "Jalón al pecho neutro",
-      "supineChestPull": "Jalón agarre supino",
-      "dumbellRow": "Remo con mancuerna",
-      "pulleyRow": "Remo en polea",
-      "pullover": "Pullover"
-    },
-    "leg": {
-      "legPress": "Prensa",
-      "hiptrust": "Hiptrust",
-      "strides": "Zancadas",
-      "dumbellDeadlift": "Peso muerto con mancuerna",
-      "stiffLegs": "Piernas rígidas",
-      "quadExtension": "Extensión de cuádriceps",
-      "femoralContraction": "Contracción de femoral"
-    },
-    "arm": {
-      "dumbellBiceps": "Biceps con mancuerna",
-      "barBiceps": "Biceps con barra",
-      "pulleyBiceps": "Biceps en polea",
-      "inclineBiceps": "Biceps banco inclinado",
-      "frenchPress": "Press militar",
-      "pulleyTriceps": "Triceps en polea",
-      "dumbellTriceps": "Triceps con mancuerna"
-    },
-    "shoulder": {
-      "dumbellMilitarPress": "Press militar con mancuernas",
-      "lateralRaises": "Elevaciones laterales",
-      "frontalRaises": "Elevaciones frontales",
-      "posterior": "Hombro posterior"
-    },
-    "abs": {
-      "wheel": "Rueda abdominal",
-      "pulleyContractions": "Contracciones en polea"
-    },
-    "basics": {
-      "squad": "Sentadilla",
-      "benchPress": "Pressbanca",
-      "deadLift": "Peso muerto"
-    }
+    "inclineBarBenchPress": "Inclinado con barra",
+    "inclineDumbellBenchPress": " Inclinado con mancuernas",
+    "dumbellBenchPress": "Plano con marcuernas",
+    "pulleyCrosses": "Cruces en polea",
+    "dumbellCrosses": "Cruces con mancuerna",
+    "chestPull": "Jalón al pecho",
+    "neutralChestPull": "Jalón al pecho neutro",
+    "supineChestPull": "Jalón agarre supino",
+    "dumbellRow": "Remo con mancuerna",
+    "pulleyRow": "Remo en polea",
+    "pullover": "Pullover",
+    "legPress": "Prensa",
+    "hiptrust": "Hiptrust",
+    "strides": "Zancadas",
+    "dumbellDeadlift": "Peso muerto con mancuerna",
+    "stiffLegs": "Piernas rígidas",
+    "quadExtension": "Extensión de cuádriceps",
+    "femoralContraction": "Contracción de femoral",
+    "dumbellBiceps": "Biceps con mancuerna",
+    "barBiceps": "Biceps con barra",
+    "pulleyBiceps": "Biceps en polea",
+    "inclineBiceps": "Biceps banco inclinado",
+    "frenchPress": "Press militar",
+    "pulleyTriceps": "Triceps en polea",
+    "dumbellTriceps": "Triceps con mancuerna",
+    "dumbellMilitarPress": "Press militar con mancuernas",
+    "lateralRaises": "Elevaciones laterales",
+    "frontalRaises": "Elevaciones frontales",
+    "posterior": "Hombro posterior",
+    "wheel": "Rueda abdominal",
+    "pulleyContractions": "Contracciones en polea",
+    "squad": "Sentadilla",
+    "benchPress": "Pressbanca",
+    "deadLift": "Peso muerto"
   },
   "exerciseModal": {
     "label": "Elige el número de series",

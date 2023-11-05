@@ -22,12 +22,14 @@
 }
 
 .muscles-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
-  justify-items: center;
+  /*display: grid;
+  grid-template-columns: repeat(5, 1fr);*/
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  //justify-items: center;
   padding: 24px;
-  height: 500px;
+  max-height: 500px;
   overflow: auto;
 }
 
@@ -36,7 +38,7 @@
   align-items: center;
   gap: 12px;
   padding: 12px;
-  width: 100%;
+  width: 120px;
   height: 200px;
   cursor: pointer;
 }

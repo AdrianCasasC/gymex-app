@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   loggedUser: User = {
+    id: '',
     name: '',
     email: '',
   };

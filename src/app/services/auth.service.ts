@@ -5,7 +5,11 @@ import { User } from '../interfaces/app.interface';
   providedIn: 'root',
 })
 export class AuthService {
-  user!: User;
+  user: User = {
+    id: 'id1',
+    name: 'Adri',
+    email: 'adri@gmail.com',
+  };
 
   constructor() {}
 

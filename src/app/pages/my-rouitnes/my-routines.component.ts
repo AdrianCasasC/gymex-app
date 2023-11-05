@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Exercise, Routine, Serie } from 'src/app/interfaces/app.interface';
+import {
+  Exercise,
+  Routine,
+  Serie,
+  User,
+} from 'src/app/interfaces/app.interface';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-my-routines',
@@ -18,18 +23,31 @@ export class MyRoutinesComponent implements OnInit {
   selectedExercise!: Exercise;
   showSerieModal: boolean = false;
   showNewRoutineModal: boolean = false;
-  userName!: string;
+  user!: User;
   routines: string[] = [];
 
   constructor(
-    private dataService: DataService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService
   ) {}
 
   ngOnInit(): void {
-    this.myRoutines = this.dataService.getSavedRoutines();
-    this.userName = this.authService.getUser().name;
+    this.getBackendData();
+  }
+
+  getBackendData() {
+    const userId: string = this.authService.getUser().id;
+    this.apiService.getBackendRoutines(userId).subscribe((response: any) => {
+      this.myRoutines = response;
+      this.setDefaultSelectedRoutine();
+    });
+  }
+
+  setDefaultSelectedRoutine() {
+    if (this.myRoutines.length > 0) {
+      this.selectedRoutine = this.myRoutines[0];
+    }
   }
 
   applyChanges() {

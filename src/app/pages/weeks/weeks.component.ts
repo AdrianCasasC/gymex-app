@@ -7,6 +7,8 @@ import {
   Serie,
   Week,
 } from 'src/app/interfaces/app.interface';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
 import { daysOfWeek } from 'src/app/services/data.service';
 
@@ -30,12 +32,31 @@ export class WeeksComponent implements OnInit {
   editedExerciseIndex!: number;
   showSerieModal: boolean = false;
 
-  constructor(private dataService: DataService, private router: Router) {}
+  constructor(
+    private dataService: DataService,
+    private router: Router,
+    private authService: AuthService,
+    private apiService: ApiService
+  ) {}
 
   ngOnInit(): void {
-    this.myWeeks = [...this.dataService.getWeeks()];
-    this.selectedWeek = this.myWeeks[0];
-    this.selectedDay = this.selectedWeek.days[0];
+    //this.myWeeks = [...this.dataService.getWeeks()];
+    this.getBackendData();
+  }
+
+  getBackendData() {
+    const userId: string = this.authService.getUser().id;
+    this.apiService.getBackendWeeks(userId).subscribe((response: any) => {
+      this.myWeeks = response;
+      this.asignDefaultWeekAndDay();
+    });
+  }
+
+  asignDefaultWeekAndDay() {
+    if (this.myWeeks.length > 0) {
+      this.selectedWeek = this.myWeeks[0];
+      this.selectedDay = this.selectedWeek.days[0];
+    }
   }
 
   addNewWeek(weekName: string) {
