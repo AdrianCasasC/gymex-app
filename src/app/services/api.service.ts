@@ -2,26 +2,49 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINTS } from 'src/config/api-endpoints';
 import { Routine, Week } from '../interfaces/app.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getBackendRoutines(userId: string) {
-    return this.http.get(API_ENDPOINTS.routines(userId));
+  getUserId() {
+    return this.authService.getUser().id;
   }
 
-  postNewRoutine(userId: string, newRoutine: Routine) {
-    return this.http.post(API_ENDPOINTS.routines(userId), newRoutine);
+  getBackendRoutines() {
+    return this.http.get(API_ENDPOINTS.routines(this.getUserId()));
   }
 
-  getBackendWeeks(userId: string) {
-    return this.http.get(API_ENDPOINTS.weeks(userId));
+  postNewRoutine(newRoutine: Routine) {
+    return this.http.post(API_ENDPOINTS.routines(this.getUserId()), newRoutine);
   }
 
-  postNewWeek(userId: string, newWeek: Week) {
-    return this.http.post(API_ENDPOINTS.weeks(userId), newWeek);
+  editRoutineSeries(editedRoutine: Routine) {
+    return this.http.put(
+      API_ENDPOINTS.routines(this.getUserId()),
+      editedRoutine
+    );
+  }
+
+  getBackendWeeks() {
+    return this.http.get(API_ENDPOINTS.weeks.basic(this.getUserId()));
+  }
+
+  getWeekById(weekId: string) {
+    return this.http.get(API_ENDPOINTS.weeks.byId(this.getUserId(), weekId));
+  }
+
+  editWeek(editedWeek: Week) {
+    return this.http.put(
+      API_ENDPOINTS.weeks.basic(this.getUserId()),
+      editedWeek
+    );
+  }
+
+  postNewWeek(newWeek: Week) {
+    return this.http.post(API_ENDPOINTS.weeks.basic(this.getUserId()), newWeek);
   }
 }

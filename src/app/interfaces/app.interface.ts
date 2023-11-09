@@ -30,6 +30,7 @@ export interface Routine {
 }
 
 export interface Week {
+  id: string;
   name: string;
   days: Day[];
 }

@@ -53,6 +53,14 @@ h1 {
   cursor: pointer;
 }
 
+.error-box {
+  border: 2px solid #850a06;
+  background-color: #bb1711;
+  border-radius: 10px;
+  text-align: center;
+  color: #850a06;
+}
+
 .secondary-box:hover {
   background-color: black;
   color: white;

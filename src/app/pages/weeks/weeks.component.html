@@ -9,20 +9,23 @@
 <section *ngIf="myWeeks.length > 0" class="weeks-container">
   <span
     *ngFor="let week of myWeeks"
-    (click)="selectedWeek = week"
-    [ngClass]="{ 'selected-box': selectedWeek === week }"
+    (click)="selectWeek(week)"
+    [ngClass]="{ 'selected-box': selectedWeek.id === week.id }"
     class="primary-box week"
     >{{ week.name }}</span
   >
 </section>
 
 <ng-container *ngFor="let week of myWeeks">
-  <section *ngIf="selectedWeek === week" class="week-days-container centered">
+  <section
+    *ngIf="selectedWeek.id === week.id"
+    class="week-days-container centered"
+  >
     <span
       *ngFor="let day of week.days"
       (click)="selectWeekDay(day)"
       class="primary-box week-day"
-      [ngClass]="{ 'selected-box': selectedDay === day }"
+      [ngClass]="{ 'selected-box': areEqualObjects(selectedDay, day) }"
     >
       {{ "daysOfWeek." + day.name | transloco }}
     </span>
@@ -84,15 +87,18 @@
       *ngIf="savedRoutines.length > 0; else noRoutines"
       class="flex-col-cent"
     >
-      <i (click)="showRoutinesModal = false" class="centered">X</i>
+      <i (click)="showRoutinesModal = false" class="centered close-cross">X</i>
       <h2>Selecciona rutina a añadir</h2>
       <span *ngIf="selectedAssociatedRoutine"
         >Rutina seleccionada: {{ selectedAssociatedRoutine.name }}</span
       >
+      <span *ngIf="!isRoutineSelected">¡Debes Seleccionar una rutina!</span>
       <section class="routines-wrapper">
         <span
           *ngFor="let routine of savedRoutines"
-          (click)="selectedAssociatedRoutine = routine"
+          (click)="
+            selectedAssociatedRoutine = routine; isRoutineSelected = true
+          "
           >{{ routine.name }}</span
         >
       </section>
@@ -116,9 +122,9 @@
 
 <div *ngIf="showSerieModal" class="modal">
   <div class="modal-content primary-box">
-    <i (click)="closeModal()">X</i>
+    <i (click)="closeModal()" class="close-cross">X</i>
     <section>
-      <h2>{{ selectedExercise.name | transloco }}</h2>
+      <h2>{{ "exercises." + selectedExercise.name | transloco }}</h2>
       <h3>Serie {{ editedSerieIndex + 1 }}</h3>
     </section>
 

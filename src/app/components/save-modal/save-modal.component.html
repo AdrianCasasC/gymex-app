@@ -1,0 +1,9 @@
+<div
+  class="content centered"
+  [ngClass]="{ 'primary-box': successfullSave, 'error-box': !successfullSave }"
+>
+  <span *ngIf="successfullSave; else error" class="success">{{ label }}</span>
+  <ng-template #error>
+    <span class="error">Ha ocurrido un error</span>
+  </ng-template>
+</div>

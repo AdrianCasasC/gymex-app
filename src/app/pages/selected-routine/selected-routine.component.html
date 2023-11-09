@@ -77,3 +77,10 @@
     </button>
   </div>
 </div>
+
+<app-save-modal
+  *ngIf="routineSavedSuccessfully === 'OK'"
+  class="modal"
+  [label]="'¡Rutina Guardada!'"
+  [successfullSave]="routineSavedSuccessfully === 'OK'"
+></app-save-modal>

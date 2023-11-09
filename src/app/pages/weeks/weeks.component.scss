@@ -52,23 +52,6 @@
   align-items: center;
   gap: 12px;
   width: 50%;
-
-  i {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 50%;
-    font-style: normal;
-    font-family: monospace;
-    width: 8px;
-    height: 8px;
-  }
-
-  i:hover {
-    background-color: #4ac4c4;
-  }
 }
 
 .modal-buttons-container {

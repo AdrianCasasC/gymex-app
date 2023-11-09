@@ -25,6 +25,7 @@ export class MyRoutinesComponent implements OnInit {
   showSerieModal: boolean = false;
   showNewRoutineModal: boolean = false;
   showEditSeriesModal: boolean = false;
+  saveSuccessfully!: string;
   user!: User;
   routines: string[] = [];
 
@@ -39,8 +40,7 @@ export class MyRoutinesComponent implements OnInit {
   }
 
   getBackendData() {
-    const userId: string = this.authService.getUser().id;
-    this.apiService.getBackendRoutines(userId).subscribe((response: any) => {
+    this.apiService.getBackendRoutines().subscribe((response: any) => {
       this.myRoutines = response;
       this.setDefaultSelectedRoutine();
     });
@@ -102,6 +102,19 @@ export class MyRoutinesComponent implements OnInit {
       foundExercise = { ...exerciseEdited };
     }
 
-    this.showEditSeriesModal = false;
+    this.saveEditedRoutineToBackend();
+  }
+
+  saveEditedRoutineToBackend() {
+    this.apiService.editRoutineSeries(this.selectedRoutine).subscribe({
+      next: () => {
+        this.showEditSeriesModal = false;
+        this.saveSuccessfully = 'OK';
+        setTimeout(() => (this.saveSuccessfully = 'DONE'), 1500);
+      },
+      error: () => {
+        this.saveSuccessfully = 'KO';
+      },
+    });
   }
 }

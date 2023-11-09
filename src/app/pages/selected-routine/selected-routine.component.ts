@@ -31,6 +31,7 @@ export class SelectedRoutineComponent implements OnInit {
   selectedExercise!: string;
   selectedNumberOfSeries: number = 0;
   chosenExercises: Exercise[] = [];
+  routineSavedSuccessfully: string = 'DONE';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -86,16 +87,29 @@ export class SelectedRoutineComponent implements OnInit {
   }
 
   saveRoutine() {
-    /*this.dataService.setSavedRoutines(
-      this.selectedRoutineName,
-      this.chosenExercises
-    );*/
     const newRoutine: Routine = {
       name: this.selectedRoutineName,
       exercises: this.chosenExercises,
     };
-    this.apiService
-      .postNewRoutine(this.authService.getUser().id, newRoutine)
-      .subscribe(() => this.router.navigate(['/routine']));
+    this.apiService.postNewRoutine(newRoutine).subscribe({
+      next: () => this.openModalAndRedirect('OK'),
+      error: () => this.openModalAndRedirect('KO'),
+    });
+  }
+
+  openModalAndRedirect(statusResponse: string) {
+    if (statusResponse === 'OK') {
+      this.routineSavedSuccessfully = 'OK';
+      setTimeout(() => {
+        this.routineSavedSuccessfully = 'DONE';
+        this.router.navigate(['/routine']);
+      }, 1000);
+    } else {
+      this.routineSavedSuccessfully = 'KO';
+      setTimeout(() => {
+        this.routineSavedSuccessfully = 'DONE';
+        this.router.navigate(['/routine']);
+      }, 1000);
+    }
   }
 }

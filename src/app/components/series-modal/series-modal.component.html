@@ -1,6 +1,7 @@
 <div class="flex-col-cent primary-box content">
-  <i class="close-cross centered">X</i>
+  <i (click)="closeModal.emit()" class="close-cross centered">X</i>
   <h2>Series de {{ exercise.name }}</h2>
+  <span *ngIf="error" class="error">Ha ocurrido un error</span>
   <span
     >{{ selectedNumberOfSeries }}
     {{ selectedNumberOfSeries === 1 ? "serie" : "series" }}</span

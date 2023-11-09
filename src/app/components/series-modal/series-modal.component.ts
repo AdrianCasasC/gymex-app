@@ -10,6 +10,7 @@ import { numberOfSeries } from 'src/app/services/data.service';
 })
 export class SeriesModalComponent {
   @Input() exercise!: Exercise;
+  @Input() error: boolean = false;
   @Output() closeModal = new EventEmitter();
   @Output() applySavedSeries = new EventEmitter();
 
@@ -19,7 +20,12 @@ export class SeriesModalComponent {
   constructor() {}
 
   saveSeries() {
-    this.exercise.series = new Array(this.selectedNumberOfSeries);
+    for (let i = 0; i < this.selectedNumberOfSeries; i++) {
+      this.exercise.series.push({
+        weight: 0,
+        reps: 0,
+      });
+    }
     this.applySavedSeries.emit(this.exercise);
   }
 }

@@ -38,6 +38,7 @@
   *ngIf="showEditSeriesModal"
   class="modal"
   [exercise]="exerciseToEdit"
+  [error]="saveSuccessfully === 'KO'"
   (applySavedSeries)="saveSeries($event)"
   (closeModal)="showEditSeriesModal = false"
 ></app-series-modal>
@@ -49,3 +50,11 @@
   [labelText]="'modal.label' | transloco"
   class="modal"
 ></app-routine-modal>
+
+<app-save-modal
+  *ngIf="saveSuccessfully === 'OK'"
+  class="modal"
+  [label]="'¡Rutina Guardada!'"
+  [successfullSave]="saveSuccessfully === 'OK'"
+>
+</app-save-modal>

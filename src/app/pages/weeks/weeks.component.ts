@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   Day,
@@ -31,43 +31,47 @@ export class WeeksComponent implements OnInit {
   editedSerieIndex!: number;
   editedExerciseIndex!: number;
   showSerieModal: boolean = false;
+  isRoutineSelected: boolean = true;
 
-  constructor(
-    private dataService: DataService,
-    private router: Router,
-    private authService: AuthService,
-    private apiService: ApiService
-  ) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit(): void {
     this.getBackendData();
   }
 
   getBackendData() {
-    const userId: string = this.authService.getUser().id;
-    this.apiService.getBackendWeeks(userId).subscribe((response: any) => {
+    this.apiService.getBackendWeeks().subscribe((response: any) => {
       this.myWeeks = response;
-      this.asignDefaultWeekAndDay();
+      this.asignDefaultWeek();
+      this.asignDefaultDay();
     });
   }
 
-  asignDefaultWeekAndDay() {
+  asignDefaultWeek() {
     if (this.myWeeks.length > 0) {
       this.selectedWeek = this.myWeeks[0];
+    }
+  }
+
+  asignDefaultDay() {
+    if (this.selectedWeek) {
       this.selectedDay = this.selectedWeek.days[0];
     }
   }
 
   addNewWeek(weekName: string) {
     const newWeek: Week = {
+      id: '',
       name: weekName,
       days: this.daysOfWeek,
     };
-    this.myWeeks.push(newWeek);
-    //this.dataService.setWeek(newWeek);
-    this.apiService
-      .postNewWeek(this.authService.getUser().id, newWeek)
-      .subscribe();
+
+    this.apiService.postNewWeek(newWeek).subscribe({
+      next: (response: any) => {
+        newWeek.id = response[0].id;
+        this.myWeeks.push(newWeek);
+      },
+    });
   }
 
   selectWeekDay(day: Day) {
@@ -75,35 +79,92 @@ export class WeeksComponent implements OnInit {
   }
 
   applyChanges() {
-    this.selectedAssociatedRoutine.exercises[this.editedExerciseIndex].series[
-      this.editedSerieIndex
-    ] = { ...this.selectedSerie };
+    const weekWitheditedDaySeries: Week = JSON.parse(
+      JSON.stringify(
+        this.myWeeks.find((week) => week.id === this.selectedWeek.id)
+      )
+    );
+    const editedDay = weekWitheditedDaySeries.days.find(
+      (day) => day.name === this.selectedDay.name
+    );
+    editedDay?.routine &&
+      (editedDay.routine.exercises[this.editedExerciseIndex].series[
+        this.editedSerieIndex
+      ] = { ...this.selectedSerie });
+
+    this.apiService.editWeek(weekWitheditedDaySeries).subscribe({
+      next: () => {
+        this.updateSelectedWeekAndDay(weekWitheditedDaySeries);
+        this.updateSelectedDayFromWeek(weekWitheditedDaySeries);
+      },
+    });
     this.closeModal();
+  }
+
+  updateSelectedWeekAndDay(newWeek: Week) {
+    const foundWeek = this.myWeeks.find(
+      (week) => week.id === this.selectedWeek.id
+    );
+    if (foundWeek) {
+      foundWeek.days = newWeek.days;
+    }
+  }
+
+  updateSelectedDayFromWeek(week: Week) {
+    this.selectedDay = this.getDayByName(week.days)!;
   }
 
   openRoutinesModal() {
     if (this.savedRoutines.length === 0) {
-      this.apiService
-        .getBackendRoutines(this.authService.getUser().id)
-        .subscribe((routines: any) => {
-          this.savedRoutines = routines;
-          this.showRoutinesModal = true;
-        });
+      this.apiService.getBackendRoutines().subscribe((routines: any) => {
+        this.savedRoutines = routines;
+        this.showRoutinesModal = true;
+      });
+    } else {
+      this.showRoutinesModal = true;
     }
   }
 
   associateRoutine(routine: Routine) {
     //TODO: Encontar la semana por ID, y de esa semana encontrar el dia seleccionado a asociar la rutina
     //y encufársela, en la base de datos igual
-    const foundDay = this.dataService
-      .getWeekByName(this.selectedWeek.name)
-      ?.days.find((day) => day.name === this.selectedDay.name);
-    if (foundDay) {
-      foundDay.routine = routine;
-      console.log('Rutina asociada-> ', routine);
-    }
+    if (!routine) {
+      this.isRoutineSelected = false;
+    } else {
+      let foundDay: Day | undefined;
+      this.getDatabaseSelectedWeek().subscribe({
+        next: (response: any) => {
+          const actualWeek: Week = response;
+          foundDay = this.getDayByName(actualWeek.days);
+          if (foundDay) {
+            foundDay.routine = JSON.parse(JSON.stringify(routine)); //Copia profunda
+            this.apiService.editWeek(actualWeek).subscribe({
+              next: () => {
+                /*const foundWeek = this.myWeeks.find(
+                  (week) => week.id === actualWeek.id
+                );
+                if (foundWeek) {
+                  foundWeek.days = actualWeek.days;
+                  this.selectedDay = this.getDayByName(foundWeek.days)!;
+                }*/
 
-    this.showRoutinesModal = false;
+                this.updateSelectedWeekAndDay(actualWeek);
+                this.updateSelectedDayFromWeek(actualWeek);
+              },
+            });
+          }
+        },
+      });
+      this.showRoutinesModal = false;
+    }
+  }
+
+  getDayByName(days: Day[]): Day | undefined {
+    return days.find((day: Day) => day.name === this.selectedDay.name);
+  }
+
+  getDatabaseSelectedWeek() {
+    return this.apiService.getWeekById(this.selectedWeek.id);
   }
 
   goToRoutines() {
@@ -127,5 +188,14 @@ export class WeeksComponent implements OnInit {
   closeModal() {
     document.body.style.overflow = '';
     this.showSerieModal = false;
+  }
+
+  selectWeek(week: Week) {
+    this.selectedWeek = JSON.parse(JSON.stringify(week));
+    this.asignDefaultDay();
+  }
+
+  areEqualObjects(object1: any, object2: any) {
+    return JSON.stringify(object1) === JSON.stringify(object2);
   }
 }
