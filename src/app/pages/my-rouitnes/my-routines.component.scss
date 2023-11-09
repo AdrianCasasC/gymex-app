@@ -1,5 +1,9 @@
 @import "../../../app/styles/variables.css";
 
+h2 {
+  margin: 0;
+}
+
 :host {
   display: flex;
   flex-direction: column;
@@ -31,4 +35,23 @@
   display: flex;
   justify-content: space-between;
   width: 200px;
+}
+
+.register-exercises {
+  margin-bottom: 12px;
+}
+
+.title-edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  button {
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    text-decoration: underline;
+  }
 }

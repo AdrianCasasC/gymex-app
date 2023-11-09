@@ -1,0 +1,18 @@
+<div class="flex-col-cent primary-box content">
+  <i class="close-cross centered">X</i>
+  <h2>Series de {{ exercise.name }}</h2>
+  <span
+    >{{ selectedNumberOfSeries }}
+    {{ selectedNumberOfSeries === 1 ? "serie" : "series" }}</span
+  >
+  <div class="seriesWrapper">
+    <span
+      *ngFor="let number of numberOfSeries"
+      (click)="selectedNumberOfSeries = number"
+      class="scale-hover secondary-box centered"
+      [ngClass]="{ selected: selectedNumberOfSeries === number }"
+      >{{ number }}</span
+    >
+  </div>
+  <button (click)="saveSeries()" class="secondary-box">Guardar series</button>
+</div>

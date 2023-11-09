@@ -50,7 +50,7 @@
       <div
         *ngFor="let exercise of selectedDay.routine?.exercises; let i = index"
       >
-        <h3>{{ exercise.name | transloco }}</h3>
+        <h3>{{ "exercises." + exercise.name | transloco }}</h3>
         <div
           *ngFor="let serie of exercise.series; let j = index"
           class="primary-box series scale-hover"

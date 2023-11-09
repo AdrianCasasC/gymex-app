@@ -10,7 +10,10 @@ import {
   MuscularGroups,
   Exercise,
   Serie,
+  Routine,
 } from 'src/app/interfaces/app.interface';
+import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-selected-routine',
@@ -18,7 +21,7 @@ import {
   styleUrls: ['./selected-routine.component.scss'],
 })
 export class SelectedRoutineComponent implements OnInit {
-  selectedRoutine!: string;
+  selectedRoutineName!: string;
   selectedMuscle: string = 'chest';
   muscularGroups: MuscularGroups[] = muscularGroups;
   exercisesByMuscleGroup: any = exercisesByMuscleGroup;
@@ -32,11 +35,13 @@ export class SelectedRoutineComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
+    private apiService: ApiService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.selectedRoutine =
+    this.selectedRoutineName =
       this.activatedRoute.snapshot.params['selectedRoutine'];
   }
 
@@ -69,8 +74,8 @@ export class SelectedRoutineComponent implements OnInit {
     }
   }
 
-  handleSelectedCard(exercise: string, muscleGroup: string) {
-    this.selectedExercise = 'exercises.' + muscleGroup + '.' + exercise;
+  handleSelectedCard(exercise: string) {
+    this.selectedExercise = exercise;
     this.showExerciseModal = true;
     document.body.style.overflow = 'hidden';
   }
@@ -81,10 +86,16 @@ export class SelectedRoutineComponent implements OnInit {
   }
 
   saveRoutine() {
-    this.dataService.setSavedRoutines(
-      this.selectedRoutine,
+    /*this.dataService.setSavedRoutines(
+      this.selectedRoutineName,
       this.chosenExercises
-    );
-    this.router.navigate(['/routine']);
+    );*/
+    const newRoutine: Routine = {
+      name: this.selectedRoutineName,
+      exercises: this.chosenExercises,
+    };
+    this.apiService
+      .postNewRoutine(this.authService.getUser().id, newRoutine)
+      .subscribe(() => this.router.navigate(['/routine']));
   }
 }

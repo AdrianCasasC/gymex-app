@@ -19,17 +19,28 @@
 <section>
   <div
     *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
-    class="register-exercises-wrapper__container"
+    class="register-exercises"
   >
-    <h2>
-      {{ "exercises." + exercise.name | transloco }}
-    </h2>
+    <div class="title-edit">
+      <h2>
+        {{ "exercises." + exercise.name | transloco }}
+      </h2>
+      <button (click)="editExerciseSeries(exercise)">Editar</button>
+    </div>
     <span
       >{{ exercise.series.length }}
-      {{ exercise.series.length > 1 ? "series" : "serie" }}</span
+      {{ exercise.series.length === 1 ? "serie" : "series" }}</span
     >
   </div>
 </section>
+
+<app-series-modal
+  *ngIf="showEditSeriesModal"
+  class="modal"
+  [exercise]="exerciseToEdit"
+  (applySavedSeries)="saveSeries($event)"
+  (closeModal)="showEditSeriesModal = false"
+></app-series-modal>
 
 <app-routine-modal
   *ngIf="showNewRoutineModal"

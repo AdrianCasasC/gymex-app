@@ -21,8 +21,10 @@ export class MyRoutinesComponent implements OnInit {
   selectedSerie!: Serie;
   editedSerieIndex!: number;
   selectedExercise!: Exercise;
+  exerciseToEdit!: Exercise;
   showSerieModal: boolean = false;
   showNewRoutineModal: boolean = false;
+  showEditSeriesModal: boolean = false;
   user!: User;
   routines: string[] = [];
 
@@ -83,5 +85,23 @@ export class MyRoutinesComponent implements OnInit {
 
   goToCard(selectedRoutine: string) {
     this.router.navigate([`/add/${selectedRoutine}`]);
+  }
+
+  editExerciseSeries(exercise: Exercise) {
+    this.exerciseToEdit = exercise;
+    this.showEditSeriesModal = true;
+  }
+
+  saveSeries(exerciseEdited: Exercise) {
+    let foundExercise: Exercise | undefined =
+      this.selectedRoutine.exercises.find(
+        (exercise) => exercise.name === exerciseEdited.name
+      );
+
+    if (foundExercise) {
+      foundExercise = { ...exerciseEdited };
+    }
+
+    this.showEditSeriesModal = false;
   }
 }

@@ -1,0 +1,20 @@
+button {
+  margin-top: 32px;
+}
+
+.seriesWrapper {
+  display: flex;
+  gap: 12px;
+  height: 40px;
+}
+
+.content {
+  position: relative;
+  padding: 24px;
+  gap: 12px;
+}
+
+.selected {
+  background-color: black;
+  color: white;
+}

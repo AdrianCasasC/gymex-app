@@ -1,4 +1,4 @@
-<h1>Rutina: {{ selectedRoutine | titlecase }}</h1>
+<h1>Rutina: {{ selectedRoutineName | titlecase }}</h1>
 
 <section class="muscleGroups-container centered">
   <div
@@ -26,12 +26,10 @@
           let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']
         "
         class="muscle-card scale-hover primary-box flex-col"
-        (click)="handleSelectedCard(exercise, muscleGroup)"
+        (click)="handleSelectedCard(exercise)"
       >
         <img /><!--Aquí irán las fotos de los ejercicios-->
-        <span>{{
-          "exercises." + muscleGroup + "." + exercise | transloco | titlecase
-        }}</span>
+        <span>{{ "exercises." + exercise | transloco | titlecase }}</span>
       </div>
     </section>
   </ng-container>
@@ -41,7 +39,7 @@
       *ngFor="let exercise of chosenExercises"
       class="secondary-box selected-exercises__item"
     >
-      <span>{{ exercise.name | transloco | titlecase }}</span>
+      <span>{{ "exercises." + exercise.name | transloco | titlecase }}</span>
       <span>{{
         exercise.series.length +
           (exercise.series.length !== 1 ? " series" : " serie")

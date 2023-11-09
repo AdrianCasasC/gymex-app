@@ -24,7 +24,7 @@ export class WeeksComponent implements OnInit {
   selectedDay!: Day;
   daysOfWeek: Day[] = daysOfWeek;
   showRoutinesModal: boolean = false;
-  savedRoutines!: Routine[];
+  savedRoutines: Routine[] = [];
   selectedAssociatedRoutine!: Routine;
   selectedExercise!: Exercise;
   selectedSerie!: Serie;
@@ -40,7 +40,6 @@ export class WeeksComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.myWeeks = [...this.dataService.getWeeks()];
     this.getBackendData();
   }
 
@@ -65,7 +64,10 @@ export class WeeksComponent implements OnInit {
       days: this.daysOfWeek,
     };
     this.myWeeks.push(newWeek);
-    this.dataService.setWeek(newWeek);
+    //this.dataService.setWeek(newWeek);
+    this.apiService
+      .postNewWeek(this.authService.getUser().id, newWeek)
+      .subscribe();
   }
 
   selectWeekDay(day: Day) {
@@ -80,11 +82,19 @@ export class WeeksComponent implements OnInit {
   }
 
   openRoutinesModal() {
-    this.savedRoutines = this.dataService.getSavedRoutines();
-    this.showRoutinesModal = true;
+    if (this.savedRoutines.length === 0) {
+      this.apiService
+        .getBackendRoutines(this.authService.getUser().id)
+        .subscribe((routines: any) => {
+          this.savedRoutines = routines;
+          this.showRoutinesModal = true;
+        });
+    }
   }
 
   associateRoutine(routine: Routine) {
+    //TODO: Encontar la semana por ID, y de esa semana encontrar el dia seleccionado a asociar la rutina
+    //y encufársela, en la base de datos igual
     const foundDay = this.dataService
       .getWeekByName(this.selectedWeek.name)
       ?.days.find((day) => day.name === this.selectedDay.name);
