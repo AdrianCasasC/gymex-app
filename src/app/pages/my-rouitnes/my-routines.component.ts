@@ -110,7 +110,7 @@ export class MyRoutinesComponent implements OnInit {
       next: () => {
         this.showEditSeriesModal = false;
         this.saveSuccessfully = 'OK';
-        setTimeout(() => (this.saveSuccessfully = 'DONE'), 1500);
+        setTimeout(() => (this.saveSuccessfully = 'DONE'), 1000);
       },
       error: () => {
         this.saveSuccessfully = 'KO';

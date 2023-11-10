@@ -1,6 +1,6 @@
 <div class="flex-col-cent primary-box content">
   <i (click)="closeModal.emit()" class="close-cross centered">X</i>
-  <h2>Series de {{ exercise.name }}</h2>
+  <h2>Series de {{ "exercises." + exercise.name | transloco }}</h2>
   <span *ngIf="error" class="error">Ha ocurrido un error</span>
   <span
     >{{ selectedNumberOfSeries }}

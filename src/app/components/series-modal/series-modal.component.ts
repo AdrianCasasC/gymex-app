@@ -20,6 +20,7 @@ export class SeriesModalComponent {
   constructor() {}
 
   saveSeries() {
+    this.exercise.series = [];
     for (let i = 0; i < this.selectedNumberOfSeries; i++) {
       this.exercise.series.push({
         weight: 0,

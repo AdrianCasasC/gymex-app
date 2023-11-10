@@ -32,6 +32,7 @@ export class WeeksComponent implements OnInit {
   editedExerciseIndex!: number;
   showSerieModal: boolean = false;
   isRoutineSelected: boolean = true;
+  showLastWeek: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -68,8 +69,9 @@ export class WeeksComponent implements OnInit {
 
     this.apiService.postNewWeek(newWeek).subscribe({
       next: (response: any) => {
-        newWeek.id = response[0].id;
+        newWeek.id = response[response.length - 1].id;
         this.myWeeks.push(newWeek);
+        this.selectedWeek = newWeek;
       },
     });
   }
@@ -157,6 +159,23 @@ export class WeeksComponent implements OnInit {
       });
       this.showRoutinesModal = false;
     }
+  }
+
+  handleShowLastWeek(exerciseName: string, serieNumber: number) {
+    const indexOfPreviousWeek =
+      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
+    const indexOfDay = this.daysOfWeek.findIndex(
+      (day) => day.name === this.selectedDay.name
+    );
+    const exercise = this.myWeeks[indexOfPreviousWeek].days[
+      indexOfDay
+    ].routine?.exercises.find((exercise) => exercise.name === exerciseName);
+    console.log(
+      'Series de la semana pasada -> ',
+      exercise?.series[serieNumber]
+    );
+
+    this.showLastWeek = !this.showLastWeek;
   }
 
   getDayByName(days: Day[]): Day | undefined {

@@ -56,17 +56,28 @@
         <h3>{{ "exercises." + exercise.name | transloco }}</h3>
         <div
           *ngFor="let serie of exercise.series; let j = index"
-          class="primary-box series scale-hover"
+          class="primary-box series"
+          [style.margin-bottom]="showLastWeek ? '80px' : '12px'"
           (click)="
             copySerie(serie);
             saveExerciseAndSerieIndex(i, j);
-            openModal();
             selectedExercise = exercise
           "
         >
           <strong>Serie {{ j + 1 }}:</strong> X
           {{ serie.reps ? serie.reps : "___" }} X
           {{ serie.weight ? serie.weight : "___" }} Kgs
+
+          <div
+            class="last-week"
+            [style.transform]="
+              showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
+            "
+            [style.opacity]="showLastWeek ? '1' : '0'"
+          ></div>
+          <i (click)="handleShowLastWeek(exercise.name, j)">{{
+            showLastWeek ? "↑" : "↓"
+          }}</i>
         </div>
       </div>
     </section>
