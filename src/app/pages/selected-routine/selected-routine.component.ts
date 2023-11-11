@@ -68,6 +68,7 @@ export class SelectedRoutineComponent implements OnInit {
         series.push({
           weight: 0,
           reps: 0,
+          showLastWeek: false,
         });
       }
 

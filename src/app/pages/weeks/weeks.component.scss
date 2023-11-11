@@ -64,26 +64,36 @@
   }
 }
 
-.series {
+.series-wrapper {
   position: relative;
-  padding: 24px;
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
   transition: margin-bottom 0.5s ease-out;
 
-  .last-week {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: red;
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  i {
+    cursor: pointer;
+    width: 5%;
   }
 
-  i {
-    position: absolute;
-    top: 50%;
-    right: 12px;
+  i:hover {
+    background-color: #14ded2;
+  }
+
+  .series {
+    padding: 24px;
+    cursor: pointer;
+    width: 100%;
+
+    .last-week {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      background-color: #00fff0;
+      border-color: #00fff0;
+    }
   }
 }
 

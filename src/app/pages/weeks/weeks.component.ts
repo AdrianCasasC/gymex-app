@@ -72,6 +72,7 @@ export class WeeksComponent implements OnInit {
         newWeek.id = response[response.length - 1].id;
         this.myWeeks.push(newWeek);
         this.selectedWeek = newWeek;
+        this.selectedDay = this.selectedWeek.days[0];
       },
     });
   }
@@ -128,8 +129,6 @@ export class WeeksComponent implements OnInit {
   }
 
   associateRoutine(routine: Routine) {
-    //TODO: Encontar la semana por ID, y de esa semana encontrar el dia seleccionado a asociar la rutina
-    //y encufársela, en la base de datos igual
     if (!routine) {
       this.isRoutineSelected = false;
     } else {
@@ -139,17 +138,13 @@ export class WeeksComponent implements OnInit {
           const actualWeek: Week = response;
           foundDay = this.getDayByName(actualWeek.days);
           if (foundDay) {
+            routine.exercises.forEach((exercise) =>
+              this.addLastWeekSeries(exercise)
+            );
+            console.log('Rutina con series de la semana pasada = ', routine);
             foundDay.routine = JSON.parse(JSON.stringify(routine)); //Copia profunda
             this.apiService.editWeek(actualWeek).subscribe({
               next: () => {
-                /*const foundWeek = this.myWeeks.find(
-                  (week) => week.id === actualWeek.id
-                );
-                if (foundWeek) {
-                  foundWeek.days = actualWeek.days;
-                  this.selectedDay = this.getDayByName(foundWeek.days)!;
-                }*/
-
                 this.updateSelectedWeekAndDay(actualWeek);
                 this.updateSelectedDayFromWeek(actualWeek);
               },
@@ -161,7 +156,22 @@ export class WeeksComponent implements OnInit {
     }
   }
 
-  handleShowLastWeek(exerciseName: string, serieNumber: number) {
+  addLastWeekSeries(exerciseToCompare: Exercise) {
+    const indexOfPreviousWeek: number =
+      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
+    const previousWeek: Week = this.myWeeks[indexOfPreviousWeek];
+    previousWeek.days.forEach((day) => {
+      const lastWeekExercise: Exercise | undefined =
+        day.routine?.exercises.find(
+          (exercise) => exercise.name === exerciseToCompare.name
+        );
+      if (lastWeekExercise) {
+        exerciseToCompare.lastWeekSeries = lastWeekExercise.series;
+      }
+    });
+  }
+
+  /*handleShowLastWeek(exerciseName: string, serieNumber: number) {
     const indexOfPreviousWeek =
       this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
     const indexOfDay = this.daysOfWeek.findIndex(
@@ -176,7 +186,7 @@ export class WeeksComponent implements OnInit {
     );
 
     this.showLastWeek = !this.showLastWeek;
-  }
+  }*/
 
   getDayByName(days: Day[]): Day | undefined {
     return days.find((day: Day) => day.name === this.selectedDay.name);

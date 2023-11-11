@@ -25,6 +25,7 @@ export class SeriesModalComponent {
       this.exercise.series.push({
         weight: 0,
         reps: 0,
+        showLastWeek: false,
       });
     }
     this.applySavedSeries.emit(this.exercise);

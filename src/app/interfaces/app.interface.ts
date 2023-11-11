@@ -17,11 +17,13 @@ export interface Exercises {
 export interface Serie {
   weight: number;
   reps: number;
+  showLastWeek: boolean;
 }
 
 export interface Exercise {
   name: string;
   series: Serie[];
+  lastWeekSeries?: Serie[];
 }
 
 export interface Routine {
