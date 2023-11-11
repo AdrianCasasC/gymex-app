@@ -18,12 +18,28 @@ export interface Serie {
   weight: number;
   reps: number;
   showLastWeek: boolean;
+  lastWeekCoincidences: Coincidence[];
+}
+
+export interface Coincidence {
+  weekDay: string;
+  reps: number;
+  weight: number;
+}
+
+export interface DaySeriesCoincidence {
+  weekDay: string;
+  series: SeriesCoincidence[];
+}
+
+export interface SeriesCoincidence {
+  reps: number;
+  weight: number;
 }
 
 export interface Exercise {
   name: string;
   series: Serie[];
-  lastWeekSeries?: Serie[];
 }
 
 export interface Routine {

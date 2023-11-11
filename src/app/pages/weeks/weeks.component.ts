@@ -3,9 +3,12 @@ import { Router } from '@angular/router';
 import {
   Day,
   Exercise,
+  Coincidence,
   Routine,
   Serie,
   Week,
+  DaySeriesCoincidence,
+  SeriesCoincidence,
 } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -160,33 +163,43 @@ export class WeeksComponent implements OnInit {
     const indexOfPreviousWeek: number =
       this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
     const previousWeek: Week = this.myWeeks[indexOfPreviousWeek];
+    const coincidences: DaySeriesCoincidence[] = [];
+
     previousWeek.days.forEach((day) => {
-      const lastWeekExercise: Exercise | undefined =
-        day.routine?.exercises.find(
-          (exercise) => exercise.name === exerciseToCompare.name
-        );
-      if (lastWeekExercise) {
-        exerciseToCompare.lastWeekSeries = lastWeekExercise.series;
-      }
+      day.routine?.exercises.forEach((exercise) => {
+        if (exercise.name === exerciseToCompare.name) {
+          const coincidenceSeries: SeriesCoincidence[] = [];
+          exercise.series.forEach((serie: Serie) => {
+            coincidenceSeries.push({
+              reps: serie.reps,
+              weight: serie.weight,
+            });
+          });
+          coincidences.push({
+            weekDay: day.name,
+            series: coincidenceSeries,
+          });
+        }
+      });
+    });
+
+    exerciseToCompare.series.forEach((serie: Serie, i: number) => {
+      serie.lastWeekCoincidences = [];
+      coincidences.forEach((coincidence) => {
+        serie.lastWeekCoincidences.push({
+          weekDay: coincidence.weekDay,
+          reps: coincidence.series[i].reps,
+          weight: coincidence.series[i].weight,
+        });
+      });
     });
   }
 
-  /*handleShowLastWeek(exerciseName: string, serieNumber: number) {
-    const indexOfPreviousWeek =
-      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
-    const indexOfDay = this.daysOfWeek.findIndex(
-      (day) => day.name === this.selectedDay.name
+  existSomeLastWeekRegister(lastWeekSeries: Coincidence[]) {
+    return !!lastWeekSeries.find(
+      (series) => series.reps != 0 && series.weight != 0
     );
-    const exercise = this.myWeeks[indexOfPreviousWeek].days[
-      indexOfDay
-    ].routine?.exercises.find((exercise) => exercise.name === exerciseName);
-    console.log(
-      'Series de la semana pasada -> ',
-      exercise?.series[serieNumber]
-    );
-
-    this.showLastWeek = !this.showLastWeek;
-  }*/
+  }
 
   getDayByName(days: Day[]): Day | undefined {
     return days.find((day: Day) => day.name === this.selectedDay.name);
@@ -201,7 +214,7 @@ export class WeeksComponent implements OnInit {
   }
 
   copySerie(serie: Serie) {
-    this.selectedSerie = { ...serie };
+    this.selectedSerie = JSON.parse(JSON.stringify(serie));
   }
 
   saveExerciseAndSerieIndex(exerciseIndex: number, serieIndex: number) {

@@ -26,6 +26,7 @@ export class SeriesModalComponent {
         weight: 0,
         reps: 0,
         showLastWeek: false,
+        lastWeekCoincidences: [],
       });
     }
     this.applySavedSeries.emit(this.exercise);

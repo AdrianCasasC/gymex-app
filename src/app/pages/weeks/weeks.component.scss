@@ -90,9 +90,15 @@
       position: absolute;
       top: 100%;
       left: 0;
-      transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+      transition: transform 0.5s ease-out, display 0.5s ease-out;
       background-color: #00fff0;
       border-color: #00fff0;
+      padding: 12px 0 12px 0;
+      gap: 24px;
+
+      &__serie {
+        gap: 12px;
+      }
     }
   }
 }

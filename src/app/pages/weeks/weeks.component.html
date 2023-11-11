@@ -57,7 +57,7 @@
         <div
           *ngFor="let serie of exercise.series; let j = index"
           class="series-wrapper primary-box"
-          [style.margin-bottom]="serie.showLastWeek ? '80px' : '12px'"
+          [style.margin-bottom]="serie.showLastWeek ? '110px' : '12px'"
         >
           <div
             class="series"
@@ -73,20 +73,42 @@
             {{ serie.weight ? serie.weight : "___" }} Kgs
 
             <div
-              class="primary-box last-week"
+              *ngIf="serie.showLastWeek"
+              class="primary-box last-week centered"
               [style.transform]="
                 serie.showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
               "
-              [style.opacity]="serie.showLastWeek ? '1' : '0'"
             >
-              <div
-                *ngIf="exercise.lastWeekSeries; else noLastWeekRegister"
-                class="series"
+              <ng-container
+                *ngIf="
+                  existSomeLastWeekRegister(
+                    exercise.series[j].lastWeekCoincidences
+                  );
+                  else noLastWeekRegister
+                "
               >
-                <strong>Serie {{ j + 1 }}:</strong> X
-                {{ exercise.lastWeekSeries[j].reps }} X
-                {{ exercise.lastWeekSeries[j].weight }} Kgs
-              </div>
+                <div
+                  *ngFor="
+                    let coincidence of exercise.series[j].lastWeekCoincidences
+                  "
+                  class="flex-col-cent last-week__serie"
+                >
+                  <strong
+                    >Semana pasada -
+                    {{
+                      "daysOfWeek." + coincidence.weekDay | transloco
+                    }}</strong
+                  >
+                  <span
+                    ><strong>Serie {{ j + 1 }}:</strong>
+                    X
+                    {{ coincidence.reps }}
+                    X
+                    {{ coincidence.weight }}
+                    Kgs
+                  </span>
+                </div>
+              </ng-container>
 
               <ng-template #noLastWeekRegister>
                 <strong [style.width]="'100%'"

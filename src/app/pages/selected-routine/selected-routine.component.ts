@@ -69,6 +69,7 @@ export class SelectedRoutineComponent implements OnInit {
           weight: 0,
           reps: 0,
           showLastWeek: false,
+          lastWeekCoincidences: [],
         });
       }
 
