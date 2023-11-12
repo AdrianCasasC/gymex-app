@@ -82,6 +82,10 @@ export class WeeksComponent implements OnInit {
 
   selectWeekDay(day: Day) {
     this.selectedDay = day;
+
+    if (day.routine) {
+      this.associateRoutine(day.routine); //Se refrescan las series de la semana pasda
+    }
   }
 
   applyChanges() {
