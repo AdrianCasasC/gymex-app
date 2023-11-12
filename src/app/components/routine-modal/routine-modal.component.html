@@ -4,11 +4,7 @@
 >
   <i (click)="closeModal.emit()">X</i>
   <h2>{{ labelText }}</h2>
-  <input
-    type="text"
-    (keydown.enter)="handleAddRoutine()"
-    [(ngModel)]="newRoutineName"
-  />
+  <input type="text" (keydown.enter)="handleAddRoutine()" [(ngModel)]="text" />
   <button (click)="handleAddRoutine()">
     {{ "button.accept" | transloco | titlecase }}
   </button>

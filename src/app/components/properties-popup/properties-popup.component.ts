@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-properties-popup',
@@ -6,7 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./properties-popup.component.scss'],
 })
 export class PropertiesPopupComponent {
-  @Input() properties: string[] = ['Cambiar nombre', 'Eliminar'];
+  @Input() properties: string[] = ['changeName', 'delete'];
+  @Output() selectedOption = new EventEmitter();
 
   constructor() {}
 }

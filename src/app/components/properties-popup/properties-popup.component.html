@@ -1,1 +1,5 @@
-<span *ngFor="let property of properties">{{ property }}</span>
+<span
+  *ngFor="let property of properties"
+  (click)="selectedOption.emit(property)"
+  >{{ "weekPopup." + property | transloco }}</span
+>

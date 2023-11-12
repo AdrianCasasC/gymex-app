@@ -43,13 +43,13 @@
   (closeModal)="showEditSeriesModal = false"
 ></app-series-modal>
 
-<app-routine-modal
+<app-input-modal
   *ngIf="showNewRoutineModal"
   (closeModal)="showNewRoutineModal = false"
-  (addNewRoutine)="addNewRoutine($event)"
+  (writtenText)="addNewRoutine($event)"
   [labelText]="'modal.label' | transloco"
   class="modal"
-></app-routine-modal>
+></app-input-modal>
 
 <app-save-modal
   *ngIf="saveSuccessfully === 'OK'"

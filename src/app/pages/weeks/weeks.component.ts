@@ -24,6 +24,7 @@ export class WeeksComponent implements OnInit {
   showWeekModal: boolean = false;
   myWeeks: Week[] = [];
   selectedWeek!: Week;
+  popupWeek!: Week;
   selectedDay!: Day;
   daysOfWeek: Day[] = daysOfWeek;
   showRoutinesModal: boolean = false;
@@ -36,6 +37,7 @@ export class WeeksComponent implements OnInit {
   showSerieModal: boolean = false;
   isRoutineSelected: boolean = true;
   showLastWeek: boolean = false;
+  showChangeWeekNameModal: boolean = false;
 
   private popupTimeout: any;
 
@@ -48,9 +50,13 @@ export class WeeksComponent implements OnInit {
   getBackendData() {
     this.apiService.getBackendWeeks().subscribe((response: any) => {
       this.myWeeks = response;
-      this.asignDefaultWeek();
-      this.asignDefaultDay();
+      this.asignDefaultWeekAndDay();
     });
+  }
+
+  asignDefaultWeekAndDay() {
+    this.asignDefaultWeek();
+    this.asignDefaultDay();
   }
 
   asignDefaultWeek() {
@@ -163,34 +169,74 @@ export class WeeksComponent implements OnInit {
   }
 
   updateRoutineLastWeekSeries(routine: Routine) {
-    routine.exercises.forEach((exercise) => this.addLastWeekSeries(exercise));
+    routine.exercises.forEach((exercise) => {
+      const indexOfPreviousWeek: number = this.findPreviousWeekIndex();
+
+      if (indexOfPreviousWeek >= 0) {
+        this.addLastWeeKSeries(exercise, indexOfPreviousWeek);
+      }
+    });
   }
 
-  addLastWeekSeries(exerciseToCompare: Exercise) {
-    const indexOfPreviousWeek: number =
-      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1;
+  findPreviousWeekIndex(): number {
+    return (
+      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1
+    );
+  }
+
+  addLastWeeKSeries(exerciseToCompare: Exercise, indexOfPreviousWeek: number) {
     const previousWeek: Week = this.myWeeks[indexOfPreviousWeek];
-    const coincidences: DaySeriesCoincidence[] = [];
+    let coincidences: DaySeriesCoincidence[] = [];
 
     previousWeek.days.forEach((day) => {
-      day.routine?.exercises.forEach((exercise) => {
-        if (exercise.name === exerciseToCompare.name) {
-          const coincidenceSeries: SeriesCoincidence[] = [];
-          exercise.series.forEach((serie: Serie) => {
-            coincidenceSeries.push({
-              reps: serie.reps,
-              weight: serie.weight,
-            });
-          });
-          coincidences.push({
-            weekDay: day.name,
-            series: coincidenceSeries,
-          });
+      if (day.routine) {
+        const coincidenceExercise = this.searchCoincidenceExerciseInRoutine(
+          day.routine,
+          exerciseToCompare
+        );
+        if (coincidenceExercise) {
+          coincidences.push(
+            this.addAllCoincidenceSeries(coincidenceExercise, day)
+          );
         }
+      }
+    });
+
+    this.addLastWeekCoincidences(exerciseToCompare, coincidences);
+  }
+
+  searchCoincidenceExerciseInRoutine(
+    routine: Routine,
+    exerciseToSearch: Exercise
+  ): Exercise | undefined {
+    return routine.exercises.find(
+      (exercise: Exercise) => exercise.name === exerciseToSearch.name
+    );
+  }
+
+  addAllCoincidenceSeries(exercise: Exercise, day: Day): DaySeriesCoincidence {
+    let coincidence: DaySeriesCoincidence;
+    const coincidenceSeries: SeriesCoincidence[] = [];
+
+    exercise.series.forEach((serie: Serie) => {
+      coincidenceSeries.push({
+        reps: serie.reps,
+        weight: serie.weight,
       });
     });
 
-    exerciseToCompare.series.forEach((serie: Serie, i: number) => {
+    coincidence = {
+      weekDay: day.name,
+      series: coincidenceSeries,
+    };
+    return coincidence;
+  }
+
+  addLastWeekCoincidences(
+    exercise: Exercise,
+    coincidences: DaySeriesCoincidence[]
+  ) {
+    exercise.series.forEach((serie: Serie, i: number) => {
       serie.lastWeekCoincidences = [];
       coincidences.forEach((coincidence) => {
         serie.lastWeekCoincidences.push({
@@ -209,6 +255,29 @@ export class WeeksComponent implements OnInit {
         this.updateSelectedDayFromWeek(week);
       },
     });
+  }
+
+  popupSelectedOption(selectedOption: string, week: Week) {
+    this.popupWeek = week;
+    if (selectedOption === 'delete') {
+      this.apiService.deleteWeek(this.popupWeek).subscribe({
+        next: () => this.deleteWeek(this.popupWeek),
+        error: (error) => console.log(error),
+      });
+    } else {
+      this.showChangeWeekNameModal = true;
+    }
+  }
+
+  deleteWeek(weekToDelete: Week) {
+    this.myWeeks = this.myWeeks.filter((week) => week.id !== weekToDelete.id);
+    if (this.selectedWeek.id === weekToDelete.id) {
+      this.asignDefaultWeekAndDay();
+    }
+  }
+
+  changeWeekName(newWeekName: string) {
+    this.popupWeek.name = newWeekName;
   }
 
   existSomeLastWeekRegister(lastWeekSeries: Coincidence[]) {

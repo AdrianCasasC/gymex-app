@@ -85,5 +85,9 @@
   "week": {
     "add": "Añadir semana",
     "modal-label": "Nombre de la nueva semana"
+  },
+  "weekPopup": {
+    "delete": "Eliminar",
+    "changeName": "Cambiar nombre"
   }
 }

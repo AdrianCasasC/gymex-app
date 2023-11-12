@@ -20,6 +20,7 @@
     <app-properties-popup
       *ngIf="week.showProperties"
       (clickOutside)="week.showProperties = false"
+      (selectedOption)="popupSelectedOption($event, week)"
     ></app-properties-popup>
   </span>
 </section>
@@ -141,13 +142,21 @@
   </ng-template>
 </section>
 
-<app-routine-modal
+<app-input-modal
   *ngIf="showWeekModal"
   (closeModal)="showWeekModal = false"
-  (addNewRoutine)="addNewWeek($event)"
+  (writtenText)="addNewWeek($event)"
   [labelText]="'week.modal-label' | transloco"
   class="modal"
-></app-routine-modal>
+></app-input-modal>
+
+<app-input-modal
+  *ngIf="showChangeWeekNameModal"
+  (closeModal)="showChangeWeekNameModal = false"
+  (writtenText)="changeWeekName($event)"
+  [labelText]="'Nuevo nombre de la semana'"
+  class="modal"
+></app-input-modal>
 
 <div *ngIf="showRoutinesModal" class="modal">
   <div

@@ -47,4 +47,10 @@ export class ApiService {
   postNewWeek(newWeek: Week) {
     return this.http.post(API_ENDPOINTS.weeks.basic(this.getUserId()), newWeek);
   }
+
+  deleteWeek(week: Week) {
+    return this.http.delete(
+      API_ENDPOINTS.weeks.byId(this.getUserId(), week.id)
+    );
+  }
 }
