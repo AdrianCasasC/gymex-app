@@ -98,20 +98,24 @@
                   "
                   class="flex-col-cent last-week__serie"
                 >
-                  <strong
-                    >Semana pasada -
-                    {{
-                      "daysOfWeek." + coincidence.weekDay | transloco
-                    }}</strong
+                  <ng-container
+                    *ngIf="coincidence.reps !== 0 && coincidence.weight !== 0"
                   >
-                  <span
-                    ><strong>Serie {{ j + 1 }}:</strong>
-                    X
-                    {{ coincidence.reps }}
-                    X
-                    {{ coincidence.weight }}
-                    Kgs
-                  </span>
+                    <strong
+                      >Semana pasada -
+                      {{
+                        "daysOfWeek." + coincidence.weekDay | transloco
+                      }}</strong
+                    >
+                    <span
+                      ><strong>Serie {{ j + 1 }}:</strong>
+                      X
+                      {{ coincidence.reps }}
+                      X
+                      {{ coincidence.weight }}
+                      Kgs
+                    </span>
+                  </ng-container>
                 </div>
               </ng-container>
 

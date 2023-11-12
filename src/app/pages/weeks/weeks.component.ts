@@ -62,6 +62,9 @@ export class WeeksComponent implements OnInit {
   asignDefaultDay() {
     if (this.selectedWeek) {
       this.selectedDay = this.selectedWeek.days[0];
+      if (this.selectedDay.routine) {
+        this.updateRoutineLastWeekSeries(this.selectedDay.routine);
+      }
     }
   }
 
@@ -87,7 +90,7 @@ export class WeeksComponent implements OnInit {
     this.selectedDay = day;
 
     if (day.routine) {
-      this.associateRoutine(day.routine); //Se refrescan las series de la semana pasda
+      this.updateRoutineLastWeekSeries(day.routine); //Se refrescan las series de la semana pasda
     }
   }
 
@@ -107,14 +110,14 @@ export class WeeksComponent implements OnInit {
 
     this.apiService.editWeek(weekWitheditedDaySeries).subscribe({
       next: () => {
-        this.updateSelectedWeekAndDay(weekWitheditedDaySeries);
+        this.updateSelectedWeek(weekWitheditedDaySeries);
         this.updateSelectedDayFromWeek(weekWitheditedDaySeries);
       },
     });
     this.closeModal();
   }
 
-  updateSelectedWeekAndDay(newWeek: Week) {
+  updateSelectedWeek(newWeek: Week) {
     const foundWeek = this.myWeeks.find(
       (week) => week.id === this.selectedWeek.id
     );
@@ -143,28 +146,25 @@ export class WeeksComponent implements OnInit {
       this.isRoutineSelected = false;
     } else {
       let foundDay: Day | undefined;
+
       this.getDatabaseSelectedWeek().subscribe({
         next: (response: any) => {
           const actualWeek: Week = response;
           foundDay = this.getDayByName(actualWeek.days);
           if (foundDay) {
-            routine.exercises.forEach((exercise) =>
-              this.addLastWeekSeries(exercise)
-            );
-            console.log('Rutina con series de la semana pasada = ', routine);
+            this.updateRoutineLastWeekSeries(routine);
             foundDay.routine = JSON.parse(JSON.stringify(routine)); //Copia profunda
-            this.apiService.editWeek(actualWeek).subscribe({
-              next: () => {
-                this.updateSelectedWeekAndDay(actualWeek);
-                this.updateSelectedDayFromWeek(actualWeek);
-              },
-            });
+            this.updateDatabaseWeek(actualWeek);
           }
         },
       });
       this.selectedAssociatedRoutine = null;
       this.showRoutinesModal = false;
     }
+  }
+
+  updateRoutineLastWeekSeries(routine: Routine) {
+    routine.exercises.forEach((exercise) => this.addLastWeekSeries(exercise));
   }
 
   addLastWeekSeries(exerciseToCompare: Exercise) {
@@ -200,6 +200,15 @@ export class WeeksComponent implements OnInit {
           weight: coincidence.series[i].weight,
         });
       });
+    });
+  }
+
+  updateDatabaseWeek(week: Week) {
+    this.apiService.editWeek(week).subscribe({
+      next: () => {
+        this.updateSelectedWeek(week);
+        this.updateSelectedDayFromWeek(week);
+      },
     });
   }
 
