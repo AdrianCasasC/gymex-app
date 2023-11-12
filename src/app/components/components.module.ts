@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { SeriesModalComponent } from './series-modal/series-modal.component';
 import { SaveModalComponent } from './save-modal/save-modal.component';
 import { PropertiesPopupComponent } from './properties-popup/properties-popup.component';
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PropertiesPopupComponent } from './properties-popup/properties-popup.co
     SeriesModalComponent,
     SaveModalComponent,
     PropertiesPopupComponent,
+    ClickOutsideDirective,
   ], //Aquí se declaran los componentes
   imports: [CommonModule, TranslocoModule, FormsModule], //Aquí se exportan módulos exteriores
   exports: [
@@ -26,6 +28,7 @@ import { PropertiesPopupComponent } from './properties-popup/properties-popup.co
     SeriesModalComponent,
     SaveModalComponent,
     PropertiesPopupComponent,
+    ClickOutsideDirective,
   ], //Aquí se exportan los componentes
 })
 export class ComponentsModule {}

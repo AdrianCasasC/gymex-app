@@ -1,4 +1,7 @@
-<section class="container primary-box flex-col-cent">
+<section
+  (clickOutside)="closeModal.emit()"
+  class="container primary-box flex-col-cent"
+>
   <i (click)="closeModal.emit()">X</i>
   <h2>{{ labelText }}</h2>
   <input

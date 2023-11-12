@@ -17,7 +17,10 @@
     class="primary-box week"
   >
     {{ week.name }}
-    <app-properties-popup *ngIf="week.showProperties"></app-properties-popup>
+    <app-properties-popup
+      *ngIf="week.showProperties"
+      (clickOutside)="week.showProperties = false"
+    ></app-properties-popup>
   </span>
 </section>
 
@@ -147,14 +150,15 @@
 ></app-routine-modal>
 
 <div *ngIf="showRoutinesModal" class="modal">
-  <div class="flex-col content primary-box modal-content">
+  <div
+    (clickOutside)="(closeAssociateRoutineModal)"
+    class="flex-col content primary-box modal-content"
+  >
     <div
       *ngIf="savedRoutines.length > 0; else noRoutines"
       class="flex-col-cent"
     >
-      <i
-        (click)="showRoutinesModal = false; selectedAssociatedRoutine = null"
-        class="centered close-cross"
+      <i (click)="closeAssociateRoutineModal()" class="centered close-cross"
         >X</i
       >
       <h2>Selecciona rutina a añadir</h2>

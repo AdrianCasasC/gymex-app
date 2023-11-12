@@ -158,8 +158,7 @@ export class WeeksComponent implements OnInit {
           }
         },
       });
-      this.selectedAssociatedRoutine = null;
-      this.showRoutinesModal = false;
+      this.closeAssociateRoutineModal();
     }
   }
 
@@ -247,6 +246,11 @@ export class WeeksComponent implements OnInit {
   closeModal() {
     document.body.style.overflow = '';
     this.showSerieModal = false;
+  }
+
+  closeAssociateRoutineModal() {
+    this.showRoutinesModal = false;
+    this.selectedAssociatedRoutine = null;
   }
 
   selectWeek(week: Week) {
