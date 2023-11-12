@@ -28,7 +28,7 @@ export class WeeksComponent implements OnInit {
   daysOfWeek: Day[] = daysOfWeek;
   showRoutinesModal: boolean = false;
   savedRoutines: Routine[] = [];
-  selectedAssociatedRoutine!: Routine;
+  selectedAssociatedRoutine!: Routine | null;
   selectedExercise!: Exercise;
   selectedSerie!: Serie;
   editedSerieIndex!: number;
@@ -36,6 +36,8 @@ export class WeeksComponent implements OnInit {
   showSerieModal: boolean = false;
   isRoutineSelected: boolean = true;
   showLastWeek: boolean = false;
+
+  private popupTimeout: any;
 
   constructor(private router: Router, private apiService: ApiService) {}
 
@@ -67,6 +69,7 @@ export class WeeksComponent implements OnInit {
     const newWeek: Week = {
       id: '',
       name: weekName,
+      showProperties: false,
       days: this.daysOfWeek,
     };
 
@@ -135,7 +138,7 @@ export class WeeksComponent implements OnInit {
     }
   }
 
-  associateRoutine(routine: Routine) {
+  associateRoutine(routine: Routine | null) {
     if (!routine) {
       this.isRoutineSelected = false;
     } else {
@@ -159,6 +162,7 @@ export class WeeksComponent implements OnInit {
           }
         },
       });
+      this.selectedAssociatedRoutine = null;
       this.showRoutinesModal = false;
     }
   }
@@ -243,5 +247,19 @@ export class WeeksComponent implements OnInit {
 
   areEqualObjects(object1: any, object2: any) {
     return JSON.stringify(object1) === JSON.stringify(object2);
+  }
+
+  onMouseDown(selectedWeek: Week) {
+    this.popupTimeout = setTimeout(() => {
+      selectedWeek.showProperties = true;
+    }, 1000);
+  }
+
+  onMouseUp() {
+    clearTimeout(this.popupTimeout);
+  }
+
+  onMouseLeave() {
+    clearTimeout(this.popupTimeout);
   }
 }

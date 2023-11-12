@@ -10,10 +10,15 @@
   <span
     *ngFor="let week of myWeeks"
     (click)="selectWeek(week)"
+    (mousedown)="onMouseDown(week)"
+    (mouseup)="onMouseUp()"
+    (mouseleave)="onMouseLeave()"
     [ngClass]="{ 'selected-box': selectedWeek.id === week.id }"
     class="primary-box week"
-    >{{ week.name }}</span
   >
+    {{ week.name }}
+    <app-properties-popup *ngIf="week.showProperties"></app-properties-popup>
+  </span>
 </section>
 
 <ng-container *ngFor="let week of myWeeks">
@@ -143,7 +148,11 @@
       *ngIf="savedRoutines.length > 0; else noRoutines"
       class="flex-col-cent"
     >
-      <i (click)="showRoutinesModal = false" class="centered close-cross">X</i>
+      <i
+        (click)="showRoutinesModal = false; selectedAssociatedRoutine = null"
+        class="centered close-cross"
+        >X</i
+      >
       <h2>Selecciona rutina a añadir</h2>
       <span *ngIf="selectedAssociatedRoutine"
         >Rutina seleccionada: {{ selectedAssociatedRoutine.name }}</span

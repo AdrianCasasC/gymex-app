@@ -1,0 +1,26 @@
+:host {
+  position: absolute;
+  bottom: 125%;
+  left: -2px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #12706b;
+  font-size: 12px;
+}
+
+span {
+  padding: 8px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+span:hover {
+  background-color: #a7f8f3;
+}

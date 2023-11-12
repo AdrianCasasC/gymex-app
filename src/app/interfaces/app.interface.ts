@@ -50,6 +50,7 @@ export interface Routine {
 export interface Week {
   id: string;
   name: string;
+  showProperties: boolean;
   days: Day[];
 }
 

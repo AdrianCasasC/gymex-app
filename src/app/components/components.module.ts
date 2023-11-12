@@ -7,6 +7,7 @@ import { RoutineModalComponent } from './routine-modal/routine-modal.component';
 import { FormsModule } from '@angular/forms';
 import { SeriesModalComponent } from './series-modal/series-modal.component';
 import { SaveModalComponent } from './save-modal/save-modal.component';
+import { PropertiesPopupComponent } from './properties-popup/properties-popup.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { SaveModalComponent } from './save-modal/save-modal.component';
     RoutineModalComponent,
     SeriesModalComponent,
     SaveModalComponent,
+    PropertiesPopupComponent,
   ], //Aquí se declaran los componentes
   imports: [CommonModule, TranslocoModule, FormsModule], //Aquí se exportan módulos exteriores
   exports: [
@@ -23,6 +25,7 @@ import { SaveModalComponent } from './save-modal/save-modal.component';
     RoutineModalComponent,
     SeriesModalComponent,
     SaveModalComponent,
+    PropertiesPopupComponent,
   ], //Aquí se exportan los componentes
 })
 export class ComponentsModule {}
