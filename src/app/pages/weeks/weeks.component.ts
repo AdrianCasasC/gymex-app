@@ -239,11 +239,13 @@ export class WeeksComponent implements OnInit {
     exercise.series.forEach((serie: Serie, i: number) => {
       serie.lastWeekCoincidences = [];
       coincidences.forEach((coincidence) => {
-        serie.lastWeekCoincidences.push({
-          weekDay: coincidence.weekDay,
-          reps: coincidence.series[i].reps,
-          weight: coincidence.series[i].weight,
-        });
+        if (i <= coincidence.series.length - 1) {
+          serie.lastWeekCoincidences.push({
+            weekDay: coincidence.weekDay,
+            reps: coincidence.series[i].reps,
+            weight: coincidence.series[i].weight,
+          });
+        }
       });
     });
   }
