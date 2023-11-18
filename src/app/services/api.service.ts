@@ -31,7 +31,7 @@ export class ApiService {
     );
   }
 
-  editRoutineSeries(editedRoutine: Routine) {
+  editRoutine(editedRoutine: Routine) {
     return this.http.put(
       API_ENDPOINTS.routines.basic(this.getUserId()),
       editedRoutine

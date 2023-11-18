@@ -8,7 +8,7 @@
 
 <section class="my-routines-wrapper">
   <span
-    class="primary-box selected-box"
+    class="primary-box selected-box routine"
     *ngFor="let routine of myRoutines"
     (click)="selectedRoutine = routine"
     (mousedown)="onMouseDown(routine)"
@@ -50,6 +50,14 @@
   (applySavedSeries)="saveSeries($event)"
   (closeModal)="showEditSeriesModal = false"
 ></app-series-modal>
+
+<app-input-modal
+  *ngIf="showChangeRoutineNameModal"
+  (closeModal)="showChangeRoutineNameModal = false"
+  (writtenText)="changeRoutineName($event)"
+  [labelText]="'Nuevo nombre de la rutina'"
+  class="modal"
+></app-input-modal>
 
 <app-input-modal
   *ngIf="showNewRoutineModal"

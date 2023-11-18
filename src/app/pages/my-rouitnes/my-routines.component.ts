@@ -110,7 +110,7 @@ export class MyRoutinesComponent implements OnInit {
   }
 
   saveEditedRoutineToBackend() {
-    this.apiService.editRoutineSeries(this.selectedRoutine).subscribe({
+    this.apiService.editRoutine(this.selectedRoutine).subscribe({
       next: () => {
         this.showEditSeriesModal = false;
         this.saveSuccessfully = 'OK';
@@ -147,6 +147,23 @@ export class MyRoutinesComponent implements OnInit {
     if (this.myRoutines && this.myRoutines.length > 0) {
       this.selectedRoutine = this.myRoutines[0];
     }
+  }
+
+  changeRoutineName(newRoutineName: string) {
+    const routineToChangeName = this.myRoutines.find(
+      (routine) => routine.id === this.popupRoutine.id
+    );
+    const auxRoutine = this.deepCopy(routineToChangeName);
+    auxRoutine.name = newRoutineName;
+    this.apiService.editRoutine(auxRoutine).subscribe({
+      next: () => {
+        routineToChangeName!.name = newRoutineName;
+      },
+    });
+  }
+
+  deepCopy(itemtoCopy: any) {
+    return JSON.parse(JSON.stringify(itemtoCopy));
   }
 
   onMouseDown(selectedRoutine: Routine) {

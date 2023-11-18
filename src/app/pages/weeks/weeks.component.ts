@@ -279,7 +279,20 @@ export class WeeksComponent implements OnInit {
   }
 
   changeWeekName(newWeekName: string) {
-    this.popupWeek.name = newWeekName;
+    const weekToChangeName = this.myWeeks.find(
+      (week) => week.id === this.popupWeek.id
+    );
+    const auxWeek = this.deepCopy(weekToChangeName);
+    auxWeek.name = newWeekName;
+    this.apiService.editWeek(auxWeek).subscribe({
+      next: () => {
+        weekToChangeName!.name = newWeekName;
+      },
+    });
+  }
+
+  deepCopy(itemtoCopy: any) {
+    return JSON.parse(JSON.stringify(itemtoCopy));
   }
 
   existSomeLastWeekRegister(lastWeekSeries: Coincidence[]) {
