@@ -29,7 +29,7 @@ export class SelectedRoutineComponent implements OnInit {
   showExerciseModal: boolean = false;
   numberOfSeries: number[] = numberOfSeries;
   selectedExercise!: string;
-  selectedNumberOfSeries: number = 0;
+  selectedNumberOfSeries: number = 1;
   chosenExercises: Exercise[] = [];
   routineSavedSuccessfully: string = 'DONE';
 

@@ -4,14 +4,17 @@ button {
 
 .seriesWrapper {
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 12px;
-  height: 40px;
 }
 
 .content {
+  display: flex;
   position: relative;
   padding: 24px;
   gap: 12px;
+  width: 60%;
 }
 
 .selected {

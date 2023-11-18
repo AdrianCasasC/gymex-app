@@ -25,10 +25,12 @@
         *ngFor="
           let exercise of exercisesByMuscleGroup[muscleGroup + 'Exercises']
         "
-        class="muscle-card scale-hover primary-box flex-col"
+        class="muscle-card scale-hover primary-box"
         (click)="handleSelectedCard(exercise)"
       >
-        <img /><!--Aquí irán las fotos de los ejercicios-->
+        <img
+          [src]="'../../../assets/images/' + exercise + '.jpg'"
+        /><!--Aquí irán las fotos de los ejercicios-->
         <span>{{ "exercises." + exercise | transloco | titlecase }}</span>
       </div>
     </section>
@@ -54,8 +56,10 @@
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">
   <div class="exercise-modal__content">
-    <i (click)="closeModal()" class="exercise-modal__content__icon">X</i>
-    <strong>{{ selectedExercise | transloco | titlecase }}</strong>
+    <i (click)="closeModal()" class="close-cross">X</i>
+    <strong>{{
+      "exercises." + selectedExercise | transloco | titlecase
+    }}</strong>
     <span>
       {{ "exerciseModal.label" | transloco | titlecase }}
       {{
