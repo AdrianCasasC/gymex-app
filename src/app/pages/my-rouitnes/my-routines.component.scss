@@ -1,5 +1,9 @@
 @import "../../../app/styles/variables.css";
 
+h1 {
+  white-space: nowrap;
+}
+
 h2 {
   margin: 0;
 }
@@ -7,11 +11,14 @@ h2 {
 :host {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 24px;
 }
 
 .my-routines-wrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
   margin-bottom: 24px;
 
@@ -28,10 +35,18 @@ h2 {
   padding: 12px;
 }
 
+.routines-exercise-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+}
+
 .routine-top {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
+  width: 100%;
 }
 
 .routine-top-add {
@@ -59,5 +74,16 @@ h2 {
 
   button:hover {
     text-decoration: underline;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .routine-top {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .routine-top-add {
+    width: 85%;
   }
 }

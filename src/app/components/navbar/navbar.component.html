@@ -1,11 +1,10 @@
 <ng-container>
-  <div
+  <span
     *ngFor="let tab of tabs"
     class="container"
-    [ngClass]="{ selected: tab === selectedTab }"
+    (click)="handleSelectedTab(tab)"
+    class="primary-box container__item"
+    [ngClass]="{ 'selected-box': tab === selectedTab }"
+    >{{ "nav." + tab | transloco | titlecase }}</span
   >
-    <span (click)="handleSelectedTab(tab)" class="container__item">{{
-      "nav." + tab | transloco | titlecase
-    }}</span>
-  </div>
 </ng-container>

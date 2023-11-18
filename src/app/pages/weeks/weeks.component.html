@@ -41,7 +41,7 @@
   </section>
 </ng-container>
 
-<section *ngIf="selectedDay">
+<section *ngIf="selectedDay" class="routine-day-wrapper">
   <div *ngIf="!selectedDay?.routine; else routine" class="no-routine">
     <span
       >No hay ninguna rutina asociada al
@@ -83,7 +83,7 @@
 
             <div
               *ngIf="serie.showLastWeek"
-              class="primary-box last-week centered"
+              class="primary-box last-week"
               [style.transform]="
                 serie.showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
               "

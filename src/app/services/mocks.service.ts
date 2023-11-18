@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export const headersitoTabs = ['home', 'series', 'routine', 'weeks'];
+export const headersitoTabs = ['routine', 'weeks'];
 
 @Injectable({
   providedIn: 'root',
