@@ -43,8 +43,10 @@ export interface Exercise {
 }
 
 export interface Routine {
+  id: string;
   name: string;
   exercises: Exercise[];
+  showProperties: boolean;
 }
 
 export interface Week {

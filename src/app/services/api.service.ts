@@ -15,16 +15,25 @@ export class ApiService {
   }
 
   getBackendRoutines() {
-    return this.http.get(API_ENDPOINTS.routines(this.getUserId()));
+    return this.http.get(API_ENDPOINTS.routines.basic(this.getUserId()));
   }
 
   postNewRoutine(newRoutine: Routine) {
-    return this.http.post(API_ENDPOINTS.routines(this.getUserId()), newRoutine);
+    return this.http.post(
+      API_ENDPOINTS.routines.basic(this.getUserId()),
+      newRoutine
+    );
+  }
+
+  deleteRoutine(routine: Routine) {
+    return this.http.delete(
+      API_ENDPOINTS.routines.byId(this.getUserId(), routine.id)
+    );
   }
 
   editRoutineSeries(editedRoutine: Routine) {
     return this.http.put(
-      API_ENDPOINTS.routines(this.getUserId()),
+      API_ENDPOINTS.routines.basic(this.getUserId()),
       editedRoutine
     );
   }

@@ -11,9 +11,17 @@
     class="primary-box selected-box"
     *ngFor="let routine of myRoutines"
     (click)="selectedRoutine = routine"
+    (mousedown)="onMouseDown(routine)"
+    (mouseup)="onMouseUp()"
+    (mouseleave)="onMouseLeave()"
     [ngClass]="{ 'selected-box': selectedRoutine === routine }"
-    >{{ routine.name }}</span
-  >
+    >{{ routine.name }}
+    <app-properties-popup
+      *ngIf="routine.showProperties"
+      (clickOutside)="routine.showProperties = false"
+      (selectedOption)="popupSelectedOption($event, routine)"
+    ></app-properties-popup>
+  </span>
 </section>
 
 <section>

@@ -17,6 +17,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class MyRoutinesComponent implements OnInit {
   myRoutines: Routine[] = [];
   selectedRoutine!: Routine;
+  popupRoutine!: Routine;
   editedExerciseIndex!: number;
   selectedSerie!: Serie;
   editedSerieIndex!: number;
@@ -25,9 +26,12 @@ export class MyRoutinesComponent implements OnInit {
   showSerieModal: boolean = false;
   showNewRoutineModal: boolean = false;
   showEditSeriesModal: boolean = false;
+  showChangeRoutineNameModal: boolean = false;
   saveSuccessfully!: string;
   user!: User;
   routines: string[] = [];
+
+  private popupTimeout: any;
 
   constructor(
     private authService: AuthService,
@@ -116,5 +120,46 @@ export class MyRoutinesComponent implements OnInit {
         this.saveSuccessfully = 'KO';
       },
     });
+  }
+
+  popupSelectedOption(selectedOption: string, routine: Routine) {
+    this.popupRoutine = routine;
+    if (selectedOption === 'delete') {
+      this.apiService.deleteRoutine(this.popupRoutine).subscribe({
+        next: () => this.deleteRoutine(this.popupRoutine),
+        error: (error) => console.log(error),
+      });
+    } else {
+      this.showChangeRoutineNameModal = true;
+    }
+  }
+
+  deleteRoutine(routineToDelete: Routine) {
+    this.myRoutines = this.myRoutines.filter(
+      (routine) => routine.id !== routineToDelete.id
+    );
+    if (this.selectedRoutine.id === routineToDelete.id) {
+      this.asignDefaultRoutine();
+    }
+  }
+
+  asignDefaultRoutine() {
+    if (this.myRoutines && this.myRoutines.length > 0) {
+      this.selectedRoutine = this.myRoutines[0];
+    }
+  }
+
+  onMouseDown(selectedRoutine: Routine) {
+    this.popupTimeout = setTimeout(() => {
+      selectedRoutine.showProperties = true;
+    }, 1000);
+  }
+
+  onMouseUp() {
+    clearTimeout(this.popupTimeout);
+  }
+
+  onMouseLeave() {
+    clearTimeout(this.popupTimeout);
   }
 }

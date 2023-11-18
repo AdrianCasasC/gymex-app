@@ -90,8 +90,10 @@ export class SelectedRoutineComponent implements OnInit {
 
   saveRoutine() {
     const newRoutine: Routine = {
+      id: '',
       name: this.selectedRoutineName,
       exercises: this.chosenExercises,
+      showProperties: false,
     };
     this.apiService.postNewRoutine(newRoutine).subscribe({
       next: () => this.openModalAndRedirect('OK'),

@@ -105,8 +105,10 @@ export class DataService {
 
   setSavedRoutines(routineName: string, selectedExercises: Exercise[]) {
     const newRoutine: Routine = {
+      id: '',
       name: routineName,
       exercises: [...selectedExercises],
+      showProperties: false,
     };
     this.savedRoutines.push(newRoutine);
   }
