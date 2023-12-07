@@ -40,12 +40,20 @@
     <div
       *ngFor="let exercise of chosenExercises"
       class="secondary-box selected-exercises__item"
+      (longPress)="handleLongPress(exercise)"
     >
       <span>{{ "exercises." + exercise.name | transloco | titlecase }}</span>
       <span>{{
         exercise.series.length +
           (exercise.series.length !== 1 ? " series" : " serie")
       }}</span>
+      <app-properties-popup
+        *ngIf="exercise.showProperties"
+        class="top"
+        [properties]="['delete']"
+        (clickOutside)="exercise.showProperties = false"
+        (selectedOption)="popupSelectedOption($event, exercise)"
+      ></app-properties-popup>
     </div>
   </section>
 </div>

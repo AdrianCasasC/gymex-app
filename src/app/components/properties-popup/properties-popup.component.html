@@ -1,7 +1,8 @@
 <span
-  *ngFor="let property of properties"
+  *ngFor="let property of properties; let i = index"
+  class="property"
   (click)="selectedOption.emit(property)"
 >
   {{ "weekPopup." + property | transloco }}
 </span>
-<div class="triangle"></div>
+<div id="triangle" class="triangle"></div>

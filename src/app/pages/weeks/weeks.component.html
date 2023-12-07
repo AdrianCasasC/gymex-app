@@ -10,15 +10,14 @@
   <span
     *ngFor="let week of myWeeks"
     (click)="selectWeek(week)"
-    (mousedown)="onMouseDown(week)"
-    (mouseup)="onMouseUp()"
-    (mouseleave)="onMouseLeave()"
+    (longPress)="week.showProperties = true"
     [ngClass]="{ 'selected-box': selectedWeek.id === week.id }"
     class="primary-box week"
   >
     {{ week.name }}
     <app-properties-popup
       *ngIf="week.showProperties"
+      [position]="'top'"
       (clickOutside)="week.showProperties = false"
       (selectedOption)="popupSelectedOption($event, week)"
     ></app-properties-popup>
@@ -160,7 +159,7 @@
 
 <div *ngIf="showRoutinesModal" class="modal">
   <div
-    (clickOutside)="(closeAssociateRoutineModal)"
+    (clickOutside)="closeAssociateRoutineModal()"
     class="flex-col content primary-box modal-content"
   >
     <div

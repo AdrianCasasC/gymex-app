@@ -40,23 +40,25 @@ export interface SeriesCoincidence {
 export interface Exercise {
   name: string;
   series: Serie[];
+  showProperties: boolean;
 }
 
 export interface Routine {
-  id: string;
+  id?: string;
   name: string;
   exercises: Exercise[];
   showProperties: boolean;
 }
 
 export interface Week {
-  id: string;
+  id?: string;
   name: string;
   showProperties: boolean;
   days: Day[];
 }
 
 export interface Day {
+  id?: string;
   name: string;
   routine: Routine | null;
 }

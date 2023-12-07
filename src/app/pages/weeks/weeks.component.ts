@@ -39,8 +39,6 @@ export class WeeksComponent implements OnInit {
   showLastWeek: boolean = false;
   showChangeWeekNameModal: boolean = false;
 
-  private popupTimeout: any;
-
   constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit(): void {
@@ -76,7 +74,6 @@ export class WeeksComponent implements OnInit {
 
   addNewWeek(weekName: string) {
     const newWeek: Week = {
-      id: '',
       name: weekName,
       showProperties: false,
       days: this.daysOfWeek,
@@ -84,11 +81,12 @@ export class WeeksComponent implements OnInit {
 
     this.apiService.postNewWeek(newWeek).subscribe({
       next: (response: any) => {
-        newWeek.id = response[response.length - 1].id;
+        newWeek.id = response.id;
         this.myWeeks.push(newWeek);
         this.selectedWeek = newWeek;
         this.selectedDay = this.selectedWeek.days[0];
       },
+      error: () => console.log('Ha ocurrido un error'),
     });
   }
 
@@ -101,12 +99,12 @@ export class WeeksComponent implements OnInit {
   }
 
   applyChanges() {
-    const weekWitheditedDaySeries: Week = JSON.parse(
+    const weekWithEditedDaySeries: Week = JSON.parse(
       JSON.stringify(
         this.myWeeks.find((week) => week.id === this.selectedWeek.id)
       )
     );
-    const editedDay = weekWitheditedDaySeries.days.find(
+    const editedDay = weekWithEditedDaySeries.days.find(
       (day) => day.name === this.selectedDay.name
     );
     editedDay?.routine &&
@@ -114,10 +112,10 @@ export class WeeksComponent implements OnInit {
         this.editedSerieIndex
       ] = { ...this.selectedSerie });
 
-    this.apiService.editWeek(weekWitheditedDaySeries).subscribe({
+    this.apiService.editWeek(weekWithEditedDaySeries).subscribe({
       next: () => {
-        this.updateSelectedWeek(weekWitheditedDaySeries);
-        this.updateSelectedDayFromWeek(weekWitheditedDaySeries);
+        this.updateSelectedWeek(weekWithEditedDaySeries);
+        this.updateSelectedDayFromWeek(weekWithEditedDaySeries);
       },
     });
     this.closeModal();
@@ -158,14 +156,32 @@ export class WeeksComponent implements OnInit {
           const actualWeek: Week = response;
           foundDay = this.getDayByName(actualWeek.days);
           if (foundDay) {
-            this.updateRoutineLastWeekSeries(routine);
-            foundDay.routine = JSON.parse(JSON.stringify(routine)); //Copia profunda
-            this.updateDatabaseWeek(actualWeek);
+            const dayRoutine: Routine = {
+              name: routine.name,
+              exercises: routine.exercises,
+              showProperties: false,
+            };
+
+            this.associateDayRoutine(foundDay, dayRoutine, actualWeek);
+            //this.updateRoutineLastWeekSeries(routine);
+            //foundDay.routine = this.deepCopy(routine);
+            //this.updateDatabaseWeek(actualWeek);
           }
         },
       });
       this.closeAssociateRoutineModal();
     }
+  }
+
+  associateDayRoutine(day: Day, routine: Routine, actualWeek: Week) {
+    this.apiService.associateDayRoutine(day.id!, routine).subscribe({
+      next: (response) => {
+        this.updateRoutineLastWeekSeries(routine);
+        day.routine = this.deepCopy(routine);
+        this.updateDatabaseWeek(actualWeek);
+      },
+      error: () => console.log('Ha habido un error al asociar la rutina'),
+    });
   }
 
   updateRoutineLastWeekSeries(routine: Routine) {
@@ -191,7 +207,7 @@ export class WeeksComponent implements OnInit {
     previousWeek.days.forEach((day) => {
       if (day.routine) {
         const coincidenceExercise = this.searchCoincidenceExerciseInRoutine(
-          day.routine,
+          day.routine!,
           exerciseToCompare
         );
         if (coincidenceExercise) {
@@ -252,10 +268,15 @@ export class WeeksComponent implements OnInit {
 
   updateDatabaseWeek(week: Week) {
     this.apiService.editWeek(week).subscribe({
-      next: () => {
+      next: (response) => {
         this.updateSelectedWeek(week);
         this.updateSelectedDayFromWeek(week);
       },
+      error: (response) =>
+        console.log(
+          'Ha ocurrido un error al editar la semana: ',
+          response.message
+        ),
     });
   }
 
@@ -291,10 +312,6 @@ export class WeeksComponent implements OnInit {
     });
   }
 
-  deepCopy(itemtoCopy: any) {
-    return JSON.parse(JSON.stringify(itemtoCopy));
-  }
-
   existSomeLastWeekRegister(lastWeekSeries: Coincidence[]) {
     return !!lastWeekSeries.find(
       (series) => series.reps != 0 && series.weight != 0
@@ -306,7 +323,7 @@ export class WeeksComponent implements OnInit {
   }
 
   getDatabaseSelectedWeek() {
-    return this.apiService.getWeekById(this.selectedWeek.id);
+    return this.apiService.getWeekById(this.selectedWeek.id!);
   }
 
   goToRoutines() {
@@ -314,7 +331,7 @@ export class WeeksComponent implements OnInit {
   }
 
   copySerie(serie: Serie) {
-    this.selectedSerie = JSON.parse(JSON.stringify(serie));
+    this.selectedSerie = this.deepCopy(serie);
   }
 
   saveExerciseAndSerieIndex(exerciseIndex: number, serieIndex: number) {
@@ -333,12 +350,13 @@ export class WeeksComponent implements OnInit {
   }
 
   closeAssociateRoutineModal() {
+    this.isRoutineSelected = true;
     this.showRoutinesModal = false;
     this.selectedAssociatedRoutine = null;
   }
 
   selectWeek(week: Week) {
-    this.selectedWeek = JSON.parse(JSON.stringify(week));
+    this.selectedWeek = this.deepCopy(week);
     this.asignDefaultDay();
   }
 
@@ -346,17 +364,7 @@ export class WeeksComponent implements OnInit {
     return JSON.stringify(object1) === JSON.stringify(object2);
   }
 
-  onMouseDown(selectedWeek: Week) {
-    this.popupTimeout = setTimeout(() => {
-      selectedWeek.showProperties = true;
-    }, 1000);
-  }
-
-  onMouseUp() {
-    clearTimeout(this.popupTimeout);
-  }
-
-  onMouseLeave() {
-    clearTimeout(this.popupTimeout);
+  private deepCopy(itemtoCopy: any) {
+    return JSON.parse(JSON.stringify(itemtoCopy));
   }
 }

@@ -50,12 +50,18 @@ export class SelectedRoutineComponent implements OnInit {
     const pickedExercise: Exercise = {
       name: exerciseName,
       series: this.generateSeriesTypeList(exerciseSeries),
+      showProperties: false,
     };
 
     this.chosenExercises.push(pickedExercise);
 
     this.showExerciseModal = false;
     document.body.style.overflow = 'auto';
+  }
+
+  handleLongPress(exercise: Exercise) {
+    console.log('long presss');
+    exercise.showProperties = true;
   }
 
   generateSeriesTypeList(length: number) {
@@ -90,7 +96,6 @@ export class SelectedRoutineComponent implements OnInit {
 
   saveRoutine() {
     const newRoutine: Routine = {
-      id: '',
       name: this.selectedRoutineName,
       exercises: this.chosenExercises,
       showProperties: false,
@@ -114,6 +119,17 @@ export class SelectedRoutineComponent implements OnInit {
         this.routineSavedSuccessfully = 'DONE';
         this.router.navigate(['/routine']);
       }, 1000);
+    }
+  }
+
+  popupSelectedOption(selectedOption: string, selectedExercise: Exercise) {
+    const foundExercise = this.chosenExercises.find(
+      (exercise) => exercise.name === selectedExercise.name
+    );
+    if (foundExercise) {
+      this.chosenExercises = this.chosenExercises.filter(
+        (exercise) => exercise.name !== selectedExercise.name
+      );
     }
   }
 }

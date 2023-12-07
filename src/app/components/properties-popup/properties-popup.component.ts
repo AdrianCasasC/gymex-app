@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PropertiesPopupComponent {
   @Input() properties: string[] = ['changeName', 'delete'];
+  @Input() position!: 'top' | 'rigth' | 'bottom' | 'left';
   @Output() selectedOption = new EventEmitter();
 
   constructor() {}

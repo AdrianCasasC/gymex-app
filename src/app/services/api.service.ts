@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINTS } from 'src/config/api-endpoints';
-import { Routine, Week } from '../interfaces/app.interface';
+import { Day, Routine, Week } from '../interfaces/app.interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class ApiService {
 
   deleteRoutine(routine: Routine) {
     return this.http.delete(
-      API_ENDPOINTS.routines.byId(this.getUserId(), routine.id)
+      API_ENDPOINTS.routines.byId(this.getUserId(), routine.id!)
     );
   }
 
@@ -35,6 +35,13 @@ export class ApiService {
     return this.http.put(
       API_ENDPOINTS.routines.basic(this.getUserId()),
       editedRoutine
+    );
+  }
+
+  associateDayRoutine(dayId: string, routine: Routine) {
+    return this.http.put(
+      API_ENDPOINTS.routines.associate(this.getUserId(), dayId),
+      routine
     );
   }
 
@@ -59,7 +66,7 @@ export class ApiService {
 
   deleteWeek(week: Week) {
     return this.http.delete(
-      API_ENDPOINTS.weeks.byId(this.getUserId(), week.id)
+      API_ENDPOINTS.weeks.byId(this.getUserId(), week.id!)
     );
   }
 }

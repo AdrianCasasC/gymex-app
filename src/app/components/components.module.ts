@@ -9,6 +9,7 @@ import { SeriesModalComponent } from './series-modal/series-modal.component';
 import { SaveModalComponent } from './save-modal/save-modal.component';
 import { PropertiesPopupComponent } from './properties-popup/properties-popup.component';
 import { ClickOutsideDirective } from '../directives/click-outside.directive';
+import { LongPressDirective } from '../directives/longPress.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ClickOutsideDirective } from '../directives/click-outside.directive';
     SaveModalComponent,
     PropertiesPopupComponent,
     ClickOutsideDirective,
+    LongPressDirective,
   ], //Aquí se declaran los componentes
   imports: [CommonModule, TranslocoModule, FormsModule], //Aquí se exportan módulos exteriores
   exports: [
@@ -29,6 +31,7 @@ import { ClickOutsideDirective } from '../directives/click-outside.directive';
     SaveModalComponent,
     PropertiesPopupComponent,
     ClickOutsideDirective,
+    LongPressDirective,
   ], //Aquí se exportan los componentes
 })
 export class ComponentsModule {}

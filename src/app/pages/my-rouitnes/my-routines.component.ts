@@ -31,8 +31,6 @@ export class MyRoutinesComponent implements OnInit {
   user!: User;
   routines: string[] = [];
 
-  private popupTimeout: any;
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -82,9 +80,9 @@ export class MyRoutinesComponent implements OnInit {
     this.showSerieModal = false;
   }
 
-  addNewRoutine(newRoutine: string) {
-    this.routines.push(newRoutine);
-    this.goToCard(newRoutine);
+  addNewRoutine(newRoutineName: string) {
+    this.routines.push(newRoutineName);
+    this.goToCard(newRoutineName);
   }
 
   goToCard(selectedRoutine: string) {
@@ -138,9 +136,21 @@ export class MyRoutinesComponent implements OnInit {
     this.myRoutines = this.myRoutines.filter(
       (routine) => routine.id !== routineToDelete.id
     );
-    if (this.selectedRoutine.id === routineToDelete.id) {
+    if (this.myRoutines.length === 0) {
+      this.asignEmptyRoutine();
+    } else if (this.selectedRoutine.id === routineToDelete.id) {
       this.asignDefaultRoutine();
     }
+  }
+
+  asignEmptyRoutine() {
+    const emptyRoutine: Routine = {
+      id: '',
+      name: '',
+      exercises: [],
+      showProperties: false,
+    };
+    this.selectedRoutine = emptyRoutine;
   }
 
   asignDefaultRoutine() {
@@ -164,19 +174,5 @@ export class MyRoutinesComponent implements OnInit {
 
   deepCopy(itemtoCopy: any) {
     return JSON.parse(JSON.stringify(itemtoCopy));
-  }
-
-  onMouseDown(selectedRoutine: Routine) {
-    this.popupTimeout = setTimeout(() => {
-      selectedRoutine.showProperties = true;
-    }, 1000);
-  }
-
-  onMouseUp() {
-    clearTimeout(this.popupTimeout);
-  }
-
-  onMouseLeave() {
-    clearTimeout(this.popupTimeout);
   }
 }
