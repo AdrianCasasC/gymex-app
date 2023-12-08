@@ -1,0 +1,21 @@
+:host {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+  background-color: #4ac4c4;
+}
+
+.logOut {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: cyan;
+}
+
+.logOut:hover {
+  text-decoration: underline;
+}

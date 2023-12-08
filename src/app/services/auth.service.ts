@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/app.interface';
 import { ApiService } from './api.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user: User = {
-    id: 'id1',
-    name: 'Adri',
-    password: '1234',
-  };
+  private logged = new Subject<boolean>();
+  logged$ = this.logged.asObservable();
+
+  user!: User;
 
   constructor() {}
 
@@ -20,5 +20,9 @@ export class AuthService {
 
   getUser(): User {
     return this.user;
+  }
+
+  setUserLogged(state: boolean) {
+    this.logged.next(state);
   }
 }

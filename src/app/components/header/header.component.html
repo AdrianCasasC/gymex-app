@@ -1,1 +1,10 @@
-<app-navbar [tabs]="headerTabs"></app-navbar>
+<app-navbar
+  *ngIf="userIsLogged; else NotLogged"
+  [tabs]="headerTabs"
+></app-navbar>
+<ng-template #NotLogged>
+  <h2>{{ "header.notLogged" | transloco }}</h2>
+</ng-template>
+<span *ngIf="userIsLogged" (click)="onCloseSession()" class="logOut">{{
+  "header.logOut" | transloco
+}}</span>

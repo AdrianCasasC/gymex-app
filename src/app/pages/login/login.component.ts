@@ -28,6 +28,7 @@ export class LoginComponent {
       .subscribe({
         next: () => {
           this.authService.setUser(this.loggedUser);
+          this.authService.setUserLogged(true);
           this.router.navigate(['/routine']);
         },
         error: () => console.log('Error al loggear al usuario'),

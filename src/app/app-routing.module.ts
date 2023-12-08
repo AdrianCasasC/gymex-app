@@ -20,8 +20,9 @@ const routes: Routes = [
     title: 'addRoutine',
     component: SelectedRoutineComponent,
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', title: 'login', component: LoginComponent },
+  { path: 'register', title: 'register', component: RegisterComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({

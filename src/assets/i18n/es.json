@@ -52,6 +52,10 @@
     "label": "Elige el número de series",
     "button": "Añadir ejercicio"
   },
+  "header": {
+    "notLogged": "¡Entra para empezar a ponerte mamadísimo!",
+    "logOut": "Cerrar sesión"
+  },
   "login": {
     "password": "Contraseña",
     "init": "Iniciar sesión",

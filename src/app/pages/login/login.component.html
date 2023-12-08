@@ -7,6 +7,8 @@
     <input type="password" name="password" [(ngModel)]="loggedUser.password" />
 
     <input type="submit" value="{{ 'login.init' | transloco | titlecase }}" />
-    <span (click)="onRegister()">{{ "login.register" | transloco }}</span>
+    <span (click)="onRegister()" class="register">{{
+      "login.register" | transloco
+    }}</span>
   </form>
 </div>
