@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from '../components/components.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { SelectedRoutineComponent } from './selected-routine/selected-routine.component';
 import { AppRoutingModule } from '../app-routing.module';
 import { MyRoutinesComponent } from './my-rouitnes/my-routines.component';
@@ -17,6 +18,7 @@ import { WeeksComponent } from './weeks/weeks.component';
     SelectedRoutineComponent,
     MyRoutinesComponent,
     WeeksComponent,
+    RegisterComponent,
   ], //Aquí se declaran los componentes
   imports: [
     CommonModule,

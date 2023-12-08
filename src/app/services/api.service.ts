@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_ENDPOINTS } from 'src/config/api-endpoints';
-import { Day, Routine, Week } from '../interfaces/app.interface';
+import { Day, Routine, User, Week } from '../interfaces/app.interface';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -9,6 +9,14 @@ import { AuthService } from './auth.service';
 })
 export class ApiService {
   constructor(private http: HttpClient, private authService: AuthService) {}
+
+  register(newUser: User) {
+    return this.http.post(API_ENDPOINTS.user.basic(), newUser);
+  }
+
+  getUserByNameAndPassword(name: string, password: string) {
+    return this.http.get(API_ENDPOINTS.user.byNameAndPwd(name, password));
+  }
 
   getUserId() {
     return this.authService.getUser().id;

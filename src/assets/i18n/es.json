@@ -53,8 +53,14 @@
     "button": "Añadir ejercicio"
   },
   "login": {
-    "email": "Email",
+    "password": "Contraseña",
     "init": "Iniciar sesión",
+    "name": "Nombre",
+    "register": "¿No estás registrado? ¡Regístrate!"
+  },
+  "register": {
+    "password": "Contraseña",
+    "save": "Registrarse",
     "name": "Nombre"
   },
   "modal": {

@@ -13,4 +13,9 @@ export const API_ENDPOINTS = {
     byId: (userId: string, weekId: string) =>
       basicUrl + `gymex/weeks/${userId}/${weekId}`,
   },
+  user: {
+    basic: () => basicUrl + 'gymex/user/register',
+    byNameAndPwd: (name: string, password: string) =>
+      basicUrl + `gymex/user/${name}/${password}`,
+  },
 };

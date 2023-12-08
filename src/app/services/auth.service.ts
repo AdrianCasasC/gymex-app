@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interfaces/app.interface';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ export class AuthService {
   user: User = {
     id: 'id1',
     name: 'Adri',
-    email: 'adri@gmail.com',
+    password: '1234',
   };
 
   constructor() {}

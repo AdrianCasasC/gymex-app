@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { SelectedRoutineComponent } from './pages/selected-routine/selected-routine.component';
 import { MyRoutinesComponent } from './pages/my-rouitnes/my-routines.component';
 import { WeeksComponent } from './pages/weeks/weeks.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     component: SelectedRoutineComponent,
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

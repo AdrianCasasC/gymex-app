@@ -1,0 +1,16 @@
+<div class="form-container">
+  <form (ngSubmit)="handleSubmit()" method="get">
+    <label for="name">{{ "register.name" | transloco | titlecase }}</label>
+    <input type="text" name="name" [(ngModel)]="newUser.name" />
+
+    <label for="password">{{
+      "register.password" | transloco | titlecase
+    }}</label>
+    <input type="password" name="password" [(ngModel)]="newUser.password" />
+
+    <input
+      type="submit"
+      value="{{ 'register.save' | transloco | titlecase }}"
+    />
+  </form>
+</div>

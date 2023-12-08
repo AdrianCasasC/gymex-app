@@ -3,9 +3,10 @@
     <label for="name">{{ "login.name" | transloco | titlecase }}</label>
     <input type="text" name="name" [(ngModel)]="loggedUser.name" />
 
-    <label for="email">{{ "login.email" | transloco | titlecase }}</label>
-    <input type="email" name="email" [(ngModel)]="loggedUser.email" />
+    <label for="password">{{ "login.password" | transloco | titlecase }}</label>
+    <input type="password" name="password" [(ngModel)]="loggedUser.password" />
 
     <input type="submit" value="{{ 'login.init' | transloco | titlecase }}" />
+    <span (click)="onRegister()">{{ "login.register" | transloco }}</span>
   </form>
 </div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/app.interface';
+import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -12,13 +13,28 @@ export class LoginComponent {
   loggedUser: User = {
     id: '',
     name: '',
-    email: '',
+    password: '',
   };
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private readonly authService: AuthService,
+    private readonly apiService: ApiService
+  ) {}
 
   handleSubmit() {
-    this.authService.setUser(this.loggedUser);
-    this.router.navigate(['/routine']);
+    this.apiService
+      .getUserByNameAndPassword(this.loggedUser.name, this.loggedUser.password)
+      .subscribe({
+        next: () => {
+          this.authService.setUser(this.loggedUser);
+          this.router.navigate(['/routine']);
+        },
+        error: () => console.log('Error al loggear al usuario'),
+      });
+  }
+
+  onRegister() {
+    this.router.navigate(['/register']);
   }
 }

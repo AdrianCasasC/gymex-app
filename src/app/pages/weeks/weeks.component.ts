@@ -126,7 +126,7 @@ export class WeeksComponent implements OnInit {
       (week) => week.id === this.selectedWeek.id
     );
     if (foundWeek) {
-      foundWeek.days = newWeek.days;
+      foundWeek.days = this.deepCopy(newWeek.days);
     }
   }
 
