@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/app.interface';
+import { Sex, User } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,8 +13,11 @@ export class LoginComponent {
   loggedUser: User = {
     id: '',
     name: '',
+    email: '',
+    sex: Sex.male,
     password: '',
   };
+  logError: boolean = false;
 
   constructor(
     private router: Router,
@@ -31,7 +34,12 @@ export class LoginComponent {
           this.authService.setUserLogged(true);
           this.router.navigate(['/routine']);
         },
-        error: () => console.log('Error al loggear al usuario'),
+        error: () => {
+          this.logError = true;
+          setTimeout(() => {
+            this.logError = false;
+          }, 3000);
+        },
       });
   }
 

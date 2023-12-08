@@ -12,6 +12,7 @@ form {
 }
 
 .form-container {
+  position: relative;
   border: 2px solid #4ac4c4;
   border-radius: 10px;
   padding: 24px 12px;
@@ -42,4 +43,11 @@ form {
 
 .register:hover::after {
   transform: scaleX(1);
+}
+
+.logError {
+  position: absolute;
+  top: -24px;
+  transform: translateY(-100%);
+  color: #bb0000;
 }

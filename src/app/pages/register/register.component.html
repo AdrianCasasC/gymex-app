@@ -3,10 +3,35 @@
     <label for="name">{{ "register.name" | transloco | titlecase }}</label>
     <input type="text" name="name" [(ngModel)]="newUser.name" />
 
+    <label for="email">{{ "register.email" | transloco | titlecase }}</label>
+    <input type="email" name="email" [(ngModel)]="newUser.email" />
+
     <label for="password">{{
       "register.password" | transloco | titlecase
     }}</label>
     <input type="password" name="password" [(ngModel)]="newUser.password" />
+
+    <label for="repeatPassword">{{
+      "register.repeatPassword" | transloco | titlecase
+    }}</label>
+    <input
+      type="password"
+      name="repeatPassword"
+      [(ngModel)]="repeatedPassword"
+    />
+
+    <label class="dropdown-label" for="sex">
+      {{ "register.sex" | transloco | titlecase }}
+      <app-dropdown
+        class="dropdown"
+        [options]="dropdownOptions"
+        (selectedOption)="onSelectedOption($event)"
+      ></app-dropdown>
+    </label>
+    <!--<span class="selectSex" type="text" name="sex"
+      >{{ "dropdown." + newUser.sex | transloco }}
+      
+    </span>-->
 
     <input
       type="submit"

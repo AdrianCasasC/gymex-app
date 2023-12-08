@@ -12,6 +12,20 @@
     "saturday": "Sábado",
     "sunday": "Domingo"
   },
+  "dropdown": {
+    "select": "Seleccionar",
+    "male": "Hombre",
+    "female": "Mujer",
+    "transgender": "Transgénero",
+    "intersexual": "Intersexual",
+    "bisexual": "Bisexual",
+    "queer": "Queer",
+    "combatHelicopter": "Helicóptero de combate",
+    "terraneitor3000": "Terraneitor3000",
+    "gokuSuperSaiyan3": "Goku Super Saiyan 3",
+    "superMarioBro": "Super Mario Bro",
+    "terminator2": "Terminator 2"
+  },
   "exercises": {
     "inclineBarBenchPress": "Inclinado con barra",
     "inclineDumbellBenchPress": " Inclinado con mancuernas",
@@ -53,19 +67,23 @@
     "button": "Añadir ejercicio"
   },
   "header": {
-    "notLogged": "¡Entra para empezar a ponerte mamadísimo!",
+    "notLogged": "¡Entra para empezar a ponerte mamadísim@!",
     "logOut": "Cerrar sesión"
   },
   "login": {
     "password": "Contraseña",
     "init": "Iniciar sesión",
     "name": "Nombre",
-    "register": "¿No estás registrado? ¡Regístrate!"
+    "register": "¿No estás registrado? ¡Regístrate!",
+    "logError": "Usuario o contraseña incorrectos"
   },
   "register": {
     "password": "Contraseña",
+    "repeatPassword": "Repetir Contraseña",
     "save": "Registrarse",
-    "name": "Nombre"
+    "name": "Nombre",
+    "email": "E-mail",
+    "sex": "Sexo"
   },
   "modal": {
     "label": "Nombre de la nueva rutina"

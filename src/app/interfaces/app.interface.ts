@@ -1,6 +1,21 @@
+export enum Sex {
+  male = 'male',
+  female = 'female',
+  transgender = 'transgender',
+  intersexual = 'intersexual',
+  bisexual = 'bisexual',
+  queer = 'queer',
+  combatHelicopter = 'combatHelicopter',
+  terraneitor3000 = 'terraneitor3000',
+  gokuSuperSaiyan3 = 'gokuSuperSaiyan3',
+  superMarioBro = 'superMarioBro',
+  terminator2 = 'terminator2',
+}
 export interface User {
   id: string;
   name: string;
+  email: string;
+  sex: Sex;
   password: string;
 }
 

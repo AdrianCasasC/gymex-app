@@ -1,4 +1,7 @@
 <div class="form-container">
+  <span *ngIf="logError" class="logError">{{
+    "login.logError" | transloco
+  }}</span>
   <form (ngSubmit)="handleSubmit()" method="get">
     <label for="name">{{ "login.name" | transloco | titlecase }}</label>
     <input type="text" name="name" [(ngModel)]="loggedUser.name" />
