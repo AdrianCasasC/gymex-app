@@ -9,6 +9,10 @@ form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  .fieldError {
+    color: #bb0000;
+  }
 }
 
 .form-container {

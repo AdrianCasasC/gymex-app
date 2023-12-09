@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Sex, User } from 'src/app/interfaces/app.interface';
+import { Sex, User, ValidationError } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -14,10 +14,11 @@ export class RegisterComponent {
     id: '',
     name: '',
     email: '',
-    sex: Sex.male,
+    sex: '',
     password: '',
+    confirmPassword: '',
   };
-  repeatedPassword!: string;
+  validationErrors: ValidationError[] = [];
   dropdownOptions: string[] = sexOptions;
 
   constructor(
@@ -26,11 +27,29 @@ export class RegisterComponent {
   ) {}
 
   handleSubmit() {
+    this.validationErrors = [];
     this.apiService.register(this.newUser).subscribe({
       next: () => this.router.navigate(['/login']),
-      error: () => console.log('Error al registrar el usuario'),
+      error: (response) => {
+        console.log('Error al registrar el usuario', response);
+        this.validationErrors = response.error;
+        //this.checkPasswords();
+      },
     });
   }
+
+  /* checkPasswords(): boolean {
+    if (this.newUser.password !== this.repeatedPassword) {
+      const repeatedPasswordError: ValidationError = {
+        field: 'repeatPassword',
+        message:
+          'Las contraseñas no coinciden. Por favor, vuelva a intentarlo.',
+      };
+      this.validationErrors = [...this.validationErrors, repeatedPasswordError];
+      return false;
+    }
+    return true;
+  } */
 
   onSelectedOption(option: string) {
     this.newUser.sex = this.getEnumValueFromString(option);

@@ -15,8 +15,9 @@ export interface User {
   id: string;
   name: string;
   email: string;
-  sex: Sex;
+  sex: string;
   password: string;
+  confirmPassword: string;
 }
 
 export interface Exercises {
@@ -76,6 +77,11 @@ export interface Day {
   id?: string;
   name: string;
   routine: Routine | null;
+}
+
+export interface ValidationError {
+  field: string;
+  message: string;
 }
 
 export type MuscularGroups =

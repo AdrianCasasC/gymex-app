@@ -10,6 +10,7 @@ import { SelectedRoutineComponent } from './selected-routine/selected-routine.co
 import { AppRoutingModule } from '../app-routing.module';
 import { MyRoutinesComponent } from './my-rouitnes/my-routines.component';
 import { WeeksComponent } from './weeks/weeks.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { WeeksComponent } from './weeks/weeks.component';
     TranslocoModule,
     FormsModule,
     AppRoutingModule,
+    PipesModule,
   ], //Aquí se exportan módulos exteriores
   exports: [
     HomeComponent,

@@ -79,7 +79,7 @@
   },
   "register": {
     "password": "Contraseña",
-    "repeatPassword": "Repetir Contraseña",
+    "confirmPassword": "Repetir Contraseña",
     "save": "Registrarse",
     "name": "Nombre",
     "email": "E-mail",

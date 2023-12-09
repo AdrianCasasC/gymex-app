@@ -16,6 +16,7 @@ export class LoginComponent {
     email: '',
     sex: Sex.male,
     password: '',
+    confirmPassword: '',
   };
   logError: boolean = false;
 

@@ -9,6 +9,7 @@ import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     HttpClientModule,
     TranslocoRootModule,
     FormsModule,
+    PipesModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

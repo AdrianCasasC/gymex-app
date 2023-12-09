@@ -1,27 +1,52 @@
 <div class="form-container">
   <form (ngSubmit)="handleSubmit()" method="get">
     <label for="name">{{ "register.name" | transloco | titlecase }}</label>
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'name'" class="fieldError">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
     <input type="text" name="name" [(ngModel)]="newUser.name" />
 
     <label for="email">{{ "register.email" | transloco | titlecase }}</label>
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'email'" class="fieldError">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
     <input type="email" name="email" [(ngModel)]="newUser.email" />
 
     <label for="password">{{
-      "register.password" | transloco | titlecase
+      "register.password" | transloco | capitalizefirst
     }}</label>
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'password'" class="fieldError">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
     <input type="password" name="password" [(ngModel)]="newUser.password" />
 
-    <label for="repeatPassword">{{
-      "register.repeatPassword" | transloco | titlecase
+    <label for="confirmPassword">{{
+      "register.confirmPassword" | transloco | titlecase
     }}</label>
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'confirmPassword'" class="fieldError">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
     <input
       type="password"
-      name="repeatPassword"
-      [(ngModel)]="repeatedPassword"
+      name="confirmPassword"
+      [(ngModel)]="newUser.confirmPassword"
     />
 
     <label class="dropdown-label" for="sex">
-      {{ "register.sex" | transloco | titlecase }}
+      {{ "register.sex" | transloco | titlecase }}<br />
+      <ng-container *ngFor="let error of validationErrors">
+        <span *ngIf="error.field === 'sex'" class="fieldError">{{
+          error.message | capitalizefirst
+        }}</span>
+      </ng-container>
       <app-dropdown
         class="dropdown"
         [options]="dropdownOptions"
