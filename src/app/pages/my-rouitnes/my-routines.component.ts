@@ -43,7 +43,11 @@ export class MyRoutinesComponent implements OnInit {
 
   getBackendData() {
     this.apiService.getBackendRoutines().subscribe((response: any) => {
-      this.myRoutines = response;
+      this.myRoutines = this.mapDateRoutines(response);
+      this.myRoutines = this.myRoutines.sort(
+        (a: Routine, b: Routine) =>
+          a.createdDate!.getTime() - b.createdDate!.getTime()
+      );
       this.setDefaultSelectedRoutine();
     });
   }
@@ -174,5 +178,15 @@ export class MyRoutinesComponent implements OnInit {
 
   deepCopy(itemtoCopy: any) {
     return JSON.parse(JSON.stringify(itemtoCopy));
+  }
+
+  private mapDateRoutines(response: any): Routine[] {
+    const mappedRoutines: Routine[] = [];
+    response.forEach((databaseRoutine: any) => {
+      const mappedRoutine: Routine = { ...databaseRoutine };
+      mappedRoutine.createdDate = new Date(mappedRoutine.createdDate!);
+      mappedRoutines.push(mappedRoutine);
+    });
+    return mappedRoutines;
   }
 }

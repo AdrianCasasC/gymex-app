@@ -30,7 +30,8 @@ export class LoginComponent {
     this.apiService
       .getUserByNameAndPassword(this.loggedUser.name, this.loggedUser.password)
       .subscribe({
-        next: () => {
+        next: (response: any) => {
+          this.loggedUser = response;
           this.authService.setUser(this.loggedUser);
           this.authService.setUserLogged(true);
           this.router.navigate(['/routine']);

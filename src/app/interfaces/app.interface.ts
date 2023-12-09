@@ -64,6 +64,7 @@ export interface Routine {
   name: string;
   exercises: Exercise[];
   showProperties: boolean;
+  createdDate?: Date;
 }
 
 export interface Week {
@@ -71,6 +72,7 @@ export interface Week {
   name: string;
   showProperties: boolean;
   days: Day[];
+  createdDate?: Date;
 }
 
 export interface Day {

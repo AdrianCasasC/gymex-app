@@ -47,7 +47,11 @@ export class WeeksComponent implements OnInit {
 
   getBackendData() {
     this.apiService.getBackendWeeks().subscribe((response: any) => {
-      this.myWeeks = response;
+      this.myWeeks = this.mapDateWeeks(response);
+      this.myWeeks = this.myWeeks.sort(
+        (a: Week, b: Week) =>
+          a.createdDate!.getTime() - b.createdDate!.getTime()
+      );
       this.asignDefaultWeekAndDay();
     });
   }
@@ -366,5 +370,15 @@ export class WeeksComponent implements OnInit {
 
   private deepCopy(itemtoCopy: any) {
     return JSON.parse(JSON.stringify(itemtoCopy));
+  }
+
+  private mapDateWeeks(response: any): Week[] {
+    const mappedWeeks: Week[] = [];
+    response.forEach((databaseWeek: any) => {
+      const mappedWeek: Week = { ...databaseWeek };
+      mappedWeek.createdDate = new Date(databaseWeek.createdDate);
+      mappedWeeks.push(mappedWeek);
+    });
+    return mappedWeeks;
   }
 }
