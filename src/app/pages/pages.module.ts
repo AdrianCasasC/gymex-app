@@ -11,6 +11,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { MyRoutinesComponent } from './my-rouitnes/my-routines.component';
 import { WeeksComponent } from './weeks/weeks.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PipesModule } from '../pipes/pipes.module';
     FormsModule,
     AppRoutingModule,
     PipesModule,
+    DialogModule,
   ], //Aquí se exportan módulos exteriores
   exports: [
     HomeComponent,

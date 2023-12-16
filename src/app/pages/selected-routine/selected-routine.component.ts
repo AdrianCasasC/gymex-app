@@ -59,7 +59,7 @@ export class SelectedRoutineComponent implements OnInit {
     document.body.style.overflow = 'auto';
   }
 
-  handleLongPress(exercise: Exercise) {
+  onLongPress(exercise: Exercise) {
     console.log('long presss');
     exercise.showProperties = true;
   }
@@ -122,7 +122,7 @@ export class SelectedRoutineComponent implements OnInit {
     }
   }
 
-  popupSelectedOption(selectedOption: string, selectedExercise: Exercise) {
+  deleteExercise(selectedExercise: Exercise) {
     const foundExercise = this.chosenExercises.find(
       (exercise) => exercise.name === selectedExercise.name
     );

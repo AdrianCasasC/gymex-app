@@ -1,5 +1,8 @@
-:host {
+/*:host {
   position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -60%);
   padding: 12px;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -10,6 +13,12 @@
   align-items: center;
   color: black;
   font-size: 12px;
+}*/
+
+.popup-content {
+  padding: 24px;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .top {

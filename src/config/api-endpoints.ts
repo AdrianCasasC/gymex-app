@@ -5,6 +5,8 @@ export const API_ENDPOINTS = {
     basic: (userId: string) => basicUrl + `gymex/routines/${userId}`,
     associate: (userId: string, dayId: string) =>
       basicUrl + `gymex/${userId}/routines/associate/${dayId}`,
+    desAssociate: (userId: string, dayId: string) =>
+      basicUrl + `gymex/${userId}/routines/desassociate/${dayId}`,
     byId: (userId: string, routineId: string) =>
       basicUrl + `gymex/routines/${userId}/${routineId}`,
   },

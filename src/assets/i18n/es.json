@@ -112,7 +112,8 @@
   },
   "week": {
     "add": "Añadir semana",
-    "modal-label": "Nombre de la nueva semana"
+    "modal-label": "Nombre de la nueva semana",
+    "desassociate": "Desasociar rutina"
   },
   "weekPopup": {
     "delete": "Eliminar",

@@ -18,6 +18,11 @@
   cursor: pointer;
 }
 
+.close-cross {
+  top: 6px;
+  right: 6px;
+}
+
 .option:hover {
   background-color: #114340;
   color: #1ab9b1;
@@ -115,7 +120,6 @@
 }
 
 .selected-exercises {
-  padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -125,11 +129,14 @@
   overflow: auto;
   background-color: #4ac4c4;
   border-radius: 12px;
+  border: 12px solid #4ac4c4;
 
   &__item {
+    position: relative;
     display: flex;
     flex-direction: column;
     position: relative;
+    padding-right: 32px;
   }
 }
 

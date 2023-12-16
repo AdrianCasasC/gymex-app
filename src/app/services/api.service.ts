@@ -53,6 +53,12 @@ export class ApiService {
     );
   }
 
+  desAssociateDayRoutine(dayId: string) {
+    return this.http.delete(
+      API_ENDPOINTS.routines.desAssociate(this.getUserId(), dayId)
+    );
+  }
+
   getBackendWeeks() {
     return this.http.get(API_ENDPOINTS.weeks.basic(this.getUserId()));
   }

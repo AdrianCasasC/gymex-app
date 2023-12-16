@@ -10,15 +10,16 @@
   <span
     *ngFor="let week of myWeeks"
     (click)="selectWeek(week)"
-    (longPress)="week.showProperties = true"
+    (longPress)="onLongPress(week)"
     [ngClass]="{ 'selected-box': selectedWeek.id === week.id }"
     class="primary-box week"
   >
     {{ week.name }}
     <app-properties-popup
       *ngIf="week.showProperties"
+      class="modal"
       [position]="'top'"
-      (clickOutside)="week.showProperties = false"
+      (clickOutsideContent)="week.showProperties = false"
       (selectedOption)="popupSelectedOption($event, week)"
     ></app-properties-popup>
   </span>
@@ -141,6 +142,12 @@
   </ng-template>
 </section>
 
+<section class="desassociate" *ngIf="selectedDay.routine">
+  <button (click)="onDesassociateRoutine()" class="primary-box">
+    {{ "week.desassociate" | transloco }}
+  </button>
+</section>
+
 <app-input-modal
   *ngIf="showWeekModal"
   (closeModal)="showWeekModal = false"
@@ -176,6 +183,11 @@
       <span *ngIf="!isRoutineSelected">¡Debes Seleccionar una rutina!</span>
       <section class="routines-wrapper">
         <span
+          [ngClass]="{
+            selectedRoutine:
+              selectedAssociatedRoutine &&
+              selectedAssociatedRoutine!.name === routine.name
+          }"
           *ngFor="let routine of savedRoutines"
           (click)="
             selectedAssociatedRoutine = routine; isRoutineSelected = true
@@ -185,7 +197,7 @@
       </section>
 
       <button
-        (click)="associateRoutine(selectedAssociatedRoutine)"
+        (click)="onAssociateRoutine(selectedAssociatedRoutine)"
         class="secondary-box"
       >
         Asociar rutina

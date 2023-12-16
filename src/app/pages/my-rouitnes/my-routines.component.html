@@ -15,9 +15,10 @@
     [ngClass]="{ 'selected-box': selectedRoutine === routine }"
     >{{ routine.name }}
     <app-properties-popup
+      class="modal"
       *ngIf="routine.showProperties"
       [position]="'top'"
-      (clickOutside)="routine.showProperties = false"
+      (clickOutsideContent)="routine.showProperties = false"
       (selectedOption)="popupSelectedOption($event, routine)"
     ></app-properties-popup>
   </span>

@@ -21,7 +21,6 @@ import { daysOfWeek } from 'src/app/services/data.service';
   styleUrls: ['./weeks.component.scss'],
 })
 export class WeeksComponent implements OnInit {
-  showWeekModal: boolean = false;
   myWeeks: Week[] = [];
   selectedWeek!: Week;
   popupWeek!: Week;
@@ -37,6 +36,8 @@ export class WeeksComponent implements OnInit {
   showSerieModal: boolean = false;
   isRoutineSelected: boolean = true;
   showLastWeek: boolean = false;
+  showWeekModal: boolean = false;
+  showWeekPropertiesModal: boolean = false;
   showChangeWeekNameModal: boolean = false;
 
   constructor(private router: Router, private apiService: ApiService) {}
@@ -149,7 +150,7 @@ export class WeeksComponent implements OnInit {
     }
   }
 
-  associateRoutine(routine: Routine | null) {
+  onAssociateRoutine(routine: Routine | null) {
     if (!routine) {
       this.isRoutineSelected = false;
     } else {
@@ -165,11 +166,7 @@ export class WeeksComponent implements OnInit {
               exercises: routine.exercises,
               showProperties: false,
             };
-
             this.associateDayRoutine(foundDay, dayRoutine, actualWeek);
-            //this.updateRoutineLastWeekSeries(routine);
-            //foundDay.routine = this.deepCopy(routine);
-            //this.updateDatabaseWeek(actualWeek);
           }
         },
       });
@@ -179,12 +176,38 @@ export class WeeksComponent implements OnInit {
 
   associateDayRoutine(day: Day, routine: Routine, actualWeek: Week) {
     this.apiService.associateDayRoutine(day.id!, routine).subscribe({
-      next: (response) => {
+      next: () => {
         this.updateRoutineLastWeekSeries(routine);
         day.routine = this.deepCopy(routine);
         this.updateDatabaseWeek(actualWeek);
       },
       error: () => console.log('Ha habido un error al asociar la rutina'),
+    });
+  }
+
+  onDesassociateRoutine() {
+    let foundDay: Day | undefined;
+    this.getDatabaseSelectedWeek().subscribe({
+      next: (response: any) => {
+        const actualWeek: Week = response;
+        foundDay = this.getDayByName(actualWeek.days);
+        if (foundDay) {
+          this.desassociateDayRoutine(foundDay, actualWeek);
+        }
+      },
+    });
+  }
+
+  desassociateDayRoutine(day: Day, actualWeek: Week) {
+    this.apiService.desAssociateDayRoutine(day.id!).subscribe({
+      next: (response: any) => {
+        const actualDay = actualWeek.days.find((day) => day.id === response.id);
+        if (actualDay) {
+          actualDay.routine = null;
+        }
+        this.updateDatabaseWeek(actualWeek);
+      },
+      error: () => console.log('Ha habido un error al desasociar la rutina'),
     });
   }
 
@@ -366,6 +389,10 @@ export class WeeksComponent implements OnInit {
 
   areEqualObjects(object1: any, object2: any) {
     return JSON.stringify(object1) === JSON.stringify(object2);
+  }
+
+  onLongPress(week: Week) {
+    week.showProperties = true;
   }
 
   private deepCopy(itemtoCopy: any) {
