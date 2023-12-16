@@ -11,6 +11,16 @@ h1 {
 
 .desassociate {
   margin-top: 24px;
+
+  button {
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #14ded2;
+    color: #a7f8f3;
+  }
 }
 
 .week-top {

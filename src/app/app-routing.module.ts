@@ -6,23 +6,49 @@ import { SelectedRoutineComponent } from './pages/selected-routine/selected-rout
 import { MyRoutinesComponent } from './pages/my-rouitnes/my-routines.component';
 import { WeeksComponent } from './pages/weeks/weeks.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { isLoggedGuard, isNotLoggedGuard } from './guards/logged.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent, canActivate: [isLoggedGuard] },
   /*{ path: 'routine', title: 'routine', component: RoutineComponent, children: [{
     path: ':selectedRoutine', title: 'selectedRoutine', component: SelectedRoutineComponent
   }]},*/
-  { path: 'routine', title: 'routine', component: MyRoutinesComponent },
-  { path: 'weeks', title: 'weeks', component: WeeksComponent },
+  {
+    path: 'routine',
+    title: 'routine',
+    component: MyRoutinesComponent,
+    canActivate: [isLoggedGuard],
+  },
+  {
+    path: 'weeks',
+    title: 'weeks',
+    component: WeeksComponent,
+    canActivate: [isLoggedGuard],
+  },
   //{ path: 'routine/:selectedRoutine', title: 'selectedRoutine', component: SelectedRoutineComponent},
   {
     path: 'add/:selectedRoutine',
     title: 'addRoutine',
     component: SelectedRoutineComponent,
+    canActivate: [isLoggedGuard],
   },
-  { path: 'login', title: 'login', component: LoginComponent },
-  { path: 'register', title: 'register', component: RegisterComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  {
+    path: 'login',
+    title: 'login',
+    component: LoginComponent,
+    canActivate: [isNotLoggedGuard],
+  },
+  {
+    path: 'register',
+    title: 'register',
+    component: RegisterComponent,
+    canActivate: [isNotLoggedGuard],
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -142,7 +142,7 @@
   </ng-template>
 </section>
 
-<section class="desassociate" *ngIf="selectedDay.routine">
+<section class="desassociate" *ngIf="selectedDay?.routine">
   <button (click)="onDesassociateRoutine()" class="primary-box">
     {{ "week.desassociate" | transloco }}
   </button>

@@ -34,6 +34,7 @@ export class LoginComponent {
           this.loggedUser = response;
           this.authService.setUser(this.loggedUser);
           this.authService.setUserLogged(true);
+          this.authService.saveUserToLocalStorage(this.loggedUser);
           this.router.navigate(['/routine']);
         },
         error: () => {

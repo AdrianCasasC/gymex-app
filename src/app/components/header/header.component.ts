@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.userIsLogged = this.authService.getLoggedValue();
     this.authService.logged$.subscribe({
       next: (logValue) => (this.userIsLogged = logValue),
     });
