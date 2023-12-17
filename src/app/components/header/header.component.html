@@ -5,6 +5,7 @@
 <ng-template #NotLogged>
   <h2>{{ "header.notLogged" | transloco }}</h2>
 </ng-template>
-<span *ngIf="userIsLogged" (click)="onCloseSession()" class="logOut">{{
-  "header.logOut" | transloco
-}}</span>
+<div (click)="onCloseSession()" class="logOut flex-col-cent">
+  <span *ngIf="userIsLogged">{{ "header.logOut" | transloco }}</span>
+  <mat-icon>logout</mat-icon>
+</div>

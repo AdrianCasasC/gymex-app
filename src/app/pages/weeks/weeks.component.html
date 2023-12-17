@@ -2,7 +2,7 @@
   <h1>Semanas</h1>
   <div (click)="showWeekModal = true" class="add_week centered primary-box">
     <span>{{ "week.add" | transloco }}</span>
-    <i>+</i>
+    <mat-icon>add_circle_outline</mat-icon>
   </div>
 </section>
 
@@ -98,6 +98,11 @@
               <div
                 *ngIf="serie.showLastWeek"
                 class="primary-box last-week"
+                [style.justify-content]="
+                  !existSomeLastWeekRegister(
+                    exercise.series[j].lastWeekCoincidences
+                  ) && 'center'
+                "
                 [style.transform]="
                   serie.showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
                 "
@@ -144,12 +149,9 @@
                 </ng-template>
               </div>
             </div>
-            <i
-              (click)="serie.showLastWeek = !serie.showLastWeek"
-              class="centered"
-            >
-              {{ serie.showLastWeek ? "↑" : "↓" }}
-            </i>
+            <mat-icon (click)="serie.showLastWeek = !serie.showLastWeek">{{
+              serie.showLastWeek ? "arrow_circle_down" : "arrow_circle_up"
+            }}</mat-icon>
           </div>
         </div>
       </section>

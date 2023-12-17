@@ -67,7 +67,7 @@
 </button>
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">
-  <div class="exercise-modal__content">
+  <div (clickOutside)="closeModal()" class="exercise-modal__content">
     <i (click)="closeModal()" class="close-cross">X</i>
     <strong>{{
       "exercises." + selectedExercise | transloco | titlecase

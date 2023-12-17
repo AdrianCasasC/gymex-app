@@ -114,12 +114,16 @@ h1 {
   justify-content: space-between;
   transition: margin-bottom 0.5s ease-out;
 
-  i {
+  mat-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
     width: 5%;
+    height: 75px;
   }
 
-  i:hover {
+  mat-icon:hover {
     background-color: #14ded2;
   }
 
@@ -180,6 +184,12 @@ h1 {
   gap: 12px;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  max-height: 110px;
+  overflow: auto;
+
+  @media screen and (max-width: 530px) {
+    max-height: 230px;
+  }
 
   span {
     padding: 12px;
@@ -224,7 +234,7 @@ h1 {
   }
 
   .series-wrapper {
-    i {
+    mat-icon {
       width: 10%;
     }
 

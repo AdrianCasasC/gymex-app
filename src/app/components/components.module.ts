@@ -11,6 +11,7 @@ import { PropertiesPopupComponent } from './properties-popup/properties-popup.co
 import { ClickOutsideDirective } from '../directives/click-outside.directive';
 import { LongPressDirective } from '../directives/longPress.directive';
 import { DropdownComponent } from './dropdown/dropdown.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { DropdownComponent } from './dropdown/dropdown.component';
     LongPressDirective,
     DropdownComponent,
   ], //Aquí se declaran los componentes
-  imports: [CommonModule, TranslocoModule, FormsModule], //Aquí se exportan módulos exteriores
+  imports: [CommonModule, TranslocoModule, FormsModule, MatIconModule], //Aquí se exportan módulos exteriores
   exports: [
     NavbarComponent,
     HeaderComponent,

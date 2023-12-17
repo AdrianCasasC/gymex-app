@@ -32,6 +32,9 @@ export class MyRoutinesComponent implements OnInit {
   saveSuccessfully!: string;
   user!: User;
   routines: string[] = [];
+  randomImage1!: string;
+  randomImage2!: string;
+  totalRandomImages: number = 7;
 
   constructor(
     private readonly router: Router,
@@ -43,6 +46,11 @@ export class MyRoutinesComponent implements OnInit {
   ngOnInit(): void {
     this.updateSelectedNavbar();
     this.getBackendData();
+    this.assignRandomImage();
+    this.randomImage1 = this.getRandomNumberBetween(
+      1,
+      this.totalRandomImages
+    ).toString();
   }
 
   updateSelectedNavbar() {
@@ -58,6 +66,22 @@ export class MyRoutinesComponent implements OnInit {
       );
       this.setDefaultSelectedRoutine();
     });
+  }
+
+  assignRandomImage() {
+    this.randomImage1 = this.getRandomNumberBetween(1, 4).toString();
+    this.randomImage2 = this.getRandomNumberDifferentThan(
+      parseInt(this.randomImage1)
+    ).toString();
+  }
+
+  getRandomNumberDifferentThan(number: number): number {
+    const randomNumber = this.getRandomNumberBetween(1, 4);
+    if (randomNumber === number) {
+      return this.getRandomNumberDifferentThan(number);
+    }
+
+    return randomNumber;
   }
 
   setDefaultSelectedRoutine() {
@@ -186,6 +210,10 @@ export class MyRoutinesComponent implements OnInit {
 
   deepCopy(itemtoCopy: any) {
     return JSON.parse(JSON.stringify(itemtoCopy));
+  }
+
+  getRandomNumberBetween(minNumber: number, maxNumber: number): number {
+    return Math.floor(Math.random() * maxNumber + minNumber);
   }
 
   private mapDateRoutines(response: any): Routine[] {

@@ -13,6 +13,7 @@ import { WeeksComponent } from './weeks/weeks.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     PipesModule,
     DialogModule,
     ProgressSpinnerModule,
+    MatIconModule,
   ], //Aquí se exportan módulos exteriores
   exports: [
     HomeComponent,
