@@ -15,6 +15,12 @@ h2 {
   padding: 24px;
 }
 
+.routines-content {
+  width: 100%;
+  position: relative;
+  min-height: 300px;
+}
+
 .my-routines-wrapper {
   display: flex;
   flex-wrap: wrap;
@@ -62,13 +68,15 @@ h2 {
   margin-bottom: 12px;
 }
 
-.noRoutines-img {
-  width: 50%;
-  margin-top: 32px;
-}
+.noRoutines {
+  h2 {
+    text-align: center;
+  }
 
-.noRoutines-title {
-  text-align: center;
+  img {
+    width: 50%;
+    margin-top: 32px;
+  }
 }
 
 .title-edit {

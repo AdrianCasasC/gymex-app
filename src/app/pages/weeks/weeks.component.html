@@ -6,147 +6,162 @@
   </div>
 </section>
 
-<section *ngIf="myWeeks.length > 0; else noWeeks" class="weeks-container">
-  <span
-    *ngFor="let week of myWeeks"
-    (click)="selectWeek(week)"
-    (longPress)="onLongPress(week)"
-    [ngClass]="{ 'selected-box': selectedWeek?.id === week.id }"
-    class="primary-box week"
-  >
-    {{ week.name }}
-    <app-properties-popup
-      *ngIf="week.showProperties"
-      class="modal"
-      [position]="'top'"
-      (clickOutsideContent)="week.showProperties = false"
-      (selectedOption)="popupSelectedOption($event, week)"
-    ></app-properties-popup>
-  </span>
-</section>
+<div class="weeks-content flex-col-cent">
+  <p-progressSpinner
+    *ngIf="spinnerService.spinnerState$ | async"
+    styleClass="w-4rem h-4rem"
+    strokeWidth="2"
+    animationDuration="1s"
+  ></p-progressSpinner>
 
-<ng-container *ngFor="let week of myWeeks">
   <section
-    *ngIf="selectedWeek?.id === week.id"
-    class="week-days-container centered"
+    *ngIf="
+      myWeeks.length > 0 && (spinnerService.spinnerState$ | async) === false;
+      else noWeeks
+    "
+    class="weeks-container"
   >
     <span
-      *ngFor="let day of week.days"
-      (click)="selectWeekDay(day)"
-      class="primary-box week-day"
-      [ngClass]="{ 'selected-box': areEqualObjects(selectedDay, day) }"
+      *ngFor="let week of myWeeks"
+      (click)="selectWeek(week)"
+      (longPress)="onLongPress(week)"
+      [ngClass]="{ 'selected-box': selectedWeek?.id === week.id }"
+      class="primary-box week"
     >
-      {{ "daysOfWeek." + day.name | transloco }}
+      {{ week.name }}
+      <app-properties-popup
+        *ngIf="week.showProperties"
+        class="modal"
+        [position]="'top'"
+        (clickOutsideContent)="week.showProperties = false"
+        (selectedOption)="popupSelectedOption($event, week)"
+      ></app-properties-popup>
     </span>
   </section>
-</ng-container>
 
-<section *ngIf="selectedDay" class="routine-day-wrapper">
-  <div *ngIf="!selectedDay?.routine; else routine" class="no-routine">
-    <span
-      >No hay ninguna rutina asociada al
-      {{ "daysOfWeek." + selectedDay.name | transloco }}</span
+  <ng-container *ngFor="let week of myWeeks">
+    <section
+      *ngIf="selectedWeek?.id === week.id"
+      class="week-days-container centered"
     >
-    <button (click)="openRoutinesModal()" class="secondary-box">
-      Añadir rutina
-    </button>
-  </div>
-
-  <ng-template #routine>
-    <h2 class="routine-title centered">
-      {{ "daysOfWeek." + selectedDay.name | transloco }} de
-      {{ selectedDay.routine?.name }}
-    </h2>
-
-    <section>
-      <div
-        *ngFor="let exercise of selectedDay.routine?.exercises; let i = index"
+      <span
+        *ngFor="let day of week.days"
+        (click)="selectWeekDay(day)"
+        class="primary-box week-day"
+        [ngClass]="{ 'selected-box': areEqualObjects(selectedDay, day) }"
       >
-        <h3>{{ "exercises." + exercise.name | transloco }}</h3>
-        <div
-          *ngFor="let serie of exercise.series; let j = index"
-          class="series-wrapper primary-box"
-          [style.margin-bottom]="serie.showLastWeek ? '110px' : '12px'"
-        >
-          <div
-            class="series"
-            (click)="
-              copySerie(serie);
-              saveExerciseAndSerieIndex(i, j);
-              openModal();
-              selectedExercise = exercise
-            "
-          >
-            <strong>Serie {{ j + 1 }}:</strong> X
-            {{ serie.reps ? serie.reps : "___" }} X
-            {{ serie.weight ? serie.weight : "___" }} Kgs
+        {{ "daysOfWeek." + day.name | transloco }}
+      </span>
+    </section>
+  </ng-container>
 
+  <section *ngIf="selectedDay" class="routine-day-wrapper">
+    <div *ngIf="!selectedDay?.routine; else routine" class="no-routine">
+      <span
+        >No hay ninguna rutina asociada al
+        {{ "daysOfWeek." + selectedDay.name | transloco }}</span
+      >
+      <button (click)="openRoutinesModal()" class="secondary-box">
+        Añadir rutina
+      </button>
+    </div>
+
+    <ng-template #routine>
+      <h2 class="routine-title centered">
+        {{ "daysOfWeek." + selectedDay.name | transloco }} de
+        {{ selectedDay.routine?.name }}
+      </h2>
+
+      <section>
+        <div
+          *ngFor="let exercise of selectedDay.routine?.exercises; let i = index"
+        >
+          <h3>{{ "exercises." + exercise.name | transloco }}</h3>
+          <div
+            *ngFor="let serie of exercise.series; let j = index"
+            class="series-wrapper primary-box"
+            [style.margin-bottom]="serie.showLastWeek ? '110px' : '12px'"
+          >
             <div
-              *ngIf="serie.showLastWeek"
-              class="primary-box last-week"
-              [style.transform]="
-                serie.showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
+              class="series"
+              (click)="
+                copySerie(serie);
+                saveExerciseAndSerieIndex(i, j);
+                openModal();
+                selectedExercise = exercise
               "
             >
-              <ng-container
-                *ngIf="
-                  existSomeLastWeekRegister(
-                    exercise.series[j].lastWeekCoincidences
-                  );
-                  else noLastWeekRegister
+              <strong>Serie {{ j + 1 }}:</strong> X
+              {{ serie.reps ? serie.reps : "___" }} X
+              {{ serie.weight ? serie.weight : "___" }} Kgs
+
+              <div
+                *ngIf="serie.showLastWeek"
+                class="primary-box last-week"
+                [style.transform]="
+                  serie.showLastWeek ? 'translateY(0)' : 'translateY(-20px)'
                 "
               >
-                <div
-                  *ngFor="
-                    let coincidence of exercise.series[j].lastWeekCoincidences
+                <ng-container
+                  *ngIf="
+                    existSomeLastWeekRegister(
+                      exercise.series[j].lastWeekCoincidences
+                    );
+                    else noLastWeekRegister
                   "
-                  class="flex-col-cent last-week__serie"
                 >
-                  <ng-container
-                    *ngIf="coincidence.reps !== 0 && coincidence.weight !== 0"
+                  <div
+                    *ngFor="
+                      let coincidence of exercise.series[j].lastWeekCoincidences
+                    "
+                    class="flex-col-cent last-week__serie"
                   >
-                    <strong
-                      >Semana pasada -
-                      {{
-                        "daysOfWeek." + coincidence.weekDay | transloco
-                      }}</strong
+                    <ng-container
+                      *ngIf="coincidence.reps !== 0 && coincidence.weight !== 0"
                     >
-                    <span
-                      ><strong>Serie {{ j + 1 }}:</strong>
-                      X
-                      {{ coincidence.reps }}
-                      X
-                      {{ coincidence.weight }}
-                      Kgs
-                    </span>
-                  </ng-container>
-                </div>
-              </ng-container>
+                      <strong
+                        >Semana pasada -
+                        {{
+                          "daysOfWeek." + coincidence.weekDay | transloco
+                        }}</strong
+                      >
+                      <span
+                        ><strong>Serie {{ j + 1 }}:</strong>
+                        X
+                        {{ coincidence.reps }}
+                        X
+                        {{ coincidence.weight }}
+                        Kgs
+                      </span>
+                    </ng-container>
+                  </div>
+                </ng-container>
 
-              <ng-template #noLastWeekRegister>
-                <strong [style.width]="'100%'"
-                  >No se tienen registos de la semana pasada</strong
-                >
-              </ng-template>
+                <ng-template #noLastWeekRegister>
+                  <strong [style.width]="'100%'"
+                    >No se tienen registos de la semana pasada</strong
+                  >
+                </ng-template>
+              </div>
             </div>
+            <i
+              (click)="serie.showLastWeek = !serie.showLastWeek"
+              class="centered"
+            >
+              {{ serie.showLastWeek ? "↑" : "↓" }}
+            </i>
           </div>
-          <i
-            (click)="serie.showLastWeek = !serie.showLastWeek"
-            class="centered"
-          >
-            {{ serie.showLastWeek ? "↑" : "↓" }}
-          </i>
         </div>
-      </div>
-    </section>
-  </ng-template>
-</section>
+      </section>
+    </ng-template>
+  </section>
 
-<section class="desassociate" *ngIf="selectedDay?.routine">
-  <button (click)="onDesassociateRoutine()" class="primary-box">
-    {{ "week.desassociate" | transloco }}
-  </button>
-</section>
+  <section class="desassociate" *ngIf="selectedDay?.routine">
+    <button (click)="onDesassociateRoutine()" class="primary-box">
+      {{ "week.desassociate" | transloco }}
+    </button>
+  </section>
+</div>
 
 <app-input-modal
   *ngIf="showWeekModal"
@@ -255,9 +270,11 @@
 </div>
 
 <ng-template #noWeeks>
-  <h2 class="noWeeks-title">{{ "week.noWeeks" | transloco }}</h2>
-  <img
-    class="noWeeks-img"
-    [src]="'../../../assets/images/animated/noWeeks.jpg'"
-  />
+  <section
+    class="noWeeks flex-col-cent"
+    *ngIf="(spinnerService.spinnerState$ | async) === false"
+  >
+    <h2>{{ "week.noWeeks" | transloco }}</h2>
+    <img [src]="'../../../assets/images/animated/noWeeks.jpg'" />
+  </section>
 </ng-template>

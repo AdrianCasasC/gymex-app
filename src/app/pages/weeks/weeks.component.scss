@@ -23,13 +23,23 @@ h1 {
   }
 }
 
-.noWeeks-title {
-  text-align: center;
+.weeks-content {
+  position: relative;
+  min-height: 300px;
+  width: 100%;
 }
 
-.noWeeks-img {
-  width: 50%;
-  margin-top: 32px;
+.noWeeks {
+  min-height: 300px;
+
+  h2 {
+    text-align: center;
+  }
+
+  img {
+    width: 50%;
+    margin-top: 32px;
+  }
 }
 
 .week-top {

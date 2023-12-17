@@ -9,6 +9,7 @@ import {
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { DataService } from 'src/app/services/data.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
   selector: 'app-my-routines',
@@ -35,7 +36,8 @@ export class MyRoutinesComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly apiService: ApiService,
-    private readonly dataService: DataService
+    private readonly dataService: DataService,
+    public readonly spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {

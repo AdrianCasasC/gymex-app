@@ -5,6 +5,13 @@ body {
     sans-serif;
 }
 
+p-progressSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* Barra de desplazamiento vertical */
 ::-webkit-scrollbar {
   width: 0px; /* Ancho de la barra de desplazamiento */
