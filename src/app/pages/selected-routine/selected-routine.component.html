@@ -29,7 +29,7 @@
         (click)="handleSelectedCard(exercise)"
       >
         <img
-          [src]="'../../../assets/images/' + exercise + '.jpg'"
+          [src]="'../../../assets/images/standar/' + exercise + '.jpg'"
         /><!--Aquí irán las fotos de los ejercicios-->
         <span>{{ "exercises." + exercise | transloco | titlecase }}</span>
       </div>
@@ -61,6 +61,9 @@
 
 <button (click)="saveRoutine()" class="secondary-box save-button">
   {{ "selectedRoutine.button" | transloco }}
+  <span *ngIf="noChosenExercises" class="noChosenExercises">{{
+    "routine.noChosenExercises" | transloco
+  }}</span>
 </button>
 
 <div *ngIf="showExerciseModal" class="exercise-modal__overlay">

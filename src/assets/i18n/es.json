@@ -49,7 +49,7 @@
     "barBiceps": "Biceps con barra",
     "pulleyBiceps": "Biceps en polea",
     "inclineBiceps": "Biceps banco inclinado",
-    "frenchPress": "Press militar",
+    "frenchPress": "Press francés",
     "pulleyTriceps": "Triceps en polea",
     "dumbellTriceps": "Triceps con mancuerna",
     "dumbellMilitarPress": "Press militar con mancuernas",
@@ -99,7 +99,9 @@
   },
   "routine": {
     "add": "Añadir nueva rutina",
-    "title": "Rutinas de {{name}}"
+    "title": "Rutinas de {{name}}",
+    "noRoutines": "Aun no has añadido ninguna rutina. ¡Añade la primera para comenzar!",
+    "noChosenExercises": "¡No has añadido ningun ejercicio para tu rutina!"
   },
   "selectedRoutine": {
     "button": "Guardar rutina"
@@ -113,7 +115,11 @@
   "week": {
     "add": "Añadir semana",
     "modal-label": "Nombre de la nueva semana",
-    "desassociate": "Desasociar rutina"
+    "associateRoutine": "Asociar rutina",
+    "desassociate": "Desasociar rutina",
+    "noRoutine": "No hay ninguna rutina guardada",
+    "goToRoutine": "Ir a rutinas",
+    "noWeeks": "No has añadido ninguna semana. ¡Añade la primera para comenzar!"
   },
   "weekPopup": {
     "delete": "Eliminar",

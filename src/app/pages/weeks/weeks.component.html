@@ -6,12 +6,12 @@
   </div>
 </section>
 
-<section *ngIf="myWeeks.length > 0" class="weeks-container">
+<section *ngIf="myWeeks.length > 0; else noWeeks" class="weeks-container">
   <span
     *ngFor="let week of myWeeks"
     (click)="selectWeek(week)"
     (longPress)="onLongPress(week)"
-    [ngClass]="{ 'selected-box': selectedWeek.id === week.id }"
+    [ngClass]="{ 'selected-box': selectedWeek?.id === week.id }"
     class="primary-box week"
   >
     {{ week.name }}
@@ -27,7 +27,7 @@
 
 <ng-container *ngFor="let week of myWeeks">
   <section
-    *ngIf="selectedWeek.id === week.id"
+    *ngIf="selectedWeek?.id === week.id"
     class="week-days-container centered"
   >
     <span
@@ -200,14 +200,14 @@
         (click)="onAssociateRoutine(selectedAssociatedRoutine)"
         class="secondary-box"
       >
-        Asociar rutina
+        {{ "week.associateRoutine" | transloco }}
       </button>
     </div>
 
     <ng-template #noRoutines>
-      <span>No hay ninguna rutina guardada</span>
+      <span>{{ "week.noRoutine" | transloco }}</span>
       <button (click)="goToRoutines()" class="secondary-box">
-        Ir a rutinas
+        {{ "week.goToRoutine" | transloco }}
       </button>
     </ng-template>
   </div>
@@ -253,3 +253,11 @@
     </section>
   </div>
 </div>
+
+<ng-template #noWeeks>
+  <h2 class="noWeeks-title">{{ "week.noWeeks" | transloco }}</h2>
+  <img
+    class="noWeeks-img"
+    [src]="'../../../assets/images/animated/noWeeks.jpg'"
+  />
+</ng-template>

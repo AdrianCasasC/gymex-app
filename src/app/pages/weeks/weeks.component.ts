@@ -22,9 +22,9 @@ import { daysOfWeek } from 'src/app/services/data.service';
 })
 export class WeeksComponent implements OnInit {
   myWeeks: Week[] = [];
-  selectedWeek!: Week;
+  selectedWeek!: Week | null;
   popupWeek!: Week;
-  selectedDay!: Day;
+  selectedDay!: Day | null;
   daysOfWeek: Day[] = daysOfWeek;
   showRoutinesModal: boolean = false;
   savedRoutines: Routine[] = [];
@@ -40,10 +40,19 @@ export class WeeksComponent implements OnInit {
   showWeekPropertiesModal: boolean = false;
   showChangeWeekNameModal: boolean = false;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private readonly router: Router,
+    private readonly apiService: ApiService,
+    private readonly dataService: DataService
+  ) {}
 
   ngOnInit(): void {
+    this.updateSelectedNavbar();
     this.getBackendData();
+  }
+
+  updateSelectedNavbar() {
+    this.dataService.setTabValue('weeks');
   }
 
   getBackendData() {
@@ -65,6 +74,8 @@ export class WeeksComponent implements OnInit {
   asignDefaultWeek() {
     if (this.myWeeks.length > 0) {
       this.selectedWeek = this.myWeeks[0];
+    } else {
+      this.selectedWeek = null;
     }
   }
 
@@ -74,6 +85,8 @@ export class WeeksComponent implements OnInit {
       if (this.selectedDay.routine) {
         this.updateRoutineLastWeekSeries(this.selectedDay.routine);
       }
+    } else {
+      this.selectedDay = null;
     }
   }
 
@@ -106,11 +119,11 @@ export class WeeksComponent implements OnInit {
   applyChanges() {
     const weekWithEditedDaySeries: Week = JSON.parse(
       JSON.stringify(
-        this.myWeeks.find((week) => week.id === this.selectedWeek.id)
+        this.myWeeks.find((week) => week.id === this.selectedWeek!.id)
       )
     );
     const editedDay = weekWithEditedDaySeries.days.find(
-      (day) => day.name === this.selectedDay.name
+      (day) => day.name === this.selectedDay!.name
     );
     editedDay?.routine &&
       (editedDay.routine.exercises[this.editedExerciseIndex].series[
@@ -128,7 +141,7 @@ export class WeeksComponent implements OnInit {
 
   updateSelectedWeek(newWeek: Week) {
     const foundWeek = this.myWeeks.find(
-      (week) => week.id === this.selectedWeek.id
+      (week) => week.id === this.selectedWeek!.id
     );
     if (foundWeek) {
       foundWeek.days = this.deepCopy(newWeek.days);
@@ -223,7 +236,7 @@ export class WeeksComponent implements OnInit {
 
   findPreviousWeekIndex(): number {
     return (
-      this.myWeeks.findIndex((week) => week.id === this.selectedWeek.id) - 1
+      this.myWeeks.findIndex((week) => week.id === this.selectedWeek!.id) - 1
     );
   }
 
@@ -321,7 +334,7 @@ export class WeeksComponent implements OnInit {
 
   deleteWeek(weekToDelete: Week) {
     this.myWeeks = this.myWeeks.filter((week) => week.id !== weekToDelete.id);
-    if (this.selectedWeek.id === weekToDelete.id) {
+    if (this.selectedWeek!.id === weekToDelete.id) {
       this.asignDefaultWeekAndDay();
     }
   }
@@ -346,11 +359,11 @@ export class WeeksComponent implements OnInit {
   }
 
   getDayByName(days: Day[]): Day | undefined {
-    return days.find((day: Day) => day.name === this.selectedDay.name);
+    return days.find((day: Day) => day.name === this.selectedDay?.name);
   }
 
   getDatabaseSelectedWeek() {
-    return this.apiService.getWeekById(this.selectedWeek.id!);
+    return this.apiService.getWeekById(this.selectedWeek!.id!);
   }
 
   goToRoutines() {

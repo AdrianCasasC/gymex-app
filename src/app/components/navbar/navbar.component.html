@@ -3,6 +3,6 @@
   class="container"
   (click)="handleSelectedTab(tab)"
   class="primary-box container__item"
-  [ngClass]="{ 'selected-box': tab === selectedTab }"
+  [ngClass]="{ 'selected-box': tab === (selectedTab$ | async) }"
   >{{ "nav." + tab | transloco | titlecase }}</span
 >

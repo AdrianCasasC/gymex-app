@@ -7,6 +7,8 @@ import {
   Day,
   Week,
 } from '../interfaces/app.interface';
+import { BehaviorSubject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 export const muscularGroups: MuscularGroups[] = [
   'chest',
@@ -98,10 +100,20 @@ export const daysOfWeek: Day[] = [
   providedIn: 'root',
 })
 export class DataService {
+  private selectedTab$ = new BehaviorSubject<string>('');
+  _selectedTab$ = this.selectedTab$.asObservable();
   savedRoutines: Routine[] = [];
   savedWeeks: Week[] = [];
 
-  constructor() {}
+  constructor(private readonly route: ActivatedRoute) {}
+
+  getSelectedTabValue(): string {
+    return this.selectedTab$.getValue();
+  }
+
+  setTabValue(value: string): void {
+    this.selectedTab$.next(value);
+  }
 
   setSavedRoutines(routineName: string, selectedExercises: Exercise[]) {
     const newRoutine: Routine = {

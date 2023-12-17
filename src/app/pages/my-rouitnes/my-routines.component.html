@@ -6,41 +6,51 @@
   </div>
 </section>
 
-<section class="my-routines-wrapper">
-  <span
-    class="primary-box selected-box routine"
-    *ngFor="let routine of myRoutines"
-    (click)="selectedRoutine = routine"
-    (longPress)="routine.showProperties = true"
-    [ngClass]="{ 'selected-box': selectedRoutine === routine }"
-    >{{ routine.name }}
-    <app-properties-popup
-      class="modal"
-      *ngIf="routine.showProperties"
-      [position]="'top'"
-      (clickOutsideContent)="routine.showProperties = false"
-      (selectedOption)="popupSelectedOption($event, routine)"
-    ></app-properties-popup>
-  </span>
-</section>
-
-<section class="routines-exercise-wrapper">
-  <div
-    *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
-    class="register-exercises"
-  >
-    <div class="title-edit">
-      <h2>
-        {{ "exercises." + exercise.name | transloco }}
-      </h2>
-      <button (click)="editExerciseSeries(exercise)">Editar</button>
-    </div>
+<ng-container *ngIf="myRoutines && myRoutines.length > 0; else noRoutines">
+  <section class="my-routines-wrapper">
     <span
-      >{{ exercise.series.length }}
-      {{ exercise.series.length === 1 ? "serie" : "series" }}</span
+      class="primary-box selected-box routine"
+      *ngFor="let routine of myRoutines"
+      (click)="selectedRoutine = routine"
+      (longPress)="routine.showProperties = true"
+      [ngClass]="{ 'selected-box': selectedRoutine === routine }"
+      >{{ routine.name }}
+      <app-properties-popup
+        class="modal"
+        *ngIf="routine.showProperties"
+        [position]="'top'"
+        (clickOutsideContent)="routine.showProperties = false"
+        (selectedOption)="popupSelectedOption($event, routine)"
+      ></app-properties-popup>
+    </span>
+  </section>
+
+  <section class="routines-exercise-wrapper">
+    <div
+      *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
+      class="register-exercises"
     >
-  </div>
-</section>
+      <div class="title-edit">
+        <h2>
+          {{ "exercises." + exercise.name | transloco }}
+        </h2>
+        <button (click)="editExerciseSeries(exercise)">Editar</button>
+      </div>
+      <span
+        >{{ exercise.series.length }}
+        {{ exercise.series.length === 1 ? "serie" : "series" }}</span
+      >
+    </div>
+  </section>
+</ng-container>
+
+<ng-template #noRoutines>
+  <h2 class="noRoutines-title">{{ "routine.noRoutines" | transloco }}</h2>
+  <img
+    class="noRoutines-img"
+    [src]="'../../../assets/images/animated/noRoutines.jpg'"
+  />
+</ng-template>
 
 <app-series-modal
   *ngIf="showEditSeriesModal"

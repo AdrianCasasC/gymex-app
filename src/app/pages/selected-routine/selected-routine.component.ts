@@ -32,6 +32,7 @@ export class SelectedRoutineComponent implements OnInit {
   selectedNumberOfSeries: number = 1;
   chosenExercises: Exercise[] = [];
   routineSavedSuccessfully: string = 'DONE';
+  noChosenExercises: boolean = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -42,8 +43,13 @@ export class SelectedRoutineComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.updateSelectedNavbar();
     this.selectedRoutineName =
       this.activatedRoute.snapshot.params['selectedRoutine'];
+  }
+
+  updateSelectedNavbar() {
+    this.dataService.setTabValue('routine');
   }
 
   addExercise(exerciseName: string, exerciseSeries: number) {
@@ -95,6 +101,11 @@ export class SelectedRoutineComponent implements OnInit {
   }
 
   saveRoutine() {
+    if (this.chosenExercises.length === 0) {
+      this.noChosenExercises = true;
+      setTimeout(() => (this.noChosenExercises = false), 3000);
+      return;
+    }
     const newRoutine: Routine = {
       name: this.selectedRoutineName,
       exercises: this.chosenExercises,

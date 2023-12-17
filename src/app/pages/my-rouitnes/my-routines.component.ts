@@ -8,6 +8,7 @@ import {
 } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-my-routines',
@@ -32,13 +33,18 @@ export class MyRoutinesComponent implements OnInit {
   routines: string[] = [];
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private apiService: ApiService
+    private readonly router: Router,
+    private readonly apiService: ApiService,
+    private readonly dataService: DataService
   ) {}
 
   ngOnInit(): void {
+    this.updateSelectedNavbar();
     this.getBackendData();
+  }
+
+  updateSelectedNavbar() {
+    this.dataService.setTabValue('routine');
   }
 
   getBackendData() {

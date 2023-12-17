@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslocoService } from '@ngneat/transloco';
+import { Observable } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,19 +11,19 @@ import { TranslocoService } from '@ngneat/transloco';
 export class NavbarComponent implements OnInit {
   @Input() tabs!: string[];
 
-  selectedTab!: string;
+  selectedTab$!: Observable<string>;
 
   constructor(
-    private translocoService: TranslocoService,
-    private router: Router
+    private readonly router: Router,
+    private readonly dataService: DataService
   ) {}
 
   ngOnInit(): void {
-    this.selectedTab = this.tabs?.[0];
+    this.selectedTab$ = this.dataService._selectedTab$;
   }
 
   handleSelectedTab(selectedTab: string) {
-    this.selectedTab = selectedTab;
-    this.router.navigate(['/' + this.selectedTab]);
+    this.dataService.setTabValue(selectedTab);
+    this.router.navigate(['/' + this.dataService.getSelectedTabValue()]);
   }
 }
