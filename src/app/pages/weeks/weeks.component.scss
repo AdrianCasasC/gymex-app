@@ -9,6 +9,10 @@ h1 {
   white-space: nowrap;
 }
 
+h2 {
+  margin: 0;
+}
+
 .desassociate {
   margin-top: 24px;
 
@@ -46,7 +50,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 24px;
-  width: 85%;
+  width: 90%;
 }
 
 .weeks-container {

@@ -2,10 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-modal',
-  templateUrl: './routine-modal.component.html',
-  styleUrls: ['./routine-modal.component.scss'],
+  templateUrl: './input-modal.component.html',
+  styleUrls: ['./input-modal.component.scss'],
 })
-export class RoutineModalComponent {
+export class InputModalComponent {
   @Input() labelText!: string;
   @Output() closeModal = new EventEmitter();
   @Output() writtenText = new EventEmitter();
@@ -15,6 +15,9 @@ export class RoutineModalComponent {
   constructor() {}
 
   handleAddRoutine() {
+    if (!this.text) {
+      return;
+    }
     this.writtenText.emit(this.text);
     this.closeModal.emit();
   }

@@ -2,10 +2,10 @@
   (clickOutside)="closeModal.emit()"
   class="container primary-box flex-col-cent"
 >
-  <i (click)="closeModal.emit()">X</i>
+  <mat-icon (click)="closeModal.emit()">close</mat-icon>
   <h2>{{ labelText }}</h2>
   <input type="text" (keydown.enter)="handleAddRoutine()" [(ngModel)]="text" />
-  <button (click)="handleAddRoutine()">
+  <button (click)="handleAddRoutine()" [ngClass]="{ disabled: !text }">
     {{ "button.accept" | transloco | titlecase }}
   </button>
 </section>

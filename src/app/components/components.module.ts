@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HeaderComponent } from './header/header.component';
 import { TranslocoModule } from '@ngneat/transloco';
-import { RoutineModalComponent } from './routine-modal/routine-modal.component';
+import { InputModalComponent } from './input-modal/input-modal.component';
 import { FormsModule } from '@angular/forms';
 import { SeriesModalComponent } from './series-modal/series-modal.component';
 import { SaveModalComponent } from './save-modal/save-modal.component';
@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   declarations: [
     NavbarComponent,
     HeaderComponent,
-    RoutineModalComponent,
+    InputModalComponent,
     SeriesModalComponent,
     SaveModalComponent,
     PropertiesPopupComponent,
@@ -29,7 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
   exports: [
     NavbarComponent,
     HeaderComponent,
-    RoutineModalComponent,
+    InputModalComponent,
     SeriesModalComponent,
     SaveModalComponent,
     PropertiesPopupComponent,
