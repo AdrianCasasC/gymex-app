@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { Sex, User, ValidationError } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
+  showDropdownOptions$ = new BehaviorSubject<boolean>(false);
   newUser: User = {
     id: '',
     name: '',
@@ -33,26 +34,16 @@ export class RegisterComponent {
       error: (response) => {
         console.log('Error al registrar el usuario', response);
         this.validationErrors = response.error;
-        //this.checkPasswords();
       },
     });
   }
 
-  /* checkPasswords(): boolean {
-    if (this.newUser.password !== this.repeatedPassword) {
-      const repeatedPasswordError: ValidationError = {
-        field: 'repeatPassword',
-        message:
-          'Las contraseñas no coinciden. Por favor, vuelva a intentarlo.',
-      };
-      this.validationErrors = [...this.validationErrors, repeatedPasswordError];
-      return false;
-    }
-    return true;
-  } */
-
   onSelectedOption(option: string) {
     this.newUser.sex = this.getEnumValueFromString(option);
+  }
+
+  onClickOutside(): void {
+    this.showDropdownOptions$.next(false);
   }
 
   private getEnumValueFromString(value: string): Sex {

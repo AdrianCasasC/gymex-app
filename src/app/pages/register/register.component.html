@@ -1,66 +1,99 @@
-<div class="form-container">
-  <form (ngSubmit)="handleSubmit()" method="get">
-    <label for="name">{{ "register.name" | transloco | titlecase }}</label>
-    <ng-container *ngFor="let error of validationErrors">
-      <span *ngIf="error.field === 'name'" class="fieldError">{{
-        error.message | capitalizefirst
-      }}</span>
-    </ng-container>
-    <input type="text" name="name" [(ngModel)]="newUser.name" />
-
-    <label for="email">{{ "register.email" | transloco | titlecase }}</label>
-    <ng-container *ngFor="let error of validationErrors">
-      <span *ngIf="error.field === 'email'" class="fieldError">{{
-        error.message | capitalizefirst
-      }}</span>
-    </ng-container>
-    <input type="email" name="email" [(ngModel)]="newUser.email" />
-
-    <label for="password">{{
-      "register.password" | transloco | capitalizefirst
-    }}</label>
-    <ng-container *ngFor="let error of validationErrors">
-      <span *ngIf="error.field === 'password'" class="fieldError">{{
-        error.message | capitalizefirst
-      }}</span>
-    </ng-container>
-    <input type="password" name="password" [(ngModel)]="newUser.password" />
-
-    <label for="confirmPassword">{{
-      "register.confirmPassword" | transloco | titlecase
-    }}</label>
-    <ng-container *ngFor="let error of validationErrors">
-      <span *ngIf="error.field === 'confirmPassword'" class="fieldError">{{
-        error.message | capitalizefirst
-      }}</span>
-    </ng-container>
-    <input
-      type="password"
-      name="confirmPassword"
-      [(ngModel)]="newUser.confirmPassword"
-    />
-
-    <label class="dropdown-label" for="sex">
-      {{ "register.sex" | transloco | titlecase }}<br />
+<form (ngSubmit)="handleSubmit()" method="get">
+  <div class="input-border">
+    <mat-icon>person</mat-icon>
+    <div class="fieldError">
       <ng-container *ngFor="let error of validationErrors">
-        <span *ngIf="error.field === 'sex'" class="fieldError">{{
+        <span *ngIf="error.field === 'name'">{{
           error.message | capitalizefirst
         }}</span>
       </ng-container>
-      <app-dropdown
-        class="dropdown"
-        [options]="dropdownOptions"
-        (selectedOption)="onSelectedOption($event)"
-      ></app-dropdown>
-    </label>
-    <!--<span class="selectSex" type="text" name="sex"
-      >{{ "dropdown." + newUser.sex | transloco }}
-      
-    </span>-->
+    </div>
+    <input
+      type="text"
+      name="name"
+      autocomplete="off"
+      [placeholder]="'register.name' | transloco | titlecase"
+      [(ngModel)]="newUser.name"
+    />
+  </div>
+
+  <div class="input-border">
+    <mat-icon>mail</mat-icon>
+    <div class="fieldError">
+      <ng-container *ngFor="let error of validationErrors">
+        <span *ngIf="error.field === 'email'">{{
+          error.message | capitalizefirst
+        }}</span>
+      </ng-container>
+    </div>
+    <input
+      type="email"
+      name="email"
+      autocomplete="off"
+      [placeholder]="'register.email' | transloco | titlecase"
+      [(ngModel)]="newUser.email"
+    />
+  </div>
+
+  <div class="input-border">
+    <mat-icon>lock</mat-icon>
+    <div class="fieldError">
+      <ng-container *ngFor="let error of validationErrors">
+        <span *ngIf="error.field === 'password'">{{
+          error.message | capitalizefirst
+        }}</span>
+      </ng-container>
+    </div>
+    <input
+      type="password"
+      name="password"
+      autocomplete="off"
+      [placeholder]="'register.password' | transloco | capitalizefirst"
+      [(ngModel)]="newUser.password"
+    />
+  </div>
+
+  <div class="input-border">
+    <mat-icon>lock</mat-icon>
+    <div class="fieldError">
+      <ng-container *ngFor="let error of validationErrors">
+        <span *ngIf="error.field === 'confirmPassword'">{{
+          error.message | capitalizefirst
+        }}</span>
+      </ng-container>
+    </div>
 
     <input
-      type="submit"
-      value="{{ 'register.save' | transloco | titlecase }}"
+      type="password"
+      name="confirmPassword"
+      autocomplete="off"
+      [placeholder]="'register.confirmPassword' | transloco | titlecase"
+      [(ngModel)]="newUser.confirmPassword"
     />
-  </form>
-</div>
+  </div>
+
+  <div class="dropdownError">
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'sex'">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
+  </div>
+
+  <app-dropdown
+    class="dropdown"
+    [options]="dropdownOptions"
+    [label]="'register.sex' | transloco | titlecase"
+    [showOptions]="showDropdownOptions$"
+    (selectedOption)="onSelectedOption($event)"
+    (clickOutside)="onClickOutside()"
+  ></app-dropdown>
+
+  <button
+    *ngIf="(showDropdownOptions$ | async) === false"
+    class="login login__register"
+    type="submit"
+  >
+    {{ "register.save" | transloco | titlecase }}
+  </button>
+</form>

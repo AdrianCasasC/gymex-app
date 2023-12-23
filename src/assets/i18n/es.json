@@ -13,7 +13,7 @@
     "sunday": "Domingo"
   },
   "dropdown": {
-    "select": "Seleccionar",
+    "sexLabel": "Seleccionar sexo",
     "male": "Hombre",
     "female": "Mujer",
     "transgender": "Transgénero",

@@ -1,11 +1,16 @@
-<div class="selector-container centered">
-  <span (click)="onHandleDropdown()" class="selector">{{
-    (optionSelected ? "dropdown." + optionSelected : "dropdown.select")
+<button
+  (mousedown)="onDropdownClick()"
+  class="dropdown"
+  [ngClass]="{ dropdown__open: showOptions | async }"
+  type="button"
+>
+  {{
+    (optionSelected ? "dropdown." + optionSelected : "dropdown.sexLabel")
       | transloco
+  }}
+</button>
+<div *ngIf="showOptions | async" class="option-container flex-col">
+  <span (click)="onSelectedOption(option)" *ngFor="let option of options">{{
+    "dropdown." + option | transloco
   }}</span>
-  <div *ngIf="showOptions" class="option-container flex-col">
-    <span (click)="onSelectedOption(option)" *ngFor="let option of options">{{
-      "dropdown." + option | transloco
-    }}</span>
-  </div>
 </div>

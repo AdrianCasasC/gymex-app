@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-dropdown',
@@ -7,20 +8,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class DropdownComponent {
   @Input() options: string[] = [];
+  @Input() label!: string;
+  @Input() showOptions!: BehaviorSubject<boolean>;
   @Output() selectedOption = new EventEmitter();
 
-  showOptions: boolean = false;
   optionSelected: string = '';
 
   constructor() {}
 
   onSelectedOption(option: string) {
     this.optionSelected = option;
-    this.showOptions = false;
+    this.showOptions.next(false);
     this.selectedOption.emit(option);
   }
 
-  onHandleDropdown() {
-    this.showOptions = !this.showOptions;
+  onDropdownClick() {
+    this.showOptions.next(!this.showOptions.value);
+    console.log('toggle');
   }
 }
