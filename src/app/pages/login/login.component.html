@@ -1,17 +1,32 @@
-<div class="form-container">
+<form (ngSubmit)="handleSubmit()" method="get">
   <span *ngIf="logError" class="logError">{{
     "login.logError" | transloco
   }}</span>
-  <form (ngSubmit)="handleSubmit()" method="get">
-    <label for="name">{{ "login.name" | transloco | titlecase }}</label>
-    <input type="text" name="name" [(ngModel)]="loggedUser.name" />
+  <div class="input-border">
+    <mat-icon>person</mat-icon>
+    <input
+      type="text"
+      name="name"
+      [placeholder]="'login.name' | transloco | titlecase"
+      [(ngModel)]="loggedUser.name"
+    />
+  </div>
 
-    <label for="password">{{ "login.password" | transloco | titlecase }}</label>
-    <input type="password" name="password" [(ngModel)]="loggedUser.password" />
+  <div class="input-border">
+    <mat-icon>lock</mat-icon>
+    <input
+      type="password"
+      name="password"
+      [placeholder]="'login.password' | transloco | titlecase"
+      [(ngModel)]="loggedUser.password"
+    />
+  </div>
 
-    <input type="submit" value="{{ 'login.init' | transloco | titlecase }}" />
-    <span (click)="onRegister()" class="register">{{
-      "login.register" | transloco
-    }}</span>
-  </form>
-</div>
+  <!--<input type="submit" value="{{ 'login.init' | transloco | titlecase }}" />-->
+  <button class="login" type="submit">
+    {{ "login.init" | transloco | titlecase }}
+  </button>
+  <button (click)="onRegister()" class="login login__register" type="submit">
+    {{ "login.register" | transloco }}
+  </button>
+</form>

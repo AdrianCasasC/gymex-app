@@ -75,7 +75,7 @@
     "init": "Iniciar sesión",
     "name": "Nombre",
     "register": "¿No estás registrado? ¡Regístrate!",
-    "logError": "Usuario o contraseña incorrectos"
+    "logError": "¡Usuario o contraseña incorrectos!"
   },
   "register": {
     "password": "Contraseña",

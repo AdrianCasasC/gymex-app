@@ -3,9 +3,16 @@
   [tabs]="headerTabs"
 ></app-navbar>
 <ng-template #NotLogged>
-  <h2>{{ "header.notLogged" | transloco }}</h2>
+  <h2>
+    <mat-icon>fitness_center</mat-icon> {{ "header.notLogged" | transloco }}
+    <mat-icon>fitness_center</mat-icon>
+  </h2>
 </ng-template>
-<div (click)="onCloseSession()" class="logOut flex-col-cent">
-  <span *ngIf="userIsLogged">{{ "header.logOut" | transloco }}</span>
+<div
+  *ngIf="userIsLogged"
+  (click)="onCloseSession()"
+  class="logOut flex-col-cent"
+>
+  <span>{{ "header.logOut" | transloco }}</span>
   <mat-icon>logout</mat-icon>
 </div>

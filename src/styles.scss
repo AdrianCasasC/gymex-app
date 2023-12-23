@@ -3,6 +3,12 @@ body {
   all: unset; /* Para quitar los estilos por defecto */
   font-family: cursive, "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
     sans-serif !important;
+  background-color: #dbfffd;
+}
+
+input {
+  font-family: cursive, "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
+    sans-serif !important;
 }
 
 p-progressSpinner {
