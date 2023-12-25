@@ -1,4 +1,4 @@
-<div class="flex-col-cent primary-box content">
+<!--<div class="flex-col-cent primary-box content">
   <i (click)="closeModal.emit()" class="close-cross centered">X</i>
   <h2>Series de {{ "exercises." + exercise.name | transloco }}</h2>
   <span *ngIf="error" class="error">Ha ocurrido un error</span>
@@ -16,4 +16,33 @@
     >
   </div>
   <button (click)="saveSeries()" class="secondary-box">Guardar series</button>
+</div>-->
+
+<div class="exercise-modal__overlay">
+  <div (clickOutside)="onCloseModal()" class="exercise-modal__content">
+    <i (click)="onCloseModal()" class="close-cross">X</i>
+    <strong>{{
+      "exercises." + selectedExercise | transloco | titlecase
+    }}</strong>
+    <span>
+      {{ "exerciseModal.label" | transloco | titlecase }}
+      {{
+        ": " +
+          selectedNumberOfSeries +
+          (selectedNumberOfSeries === 1 ? " serie" : " series")
+      }}</span
+    >
+    <div class="exercise-modal__content__seriesWrapper">
+      <span
+        *ngFor="let number of numberOfSeries"
+        (click)="selectedNumberOfSeries = number"
+        class="scale-hover number"
+        [ngClass]="{ 'selected-number': number === selectedNumberOfSeries }"
+        >{{ number }}</span
+      >
+    </div>
+    <button (click)="onSaveSeries(selectedNumberOfSeries)">
+      {{ "exerciseModal.button" | transloco | titlecase }}
+    </button>
+  </div>
 </div>

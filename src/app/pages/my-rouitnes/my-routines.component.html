@@ -72,7 +72,7 @@
 <app-series-modal
   *ngIf="showEditSeriesModal"
   class="modal"
-  [exercise]="exerciseToEdit"
+  [selectedExercise]="exerciseToEdit.name"
   [error]="saveSuccessfully === 'KO'"
   (applySavedSeries)="saveSeries($event)"
   (closeModal)="showEditSeriesModal = false"

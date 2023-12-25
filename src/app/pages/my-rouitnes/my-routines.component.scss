@@ -1,18 +1,19 @@
 @import "../../../app/styles/variables.css";
 
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+  color: #296d6d;
+}
+
 h1 {
   white-space: nowrap;
 }
 
 h2 {
   margin: 0;
-}
-
-:host {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
 }
 
 .routines-content {

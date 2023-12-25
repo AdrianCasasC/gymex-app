@@ -130,15 +130,26 @@ export class MyRoutinesComponent implements OnInit {
     this.showEditSeriesModal = true;
   }
 
-  saveSeries(exerciseEdited: Exercise) {
-    let foundExercise: Exercise | undefined =
+  saveSeries(selectedNumberOfSeries: number) {
+    this.exerciseToEdit.series = [];
+    for (let i = 0; i < selectedNumberOfSeries; i++) {
+      this.exerciseToEdit.series.push({
+        weight: 0,
+        reps: 0,
+        showLastWeek: false,
+        lastWeekCoincidences: [],
+      });
+    }
+    //this.applySavedSeries.emit(this.selectedExercise);
+
+    /* let foundExercise: Exercise | undefined =
       this.selectedRoutine.exercises.find(
         (exercise) => exercise.name === exerciseEdited.name
-      );
+      ); */
 
-    if (foundExercise) {
+    /* if (foundExercise) {
       foundExercise = { ...exerciseEdited };
-    }
+    } */
 
     this.saveEditedRoutineToBackend();
   }

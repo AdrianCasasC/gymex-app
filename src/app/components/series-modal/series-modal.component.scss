@@ -2,6 +2,76 @@ button {
   margin-top: 32px;
 }
 
+.exercise-modal {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: grid;
+    place-items: center;
+  }
+
+  &__content {
+    position: relative;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 60%;
+    background-color: #4ac4c4;
+    border-radius: 12px;
+
+    button {
+      padding: 12px 0;
+      border-radius: 12px;
+      border: 1px solid #114340;
+      color: #114340;
+      cursor: pointer;
+      background-color: #a9fbf7;
+      text-align: center;
+      width: 100%;
+      &:hover {
+        background-color: #114340;
+        color: #a9fbf7;
+      }
+    }
+
+    strong,
+    span {
+      color: #154949;
+    }
+
+    &__seriesWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+
+      .number {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 10px;
+        background: white;
+        border: 1px solid black;
+        width: 40px;
+        text-align: center;
+        box-shadow: 2px 2px 2px black;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+
+      .selected-number {
+        box-shadow: none;
+        transform: translate(2px, 2px);
+        background-color: #114340;
+        color: #1ab9b1;
+      }
+    }
+  }
+}
+
 .seriesWrapper {
   display: flex;
   justify-content: center;

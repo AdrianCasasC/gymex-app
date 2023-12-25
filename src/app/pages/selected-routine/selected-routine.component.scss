@@ -84,41 +84,54 @@
     gap: 32px;
     width: 60%;
     background-color: #4ac4c4;
+    border-radius: 12px;
 
-    /*&__icon {
-      position: absolute;
-      top: 12px;
-      right: 16px;
+    button {
+      padding: 12px 0;
+      border-radius: 12px;
+      border: 1px solid #114340;
       color: #114340;
       cursor: pointer;
-    }*/
+      background-color: #a9fbf7;
+      text-align: center;
+      width: 100%;
+      &:hover {
+        background-color: #114340;
+        color: #a9fbf7;
+      }
+    }
+
+    strong,
+    span {
+      color: #154949;
+    }
 
     &__seriesWrapper {
       display: flex;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
-    }
 
-    &__seriesWrapper > span {
-      cursor: pointer;
-      padding: 8px;
-      border-radius: 10px;
-      background: white;
-      border: 1px solid black;
-      width: 24px;
-      text-align: center;
+      .number {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 10px;
+        background: white;
+        border: 1px solid black;
+        width: 40px;
+        text-align: center;
+        box-shadow: 2px 2px 2px black;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
+
+      .selected-number {
+        box-shadow: none;
+        transform: translate(2px, 2px);
+        background-color: #114340;
+        color: #1ab9b1;
+      }
     }
   }
-}
-
-.exercise-modal__content button {
-  padding: 12px 0;
-  border-radius: 12px;
-  border: 1px solid black;
-  cursor: pointer;
-  background-color: white;
-  text-align: center;
-  width: 100%;
 }
 
 .selected-exercises {
@@ -139,6 +152,27 @@
     flex-direction: column;
     position: relative;
     padding-right: 32px;
+    color: #12706b;
+    background-color: #a7f8f3;
+    padding: 16px 20px 12px 12px;
+    border-radius: 12px;
+
+    mat-icon {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      padding: 2px;
+      border-radius: 50%;
+      cursor: pointer;
+      color: #12706b;
+      &:hover {
+        color: #a7f8f3;
+        background-color: #4ac4c4;
+      }
+    }
   }
 }
 
@@ -155,6 +189,19 @@
   text-align: center;
   width: 60%;
   margin: 24px 0;
+  box-shadow: 4px 4px 4px #1ab9b1;
+  padding: 12px;
+  border: 2px solid #1ab9b1;
+  border-radius: 12px;
+  background-color: #a7f8f3;
+  color: #1ab9b1;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  &:hover {
+    color: #a7f8f3;
+    box-shadow: none;
+    background-color: #1ab9b1;
+    transform: translate(4px, 4px);
+  }
 
   span {
     position: absolute;

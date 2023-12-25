@@ -39,10 +39,10 @@
   <section *ngIf="chosenExercises.length > 0" class="selected-exercises">
     <div
       *ngFor="let exercise of chosenExercises"
-      class="secondary-box selected-exercises__item"
+      class="selected-exercises__item"
       (click)="onLongPress(exercise)"
     >
-      <i (click)="deleteExercise(exercise)" class="close-cross">X</i>
+      <mat-icon (click)="deleteExercise(exercise)">close</mat-icon>
       <span>{{ "exercises." + exercise.name | transloco | titlecase }}</span>
       <span>{{
         exercise.series.length +
@@ -59,40 +59,19 @@
   </section>
 </div>
 
-<button (click)="saveRoutine()" class="secondary-box save-button">
+<button (click)="saveRoutine()" class="save-button">
   {{ "selectedRoutine.button" | transloco }}
   <span *ngIf="noChosenExercises" class="noChosenExercises">{{
     "routine.noChosenExercises" | transloco
   }}</span>
 </button>
 
-<div *ngIf="showExerciseModal" class="exercise-modal__overlay">
-  <div (clickOutside)="closeModal()" class="exercise-modal__content">
-    <i (click)="closeModal()" class="close-cross">X</i>
-    <strong>{{
-      "exercises." + selectedExercise | transloco | titlecase
-    }}</strong>
-    <span>
-      {{ "exerciseModal.label" | transloco | titlecase }}
-      {{
-        ": " +
-          selectedNumberOfSeries +
-          (selectedNumberOfSeries === 1 ? " serie" : " series")
-      }}</span
-    >
-    <div class="exercise-modal__content__seriesWrapper">
-      <span
-        *ngFor="let number of numberOfSeries"
-        (click)="selectedNumberOfSeries = number"
-        class="scale-hover"
-        >{{ number }}</span
-      >
-    </div>
-    <button (click)="addExercise(selectedExercise, selectedNumberOfSeries)">
-      {{ "exerciseModal.button" | transloco | titlecase }}
-    </button>
-  </div>
-</div>
+<app-series-modal
+  *ngIf="showExerciseModal"
+  [selectedExercise]="selectedExercise"
+  (closeModal)="showExerciseModal = false"
+  (applySavedSeries)="addExercise(selectedExercise, $event)"
+></app-series-modal>
 
 <app-save-modal
   *ngIf="routineSavedSuccessfully === 'OK'"
