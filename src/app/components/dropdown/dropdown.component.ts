@@ -24,6 +24,5 @@ export class DropdownComponent {
 
   onDropdownClick() {
     this.showOptions.next(!this.showOptions.value);
-    console.log('toggle');
   }
 }

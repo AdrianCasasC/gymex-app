@@ -37,6 +37,7 @@ export const exercisesByMuscleGroup: Exercises = {
     'pullover',
   ],
   shoulderExercises: [
+    'militarPress',
     'dumbellMilitarPress',
     'lateralRaises',
     'frontalRaises',

@@ -14,7 +14,6 @@ export class PropertiesPopupComponent {
   constructor() {}
 
   onClickOutside() {
-    console.log('Has clickado fuera');
     this.clickOutsideContent.emit();
   }
 }

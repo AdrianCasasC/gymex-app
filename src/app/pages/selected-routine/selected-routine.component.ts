@@ -135,14 +135,9 @@ export class SelectedRoutineComponent implements OnInit {
     }
   }
 
-  deleteExercise(selectedExercise: Exercise) {
-    const foundExercise = this.chosenExercises.find(
-      (exercise) => exercise.name === selectedExercise.name
+  deleteExercise(exercisePosition: number) {
+    this.chosenExercises = this.chosenExercises.filter(
+      (exercise, position) => position !== exercisePosition
     );
-    if (foundExercise) {
-      this.chosenExercises = this.chosenExercises.filter(
-        (exercise) => exercise.name !== selectedExercise.name
-      );
-    }
   }
 }

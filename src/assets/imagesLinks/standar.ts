@@ -59,7 +59,8 @@ export const exerciseImagesLinks = {
     'https://lh3.googleusercontent.com/pw/ABLVV86X2azvWaHgVZidKZLyWy5eZs9uwoazgXlrZUanRoQfa5cHuDUZ2pKmgWywWQ3f-3osWyKkcwdtkYTJRVjxZoIv9SAWLHhTuzPwoBpQCRfyFY1QHJtl=w2400',
   quadExtension:
     'https://lh3.googleusercontent.com/pw/ABLVV84aPRH9Ro8wuCJGw-1Jip39jyNgBqjEfqEk0IQDuwbPAWhzZAueI4V3WyFi2dOvMDYKqr5imXw_XYvElsgrnnaquTh057HfDtDiu5td1oZttcEvjLwm=w2400',
-  militarPress: '',
+  militarPress:
+    'https://lh3.googleusercontent.com/pw/ABLVV84AL6smIAxHyGAvCd5vJc7QV1-sxrLr4mBtwFzC5qm0EUBk71_YCiOsDv4MJSIgfkLwGQzre-XX444br_L8PpffeZ6awAR6uwVCN23d62Q4iiBHQyCm=w2400',
   noRoutines:
     'https://lh3.googleusercontent.com/pw/ABLVV86HZ818XfPsq9rkBQFwMKikyVzgHh0OEOmICkVgBiLDr4bx0FcIGPtrOhBTHCtIHlfHtFuHIAwTXoSuyZHaChiWq8nMhElndcMxcPajRLt7J8i-LWzT=w2400',
   noWeeks:

@@ -32,7 +32,6 @@ export class RegisterComponent {
     this.apiService.register(this.newUser).subscribe({
       next: () => this.router.navigate(['/login']),
       error: (response) => {
-        console.log('Error al registrar el usuario', response);
         this.validationErrors = response.error;
       },
     });

@@ -38,11 +38,11 @@
 
   <section *ngIf="chosenExercises.length > 0" class="selected-exercises">
     <div
-      *ngFor="let exercise of chosenExercises"
+      *ngFor="let exercise of chosenExercises; let i = index"
       class="selected-exercises__item"
       (click)="onLongPress(exercise)"
     >
-      <mat-icon (click)="deleteExercise(exercise)">close</mat-icon>
+      <mat-icon (click)="deleteExercise(i)">close</mat-icon>
       <span>{{ "exercises." + exercise.name | transloco | titlecase }}</span>
       <span>{{
         exercise.series.length +

@@ -21,22 +21,21 @@
     "
     class="weeks-container"
   >
-    <span
-      *ngFor="let week of myWeeks"
-      (click)="selectWeek(week)"
-      (longPress)="onLongPress(week)"
-      [ngClass]="{ 'selected-box': selectedWeek?.id === week.id }"
-      class="primary-box week"
-    >
-      {{ week.name }}
+    <ng-container *ngFor="let week of myWeeks">
+      <span
+        (click)="selectWeek(week)"
+        (longPress)="onLongPress(week)"
+        [ngClass]="{ 'selected-box': selectedWeek?.id === week.id }"
+        class="primary-box week"
+        >{{ week.name }}
+      </span>
       <app-properties-popup
         *ngIf="week.showProperties"
-        class="modal"
         [position]="'top'"
         (clickOutsideContent)="week.showProperties = false"
         (selectedOption)="popupSelectedOption($event, week)"
       ></app-properties-popup>
-    </span>
+    </ng-container>
   </section>
 
   <ng-container *ngFor="let week of myWeeks">
