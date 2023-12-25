@@ -29,7 +29,7 @@
         (click)="handleSelectedCard(exercise)"
       >
         <img
-          [src]="'../../../assets/images/standar/' + exercise + '.jpg'"
+          [src]="exerciseImagesLinks[exercise]"
         /><!--Aquí irán las fotos de los ejercicios-->
         <span>{{ "exercises." + exercise | transloco | titlecase }}</span>
       </div>

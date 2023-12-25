@@ -14,6 +14,7 @@ import {
 } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { exerciseImagesLinks } from 'src/assets/imagesLinks/standar';
 
 @Component({
   selector: 'app-selected-routine',
@@ -33,6 +34,7 @@ export class SelectedRoutineComponent implements OnInit {
   chosenExercises: Exercise[] = [];
   routineSavedSuccessfully: string = 'DONE';
   noChosenExercises: boolean = false;
+  exerciseImagesLinks: any = exerciseImagesLinks;
 
   constructor(
     private activatedRoute: ActivatedRoute,

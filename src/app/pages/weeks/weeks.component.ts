@@ -11,7 +11,7 @@ import {
   SeriesCoincidence,
 } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { exerciseImagesLinks } from 'src/assets/imagesLinks/standar';
 import { DataService } from 'src/app/services/data.service';
 import { daysOfWeek } from 'src/app/services/data.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
@@ -40,6 +40,7 @@ export class WeeksComponent implements OnInit {
   showWeekModal: boolean = false;
   showWeekPropertiesModal: boolean = false;
   showChangeWeekNameModal: boolean = false;
+  exerciseImagesLinks = exerciseImagesLinks;
 
   constructor(
     private readonly router: Router,

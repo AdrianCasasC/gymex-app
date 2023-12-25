@@ -7,7 +7,7 @@ import {
   User,
 } from 'src/app/interfaces/app.interface';
 import { ApiService } from 'src/app/services/api.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { exerciseImagesLinks } from 'src/assets/imagesLinks/standar';
 import { DataService } from 'src/app/services/data.service';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
@@ -35,6 +35,7 @@ export class MyRoutinesComponent implements OnInit {
   randomImage1!: string;
   randomImage2!: string;
   totalRandomImages: number = 7;
+  exerciseImagesLinks = exerciseImagesLinks;
 
   constructor(
     private readonly router: Router,
