@@ -60,6 +60,38 @@ export class RegisterComponent {
     this.showDropdownOptions$.next(false);
   }
 
+  hasFieldError(fieldName: string): boolean {
+    switch (fieldName) {
+      case 'name':
+        if (this.findErrorByField('name')) {
+          return true;
+        }
+        break;
+      case 'email':
+        if (this.findErrorByField('email')) {
+          return true;
+        }
+        break;
+      case 'password':
+        if (this.findErrorByField('password')) {
+          return true;
+        }
+        break;
+      case 'confirmPassword':
+        if (this.findErrorByField('confirmPassword')) {
+          return true;
+        }
+        break;
+      default:
+        break;
+    }
+    return false;
+  }
+
+  private findErrorByField(fieldName: string): ValidationError | undefined {
+    return this.validationErrors.find((error) => error.field === fieldName);
+  }
+
   private getEnumValueFromString(value: string): Sex {
     const enumValue = Sex[value as keyof typeof Sex];
     return enumValue;

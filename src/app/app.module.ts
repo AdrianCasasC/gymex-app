@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +18,7 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HammerModule,
     AppRoutingModule,
     ComponentsModule,
     PagesModule,

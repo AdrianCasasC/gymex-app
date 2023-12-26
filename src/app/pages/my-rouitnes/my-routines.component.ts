@@ -29,11 +29,10 @@ export class MyRoutinesComponent implements OnInit {
   showNewRoutineModal: boolean = false;
   showEditSeriesModal: boolean = false;
   showChangeRoutineNameModal: boolean = false;
+  showErrorModal: boolean = false;
   saveSuccessfully!: string;
   user!: User;
   routines: string[] = [];
-  /*randomImage1!: string;
-  randomImage2!: string;*/
   totalRandomImages: number = 7;
   exerciseImagesLinks = exerciseImagesLinks;
 
@@ -47,11 +46,6 @@ export class MyRoutinesComponent implements OnInit {
   ngOnInit(): void {
     this.updateSelectedNavbar();
     this.getBackendData();
-    //this.assignRandomImage();
-    /*this.randomImage1 = this.getRandomNumberBetween(
-      1,
-      this.totalRandomImages
-    ).toString();*/
   }
 
   updateSelectedNavbar() {
@@ -68,22 +62,6 @@ export class MyRoutinesComponent implements OnInit {
       this.setDefaultSelectedRoutine();
     });
   }
-
-  /* assignRandomImage() {
-    this.randomImage1 = this.getRandomNumberBetween(1, 4).toString();
-    this.randomImage2 = this.getRandomNumberDifferentThan(
-      parseInt(this.randomImage1)
-    ).toString();
-  }
-
-  getRandomNumberDifferentThan(number: number): number {
-    const randomNumber = this.getRandomNumberBetween(1, 4);
-    if (randomNumber === number) {
-      return this.getRandomNumberDifferentThan(number);
-    }
-
-    return randomNumber;
-  } */
 
   setDefaultSelectedRoutine() {
     if (this.myRoutines.length > 0) {
@@ -141,16 +119,6 @@ export class MyRoutinesComponent implements OnInit {
         lastWeekCoincidences: [],
       });
     }
-    //this.applySavedSeries.emit(this.selectedExercise);
-
-    /* let foundExercise: Exercise | undefined =
-      this.selectedRoutine.exercises.find(
-        (exercise) => exercise.name === exerciseEdited.name
-      ); */
-
-    /* if (foundExercise) {
-      foundExercise = { ...exerciseEdited };
-    } */
 
     this.saveEditedRoutineToBackend();
   }
@@ -173,7 +141,7 @@ export class MyRoutinesComponent implements OnInit {
     if (selectedOption === 'delete') {
       this.apiService.deleteRoutine(this.popupRoutine).subscribe({
         next: () => this.deleteRoutine(this.popupRoutine),
-        error: (error) => console.log(error),
+        error: (error) => (this.showErrorModal = true),
       });
     } else {
       this.showChangeRoutineNameModal = true;

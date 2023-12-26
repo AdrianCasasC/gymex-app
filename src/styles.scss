@@ -1,13 +1,21 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("./assets/fonts/Roboto-Regular.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Estilos Globales */
 body {
   all: unset; /* Para quitar los estilos por defecto */
-  font-family: cursive, "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
+  font-family: "Roboto", "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
     sans-serif !important;
   background-color: #dbfffd;
+  user-select: none;
 }
 
 input {
-  font-family: cursive, "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
+  font-family: "Roboto", "Josefin Sans", "Chivo", "Dosis", "Preahvihear",
     sans-serif !important;
 }
 
@@ -16,6 +24,10 @@ p-progressSpinner {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+mat-icon {
+  overflow: visible !important;
 }
 
 /* Barra de desplazamiento vertical */

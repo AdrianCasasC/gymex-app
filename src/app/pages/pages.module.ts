@@ -14,6 +14,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MatIconModule } from '@angular/material/icon';
+import { HammerModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
     DialogModule,
     ProgressSpinnerModule,
     MatIconModule,
+    HammerModule,
   ], //Aquí se exportan módulos exteriores
   exports: [
     HomeComponent,

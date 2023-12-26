@@ -31,8 +31,8 @@ export interface Exercises {
 }
 
 export interface Serie {
-  weight: number;
-  reps: number;
+  weight: number | null;
+  reps: number | null;
   showLastWeek: boolean;
   lastWeekCoincidences: Coincidence[];
 }
@@ -49,8 +49,8 @@ export interface DaySeriesCoincidence {
 }
 
 export interface SeriesCoincidence {
-  reps: number;
-  weight: number;
+  reps: number | null;
+  weight: number | null;
 }
 
 export interface Exercise {

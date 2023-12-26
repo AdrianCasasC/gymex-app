@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(60vh);
+  height: 60vh;
+  @media screen and (max-width: 500px) {
+    height: 75vh;
+  }
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   color: #4ac4c4;
   width: 40%;
   min-height: 510px;
@@ -37,7 +39,6 @@ form {
     position: relative;
     display: inline-flex;
     align-items: center;
-    margin-bottom: 32px;
     &::after {
       content: "";
       position: absolute;
@@ -51,21 +52,15 @@ form {
       height: 3px;
       box-shadow: 2px 2px 3px #4ac4c4;
     }
+  }
 
-    .fieldError {
-      position: absolute;
-      top: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      color: #bb0000;
-      min-height: 50px;
-      transform: translateY(-100%);
-    }
+  .fieldError {
+    color: #bb0000;
   }
 
   .dropdownError {
     color: #bb0000;
+    margin: 12px 0;
   }
 
   .conflictMessage {

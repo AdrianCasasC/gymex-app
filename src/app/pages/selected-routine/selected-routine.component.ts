@@ -68,7 +68,6 @@ export class SelectedRoutineComponent implements OnInit {
   }
 
   onLongPress(exercise: Exercise) {
-    console.log('long presss');
     exercise.showProperties = true;
   }
 

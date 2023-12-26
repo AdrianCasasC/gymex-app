@@ -231,7 +231,7 @@
 
 <div *ngIf="showSerieModal" class="modal">
   <div class="modal-content primary-box">
-    <i (click)="closeModal()" class="close-cross">X</i>
+    <mat-icon (click)="closeModal()">close</mat-icon>
     <section>
       <h2>{{ "exercises." + selectedExercise.name | transloco }}</h2>
       <h3>Serie {{ editedSerieIndex + 1 }}</h3>
@@ -241,10 +241,12 @@
       <label for="reps">Repeticiones</label>
       <input
         type="number"
+        pattern="[0-9]*"
         min="0"
         id="reps"
         name="reps"
         [(ngModel)]="selectedSerie.reps"
+        [value]="null"
       />
     </section>
 
@@ -252,6 +254,7 @@
       <label for="weight">Peso</label>
       <input
         type="number"
+        pattern="[0-9]*"
         min="0"
         id="weight"
         name="weight"
@@ -279,3 +282,13 @@
     <img [src]="exerciseImagesLinks.noWeeks" />
   </section>
 </ng-template>
+
+<app-save-modal
+  *ngIf="showErrorModal"
+  class="modal"
+  [label]="'modal.success' | transloco"
+  [errorLabel]="'modal.error' | transloco"
+  [successfullSave]="!showErrorModal"
+  (closeModal)="showErrorModal = false"
+>
+</app-save-modal>

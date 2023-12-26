@@ -16,7 +16,7 @@ export class LongPressDirective {
 
   constructor(private el: ElementRef) {}
 
-  @HostListener('mousedown') onMouseDown() {
+  @HostListener('touchstart') onMouseDown() {
     this.isPressing = true;
     setTimeout(() => {
       if (this.isPressing) {
@@ -25,11 +25,7 @@ export class LongPressDirective {
     }, 1000);
   }
 
-  @HostListener('mouseup') onMouseUp() {
-    this.isPressing = false;
-  }
-
-  @HostListener('mouseleave') onMouseLeave() {
+  @HostListener('touchend') onMouseUp() {
     this.isPressing = false;
   }
 }

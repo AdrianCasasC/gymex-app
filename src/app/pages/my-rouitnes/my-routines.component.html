@@ -95,11 +95,15 @@
 ></app-input-modal>
 
 <app-save-modal
-  *ngIf="saveSuccessfully === 'OK' || saveSuccessfully === 'KO'"
+  *ngIf="
+    saveSuccessfully === 'OK' || saveSuccessfully === 'KO' || showErrorModal
+  "
   class="modal"
   [label]="'modal.success' | transloco"
   [errorLabel]="'modal.error' | transloco"
-  [successfullSave]="saveSuccessfully === 'OK'"
-  (closeModal)="saveSuccessfully = ''"
+  [successfullSave]="showErrorModal ? false : saveSuccessfully === 'OK'"
+  (closeModal)="
+    showErrorModal ? (showErrorModal = false) : (saveSuccessfully = '')
+  "
 >
 </app-save-modal>

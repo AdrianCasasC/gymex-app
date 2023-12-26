@@ -2,7 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(60vh);
+  height: 60vh;
+  @media screen and (max-width: 500px) {
+    height: 75vh;
+  }
 }
 
 form {

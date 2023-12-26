@@ -1,13 +1,17 @@
 <form (ngSubmit)="handleSubmit()" method="get">
-  <div class="input-border">
+  <div class="fieldError flex-col">
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'name'">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
+  </div>
+  <div
+    class="input-border"
+    [style.margin-top]="hasFieldError('name') ? '0' : '40px'"
+    [style.margin-bottom]="hasFieldError('name') ? '12px' : '0'"
+  >
     <mat-icon>person</mat-icon>
-    <div class="fieldError">
-      <ng-container *ngFor="let error of validationErrors">
-        <span *ngIf="error.field === 'name'">{{
-          error.message | capitalizefirst
-        }}</span>
-      </ng-container>
-    </div>
     <input
       type="text"
       name="name"
@@ -17,15 +21,19 @@
     />
   </div>
 
-  <div class="input-border">
+  <div class="fieldError flex-col">
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'email'">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
+  </div>
+  <div
+    class="input-border"
+    [style.margin-top]="hasFieldError('email') ? '0' : '40px'"
+    [style.margin-bottom]="hasFieldError('name') ? '12px' : '0'"
+  >
     <mat-icon>mail</mat-icon>
-    <div class="fieldError">
-      <ng-container *ngFor="let error of validationErrors">
-        <span *ngIf="error.field === 'email'">{{
-          error.message | capitalizefirst
-        }}</span>
-      </ng-container>
-    </div>
     <input
       type="email"
       name="email"
@@ -35,15 +43,19 @@
     />
   </div>
 
-  <div class="input-border">
+  <div class="fieldError flex-col">
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'password'">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
+  </div>
+  <div
+    class="input-border"
+    [style.margin-top]="hasFieldError('password') ? '0' : '40px'"
+    [style.margin-bottom]="hasFieldError('name') ? '12px' : '0'"
+  >
     <mat-icon>lock</mat-icon>
-    <div class="fieldError">
-      <ng-container *ngFor="let error of validationErrors">
-        <span *ngIf="error.field === 'password'">{{
-          error.message | capitalizefirst
-        }}</span>
-      </ng-container>
-    </div>
     <input
       type="password"
       name="password"
@@ -53,16 +65,19 @@
     />
   </div>
 
-  <div class="input-border">
+  <div class="fieldError flex-col">
+    <ng-container *ngFor="let error of validationErrors">
+      <span *ngIf="error.field === 'confirmPassword'">{{
+        error.message | capitalizefirst
+      }}</span>
+    </ng-container>
+  </div>
+  <div
+    class="input-border"
+    [style.margin-top]="hasFieldError('confirmPassword') ? '0' : '40px'"
+    [style.margin-bottom]="hasFieldError('name') ? '12px' : '0'"
+  >
     <mat-icon>lock</mat-icon>
-    <div class="fieldError">
-      <ng-container *ngFor="let error of validationErrors">
-        <span *ngIf="error.field === 'confirmPassword'">{{
-          error.message | capitalizefirst
-        }}</span>
-      </ng-container>
-    </div>
-
     <input
       type="password"
       name="confirmPassword"
@@ -106,5 +121,6 @@
   *ngIf="successRegister"
   class="modal"
   [label]="'login.successRegister' | transloco"
+  [errorLabel]="'modal.error' | transloco"
   [successfullSave]="successRegister"
 ></app-save-modal>

@@ -1,4 +1,5 @@
-const basicUrl: String = 'http://localhost:8080/';
+const basicUrl: string = 'http://localhost:8080/';
+//const basicUrl: string = 'https://b0shmpr0-8080.uks1.devtunnels.ms/';
 
 export const API_ENDPOINTS = {
   routines: {

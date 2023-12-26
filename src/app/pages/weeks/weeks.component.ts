@@ -31,7 +31,12 @@ export class WeeksComponent implements OnInit {
   savedRoutines: Routine[] = [];
   selectedAssociatedRoutine!: Routine | null;
   selectedExercise!: Exercise;
-  selectedSerie!: Serie;
+  selectedSerie: Serie = {
+    reps: null,
+    weight: null,
+    showLastWeek: false,
+    lastWeekCoincidences: [],
+  };
   editedSerieIndex!: number;
   editedExerciseIndex!: number;
   showSerieModal: boolean = false;
@@ -40,6 +45,7 @@ export class WeeksComponent implements OnInit {
   showWeekModal: boolean = false;
   showWeekPropertiesModal: boolean = false;
   showChangeWeekNameModal: boolean = false;
+  showErrorModal: boolean = false;
   exerciseImagesLinks = exerciseImagesLinks;
 
   constructor(
@@ -52,10 +58,6 @@ export class WeeksComponent implements OnInit {
   ngOnInit(): void {
     this.updateSelectedNavbar();
     this.getBackendData();
-
-    //TODO: Arreglar cuando se asocia una rutina detecta ejercicios de la semana pasada en la misma semana
-    //TODO: A veces parece que cuando añades semanas, cierras sesión y vuelves a abrir se elimina alguna semana OK
-    //TODO: Revisar que los updates en la base de datos se hagan haciendo primero un getById
   }
 
   updateSelectedNavbar() {
@@ -63,13 +65,16 @@ export class WeeksComponent implements OnInit {
   }
 
   getBackendData() {
-    this.apiService.getBackendWeeks().subscribe((response: any) => {
-      this.myWeeks = this.mapDateWeeks(response);
-      this.myWeeks = this.myWeeks.sort(
-        (a: Week, b: Week) =>
-          a.createdDate!.getTime() - b.createdDate!.getTime()
-      );
-      this.asignDefaultWeekAndDay();
+    this.apiService.getBackendWeeks().subscribe({
+      next: (response: any) => {
+        this.myWeeks = this.mapDateWeeks(response);
+        this.myWeeks = this.myWeeks.sort(
+          (a: Week, b: Week) =>
+            a.createdDate!.getTime() - b.createdDate!.getTime()
+        );
+        this.asignDefaultWeekAndDay();
+      },
+      error: () => (this.showErrorModal = true),
     });
   }
 
@@ -111,7 +116,7 @@ export class WeeksComponent implements OnInit {
         this.selectedWeek = newWeek;
         this.selectedDay = this.selectedWeek.days[0];
       },
-      error: () => console.log('Ha ocurrido un error'),
+      error: () => (this.showErrorModal = true),
     });
   }
 
@@ -119,7 +124,7 @@ export class WeeksComponent implements OnInit {
     this.selectedDay = day;
 
     if (day.routine) {
-      this.updateRoutineLastWeekSeries(day.routine); //Se refrescan las series de la semana pasda
+      this.updateRoutineLastWeekSeries(day.routine); //Se refrescan las series de la semana pasada
     }
   }
 
@@ -201,7 +206,7 @@ export class WeeksComponent implements OnInit {
         day.routine = this.deepCopy(routine);
         this.updateDatabaseWeek(actualWeek);
       },
-      error: () => console.log('Ha habido un error al asociar la rutina'),
+      error: () => (this.showErrorModal = true),
     });
   }
 
@@ -227,7 +232,7 @@ export class WeeksComponent implements OnInit {
         }
         this.updateDatabaseWeek(actualWeek);
       },
-      error: () => console.log('Ha habido un error al desasociar la rutina'),
+      error: () => (this.showErrorModal = true),
     });
   }
 
@@ -283,8 +288,8 @@ export class WeeksComponent implements OnInit {
 
     exercise.series.forEach((serie: Serie) => {
       coincidenceSeries.push({
-        reps: serie.reps,
-        weight: serie.weight,
+        reps: serie.reps!,
+        weight: serie.weight!,
       });
     });
 
@@ -305,8 +310,8 @@ export class WeeksComponent implements OnInit {
         if (i <= coincidence.series.length - 1) {
           serie.lastWeekCoincidences.push({
             weekDay: coincidence.weekDay,
-            reps: coincidence.series[i].reps,
-            weight: coincidence.series[i].weight,
+            reps: coincidence.series[i].reps!,
+            weight: coincidence.series[i].weight!,
           });
         }
       });
@@ -319,11 +324,7 @@ export class WeeksComponent implements OnInit {
         this.updateSelectedWeek(week);
         this.updateSelectedDayFromWeek(week);
       },
-      error: (response) =>
-        console.log(
-          'Ha ocurrido un error al editar la semana: ',
-          response.message
-        ),
+      error: (response) => (this.showErrorModal = true),
     });
   }
 
@@ -332,7 +333,7 @@ export class WeeksComponent implements OnInit {
     if (selectedOption === 'delete') {
       this.apiService.deleteWeek(this.popupWeek).subscribe({
         next: () => this.deleteWeek(this.popupWeek),
-        error: (error) => console.log(error),
+        error: (error) => (this.showErrorModal = true),
       });
     } else {
       this.showChangeWeekNameModal = true;
