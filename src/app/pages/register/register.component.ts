@@ -22,6 +22,7 @@ export class RegisterComponent {
   validationErrors: ValidationError[] = [];
   dropdownOptions: string[] = sexOptions;
   successRegister: boolean = false;
+  showConflictmessage: boolean = false;
 
   constructor(
     private router: Router,
@@ -39,7 +40,14 @@ export class RegisterComponent {
         }, 2000);
       },
       error: (response) => {
-        this.validationErrors = response.error;
+        if (response.status === 400) {
+          this.validationErrors = response.error;
+          return;
+        }
+        this.showConflictmessage = true;
+        setTimeout(() => {
+          this.showConflictmessage = false;
+        }, 2000);
       },
     });
   }

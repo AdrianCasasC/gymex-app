@@ -77,7 +77,8 @@
     "name": "Nombre",
     "register": "¿No estás registrado? ¡Regístrate!",
     "logError": "¡Usuario o contraseña incorrectos!",
-    "successRegister": "¡Te has registrado correctamente!"
+    "successRegister": "¡Te has registrado correctamente!",
+    "userExistsError": "¡El nombre de usuario ya existe!"
   },
   "register": {
     "password": "Contraseña",

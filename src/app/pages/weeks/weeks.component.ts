@@ -52,6 +52,10 @@ export class WeeksComponent implements OnInit {
   ngOnInit(): void {
     this.updateSelectedNavbar();
     this.getBackendData();
+
+    //TODO: Arreglar cuando se asocia una rutina detecta ejercicios de la semana pasada en la misma semana
+    //TODO: A veces parece que cuando añades semanas, cierras sesión y vuelves a abrir se elimina alguna semana OK
+    //TODO: Revisar que los updates en la base de datos se hagan haciendo primero un getById
   }
 
   updateSelectedNavbar() {
@@ -169,25 +173,25 @@ export class WeeksComponent implements OnInit {
   onAssociateRoutine(routine: Routine | null) {
     if (!routine) {
       this.isRoutineSelected = false;
-    } else {
-      let foundDay: Day | undefined;
-
-      this.getDatabaseSelectedWeek().subscribe({
-        next: (response: any) => {
-          const actualWeek: Week = response;
-          foundDay = this.getDayByName(actualWeek.days);
-          if (foundDay) {
-            const dayRoutine: Routine = {
-              name: routine.name,
-              exercises: routine.exercises,
-              showProperties: false,
-            };
-            this.associateDayRoutine(foundDay, dayRoutine, actualWeek);
-          }
-        },
-      });
-      this.closeAssociateRoutineModal();
+      return;
     }
+    let foundDay: Day | undefined;
+
+    this.getDatabaseSelectedWeek().subscribe({
+      next: (response: any) => {
+        const actualWeek: Week = response;
+        foundDay = this.getDayByName(actualWeek.days);
+        if (foundDay) {
+          const dayRoutine: Routine = {
+            name: routine.name,
+            exercises: routine.exercises,
+            showProperties: false,
+          };
+          this.associateDayRoutine(foundDay, dayRoutine, actualWeek);
+        }
+      },
+    });
+    this.closeAssociateRoutineModal();
   }
 
   associateDayRoutine(day: Day, routine: Routine, actualWeek: Week) {

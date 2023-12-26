@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { User } from './interfaces/app.interface';
 
@@ -11,6 +11,11 @@ export class AppComponent implements OnInit {
   title = 'gymEx-app';
 
   constructor(private readonly authService: AuthService) {}
+
+  /*@HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload($event: any): void {
+    this.authService.setUserLogged(false);
+  }*/
 
   ngOnInit(): void {
     const storedUser: string | null = localStorage.getItem('currentUser');

@@ -96,6 +96,10 @@
   >
     {{ "register.save" | transloco | titlecase }}
   </button>
+
+  <span *ngIf="showConflictmessage" class="conflictMessage">{{
+    "login.userExistsError" | transloco
+  }}</span>
 </form>
 
 <app-save-modal
