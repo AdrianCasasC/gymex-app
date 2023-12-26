@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-save-modal',
@@ -7,7 +7,13 @@ import { Component, Input } from '@angular/core';
 })
 export class SaveModalComponent {
   @Input() label!: string;
+  @Input() errorLabel!: string;
   @Input() successfullSave!: boolean;
+  @Output() closeModal = new EventEmitter();
 
   constructor() {}
+
+  onCloseModal() {
+    this.closeModal.emit();
+  }
 }

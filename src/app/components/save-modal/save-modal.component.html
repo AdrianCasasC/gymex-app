@@ -2,8 +2,18 @@
   class="content centered"
   [ngClass]="{ 'primary-box': successfullSave, 'error-box': !successfullSave }"
 >
-  <span *ngIf="successfullSave; else error" class="success">{{ label }}</span>
+  <div *ngIf="successfullSave; else error" class="success">
+    <mat-icon>task_alt</mat-icon>
+    <span class="flex-col-cent">{{ label }}</span>
+  </div>
+
   <ng-template #error>
-    <span class="error">Ha ocurrido un error</span>
+    <div class="flex-col-cent">
+      <mat-icon>warning</mat-icon>
+      <span>{{ errorLabel }}</span>
+      <button (click)="onCloseModal()">
+        {{ "button.accept" | transloco }}
+      </button>
+    </div>
   </ng-template>
 </div>

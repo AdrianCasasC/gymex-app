@@ -27,12 +27,12 @@
     </section>
 
     <section class="routines-exercise-wrapper">
-      <img
+      <!--<img
         [src]="'../../../assets/images/random/image_' + randomImage1 + '.jpg'"
       />
       <img
         [src]="'../../../assets/images/random/image_' + randomImage2 + '.jpg'"
-      />
+      />-->
       <div
         *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
         class="register-exercises"
@@ -95,9 +95,11 @@
 ></app-input-modal>
 
 <app-save-modal
-  *ngIf="saveSuccessfully === 'OK'"
+  *ngIf="saveSuccessfully === 'OK' || saveSuccessfully === 'KO'"
   class="modal"
-  [label]="'¡Rutina Guardada!'"
+  [label]="'modal.success' | transloco"
+  [errorLabel]="'modal.error' | transloco"
   [successfullSave]="saveSuccessfully === 'OK'"
+  (closeModal)="saveSuccessfully = ''"
 >
 </app-save-modal>

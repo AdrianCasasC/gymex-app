@@ -76,7 +76,8 @@
     "init": "Iniciar sesión",
     "name": "Nombre",
     "register": "¿No estás registrado? ¡Regístrate!",
-    "logError": "¡Usuario o contraseña incorrectos!"
+    "logError": "¡Usuario o contraseña incorrectos!",
+    "successRegister": "¡Te has registrado correctamente!"
   },
   "register": {
     "password": "Contraseña",
@@ -87,7 +88,9 @@
     "sex": "Sexo"
   },
   "modal": {
-    "label": "Nombre de la nueva rutina"
+    "label": "Nombre de la nueva rutina",
+    "success": "¡Rutina guardada!",
+    "error": "Upss... Ha ocurrido un error"
   },
   "muscles": {
     "chest": "Pecho",

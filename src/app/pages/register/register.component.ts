@@ -21,6 +21,7 @@ export class RegisterComponent {
   };
   validationErrors: ValidationError[] = [];
   dropdownOptions: string[] = sexOptions;
+  successRegister: boolean = false;
 
   constructor(
     private router: Router,
@@ -30,7 +31,13 @@ export class RegisterComponent {
   handleSubmit() {
     this.validationErrors = [];
     this.apiService.register(this.newUser).subscribe({
-      next: () => this.router.navigate(['/login']),
+      next: () => {
+        this.successRegister = true;
+        setTimeout(() => {
+          this.successRegister = false;
+          this.router.navigate(['/login']);
+        }, 2000);
+      },
       error: (response) => {
         this.validationErrors = response.error;
       },

@@ -97,3 +97,10 @@
     {{ "register.save" | transloco | titlecase }}
   </button>
 </form>
+
+<app-save-modal
+  *ngIf="successRegister"
+  class="modal"
+  [label]="'login.successRegister' | transloco"
+  [successfullSave]="successRegister"
+></app-save-modal>

@@ -76,6 +76,8 @@
 <app-save-modal
   *ngIf="routineSavedSuccessfully === 'OK'"
   class="modal"
-  [label]="'¡Rutina Guardada!'"
+  [label]="'modal.success' | transloco"
+  [errorLabel]="'modal.error' | transloco"
   [successfullSave]="routineSavedSuccessfully === 'OK'"
+  (closeModal)="routineSavedSuccessfully = ''"
 ></app-save-modal>

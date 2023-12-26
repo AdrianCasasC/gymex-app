@@ -32,8 +32,8 @@ export class MyRoutinesComponent implements OnInit {
   saveSuccessfully!: string;
   user!: User;
   routines: string[] = [];
-  randomImage1!: string;
-  randomImage2!: string;
+  /*randomImage1!: string;
+  randomImage2!: string;*/
   totalRandomImages: number = 7;
   exerciseImagesLinks = exerciseImagesLinks;
 
@@ -47,11 +47,11 @@ export class MyRoutinesComponent implements OnInit {
   ngOnInit(): void {
     this.updateSelectedNavbar();
     this.getBackendData();
-    this.assignRandomImage();
-    this.randomImage1 = this.getRandomNumberBetween(
+    //this.assignRandomImage();
+    /*this.randomImage1 = this.getRandomNumberBetween(
       1,
       this.totalRandomImages
-    ).toString();
+    ).toString();*/
   }
 
   updateSelectedNavbar() {
@@ -69,7 +69,7 @@ export class MyRoutinesComponent implements OnInit {
     });
   }
 
-  assignRandomImage() {
+  /* assignRandomImage() {
     this.randomImage1 = this.getRandomNumberBetween(1, 4).toString();
     this.randomImage2 = this.getRandomNumberDifferentThan(
       parseInt(this.randomImage1)
@@ -83,7 +83,7 @@ export class MyRoutinesComponent implements OnInit {
     }
 
     return randomNumber;
-  }
+  } */
 
   setDefaultSelectedRoutine() {
     if (this.myRoutines.length > 0) {
