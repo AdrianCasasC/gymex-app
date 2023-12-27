@@ -34,6 +34,14 @@
   padding: 24px;
   max-height: 468px;
   overflow: auto;
+  @media screen and (max-width: 900px) {
+    width: 100%;
+    justify-content: center;
+    padding: 24px 0;
+  }
+  @media screen and (max-width: 700px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .muscle-card {
@@ -82,6 +90,9 @@
     width: 60%;
     background-color: #4ac4c4;
     border-radius: 12px;
+    @media screen and (max-width: 450px) {
+      align-items: center;
+    }
 
     button {
       padding: 12px 0;
@@ -108,6 +119,9 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 12px;
+      @media screen and (max-width: 450px) {
+        justify-content: center;
+      }
 
       .number {
         cursor: pointer;
@@ -143,6 +157,11 @@
   border-radius: 12px;
   border: 12px solid #4ac4c4;
   padding-bottom: 12px;
+  @media screen and (max-width: 900px) {
+    flex-direction: row;
+    max-width: 95%;
+    margin-top: 24px;
+  }
 
   &__item {
     position: relative;
@@ -154,6 +173,9 @@
     background-color: #a7f8f3;
     padding: 16px 20px 12px 12px;
     border-radius: 12px;
+    @media screen and (max-width: 900px) {
+      min-width: 120px;
+    }
 
     mat-icon {
       position: absolute;
@@ -179,6 +201,10 @@
   grid-template-columns: 4fr 1fr;
   padding: 24px;
   width: 95%;
+  @media screen and (max-width: 900px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .save-button {
@@ -207,44 +233,5 @@
     left: 50%;
     transform: translateX(-50%);
     color: brown;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .selected-routine-content {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .selected-exercises {
-    flex-direction: row;
-    max-width: 95%;
-    margin-top: 24px;
-
-    &__item {
-      min-width: 120px;
-    }
-  }
-
-  .muscles-container {
-    width: 100%;
-    justify-content: center;
-    padding: 24px 0;
-  }
-}
-
-@media screen and (max-width: 700px) {
-  .muscles-container {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media screen and (max-width: 450px) {
-  .exercise-modal__content {
-    align-items: center;
-
-    &__seriesWrapper {
-      justify-content: center;
-    }
   }
 }
