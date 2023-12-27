@@ -279,7 +279,8 @@
     *ngIf="(spinnerService.spinnerState$ | async) === false"
   >
     <h2>{{ "week.noWeeks" | transloco }}</h2>
-    <img [src]="exerciseImagesLinks.noWeeks" />
+    <!--<img [src]="exerciseImagesLinks.noWeeks" />-->
+    <img [src]="'../../../assets/images/animated/noRoutines.jpg'" />
   </section>
 </ng-template>
 

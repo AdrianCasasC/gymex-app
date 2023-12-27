@@ -28,9 +28,10 @@
         class="muscle-card scale-hover primary-box"
         (click)="handleSelectedCard(exercise)"
       >
-        <img
+        <!--<img
           [src]="exerciseImagesLinks[exercise]"
-        /><!--Aquí irán las fotos de los ejercicios-->
+        />-->
+        <img [src]="'../../../assets/images/standar/' + exercise + '.jpg'" />
         <span>{{ "exercises." + exercise | transloco | titlecase }}</span>
       </div>
     </section>

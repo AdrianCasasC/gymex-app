@@ -27,12 +27,6 @@
     </section>
 
     <section class="routines-exercise-wrapper">
-      <!--<img
-        [src]="'../../../assets/images/random/image_' + randomImage1 + '.jpg'"
-      />
-      <img
-        [src]="'../../../assets/images/random/image_' + randomImage2 + '.jpg'"
-      />-->
       <div
         *ngFor="let exercise of selectedRoutine?.exercises; let i = index"
         class="register-exercises"
@@ -65,7 +59,7 @@
     class="noRoutines flex-col-cent"
   >
     <h2>{{ "routine.noRoutines" | transloco }}</h2>
-    <img [src]="exerciseImagesLinks.noRoutines" />
+    <img [src]="'../../../assets/images/animated/noRoutines.jpg'" />
   </section>
 </ng-template>
 
