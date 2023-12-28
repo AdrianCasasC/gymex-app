@@ -27,6 +27,7 @@ export const exercisesByMuscleGroup: Exercises = {
     'dumbellBenchPress',
     'pulleyCrosses',
     'dumbellCrosses',
+    'deeps',
   ],
   backExercises: [
     'chestPull',
@@ -35,6 +36,8 @@ export const exercisesByMuscleGroup: Exercises = {
     'dumbellRow',
     'pulleyRow',
     'pullover',
+    'pendleyRow',
+    'pullUps',
   ],
   shoulderExercises: [
     'militarPress',
@@ -61,8 +64,14 @@ export const exercisesByMuscleGroup: Exercises = {
     'stiffLegs',
     'quadExtension',
     'femoralContraction',
+    'bulgarianStride',
+    'abductor',
+    'gluteKick',
+    'glutealOpening',
+    'calfRaises',
+    'nordicCurl',
   ],
-  basicsExercises: ['squad', 'benchPress', 'deadLift'],
+  basicsExercises: ['lowBarSquad', 'squad', 'benchPress', 'deadLift'],
 };
 
 export const numberOfSeries = [1, 2, 3, 4, 5, 6, 7, 8];
