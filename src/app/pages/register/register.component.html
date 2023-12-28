@@ -112,6 +112,15 @@
     {{ "register.save" | transloco | titlecase }}
   </button>
 
+  <button
+    *ngIf="(showDropdownOptions$ | async) === false"
+    class="login login__back"
+    (click)="onBackToLogin()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+    <!--<span>{{ "login.back" | transloco }}</span>-->
+  </button>
+
   <span *ngIf="showConflictmessage" class="conflictMessage">{{
     "login.userExistsError" | transloco
   }}</span>

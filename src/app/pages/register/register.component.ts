@@ -60,6 +60,10 @@ export class RegisterComponent {
     this.showDropdownOptions$.next(false);
   }
 
+  onBackToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
   hasFieldError(fieldName: string): boolean {
     switch (fieldName) {
       case 'name':
