@@ -1,4 +1,4 @@
-const basicUrl: string = 'https://54.229.117.137/';
+const basicUrl: string = 'http://54.229.117.137/';
 //const basicUrl: string = 'https://b0shmpr0-8080.uks1.devtunnels.ms/';
 
 export const API_ENDPOINTS = {
